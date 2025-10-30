@@ -4,12 +4,11 @@
 #########################
 
 # When you install nvm using its standard installation script, it automatically
-# appends these lines to your shell configuration file (.zshrc for zsh, .bashrc for
-# bash, etc.) so that nvm is available every time you open a new terminal.
+# appends these lines to your shell configuration file (.zshrc for zsh, .bashrc
+# for bash, etc.) so that nvm is available every time you open a new terminal.
 
-# These lines need to be in your .zshrc because nvm is actually a shell
-# function, not a binary executable, so it must be loaded into each shell
-# session.
+# These lines need to be in your .zshrc because nvm is actually a shell function,
+# not a binary executable, so it must be loaded into each shell session.
 
 # Install URL:
 # https://github.com/nvm-sh/nvm?tab=readme-ov-file#manual-upgrade
@@ -51,12 +50,12 @@ compinit
 #   Owned by the 'root' account, meaning modifications may require sudo/admin
 #   privileges.
 #   Integrated with macOS's framework system.
-#   Designed to allow applications to embed and use Python, especially those
-#   with graphical user interfaces (GUIs).
+#   Designed to allow applications to embed and use Python, especially those with
+#   graphical user interfaces (GUIs).
 
 # A "non-framework build" on macOS, often called a "source build," means Python is
-# compiled and installed directly from its source code, usually into a location like
-# /usr/local/bin or a user-specific directory.
+# compiled and installed directly from its source code, usually into a location
+# like /usr/local/bin or a user-specific directory.
 
 # Characteristics:
 #   Installed by compiling from source code.
@@ -102,7 +101,7 @@ compinit
 # MacOS comes with /usr/bin/python3 and /usr/bin/pip3 pre-installed.
 
 # They are actually small "shim" binaries provided by Apple's xcode-select system.
-# 
+#
 # Besides these, many common developer tools in /usr/bin, such as git, swiftc, and
 # clang, are also shim binaries.
 
@@ -112,17 +111,18 @@ compinit
 	# /usr/lib/libxcselect.dylib (compatibility version 1.0.0, current version 1.0.0)
 	# /usr/lib/libSystem.B.dylib (compatibility version 1.0.0, current version 1356.0.0)
 
-# These shims load libxcselect.dylib to dynamically locate and execute the real versions
-# of these tools within the active Xcode or Command Line Tools installation. This allows
-# for flexibility in managing multiple Xcode versions and ensures that the correct tools
-# are always used. If XCode Command Line Tools are not installed, running the shims
-# triggers a popup for install.
+# These shims load libxcselect.dylib to dynamically locate and execute the real
+# versions of these tools within the active Xcode or Command Line Tools
+# installation. This allows for flexibility in managing multiple Xcode versions
+# and ensures that the correct tools are always used. If XCode Command Line Tools
+# are not installed, running the shims triggers a popup for install.
 
-# Installing XCode Command Line Tools makes shims like `python3` & `pip3` functional.
-# However, upgraging pip using `python3 -m ensurepip --upgrade` installs the upgraded
-# version in the location site.USER_BASE, which defaults to ~/Library/Python/X.Y for
-# MacOS. Similarly, any packages installed using pip (e.g. `pip3 install streamlit`)
-# are also installed in the site.USER_BASE location.
+# Installing XCode Command Line Tools makes shims like `python3` & `pip3`
+# functional. However, upgraging pip using `python3 -m ensurepip --upgrade`
+# installs the upgraded version in the location site.USER_BASE, which defaults to
+# ~/Library/Python/X.Y for MacOS. Similarly, any packages installed using pip
+# (e.g. `pip3 install streamlit`) are also installed in the site.USER_BASE
+# location.
 
 # Upon upgrading pip or installing a package, if pip finds that USER_BASE/bin is
 # not in $PATH, it asks you add it to $PATH.
@@ -152,7 +152,7 @@ export PATH="$HOME/Library/Python/3.9/bin:$PATH"
 
 
 ####################################################
-#####  USER_BASE and USER_SITE ##### 
+#####  USER_BASE and USER_SITE #####
 ####################################################
 
 # USER_BASE and USER_SITE are Python's standard locations for user-specific
@@ -210,7 +210,7 @@ export PATH="$HOME/Library/Python/3.9/bin:$PATH"
 #   - Build and publish a project
 
 # UV integrates into one tool most of the functionality provided by tools like
-# pip, pip-tools, pipx, poetry, pyenv, twine, virtualenv, and more. 
+# pip, pip-tools, pipx, poetry, pyenv, twine, virtualenv, and more.
 
 # UV can build and publish Python packages to package repositories like PyPI,
 # supporting a streamlined process from development to distribution
@@ -237,8 +237,8 @@ export PATH="$HOME/Library/Python/3.9/bin:$PATH"
 ##### UV PATH ADDITIONS #####
 ###############################
 
-# This line sources (executes) a script called `env` located in your
-# $HOME/.local/bin/ directory.
+# This line sources (executes) a script called `env` located in your $HOME/.local/bin/
+# directory.
 
 # It was added by the UV install command, both to .zshrc and .bashrc
 
@@ -318,6 +318,16 @@ eval "$(uv generate-shell-completion zsh)"
 # edited manually. The uv.lock format is specific to uv and not usable by other
 # tools.
 
+# As a counterpart, syncing is the process of installing the required packages
+# from the lockfile into the project's development environment.
+
+# Both locking and syncing processes are automatically handled by uv. For example,
+# when you execute uv run, the project is locked and synced before the command is
+# invoked.
+
+# To see this in action, you can go ahead and remove the .venv/ folder from the
+# project's root directory. `uv run` will recreate it.
+
 
 
 #######################################
@@ -368,8 +378,8 @@ alias python='python3.14'
 
 # PyPI serves as a central hub for Python developers to share their projects and
 # make them available to the community. By using PyPI, you can leverage a vast
-# array of pre-built solutions to accelerate your development process, ensuring you
-# don't have to "reinvent the wheel" for common tasks.
+# array of pre-built solutions to accelerate your development process, ensuring
+# you don't have to "reinvent the wheel" for common tasks.
 
 # Whether you're looking for web development frameworks, data analysis tools, or
 # utilities for scientific computing, PyPI has something for every Python
@@ -384,9 +394,9 @@ alias python='python3.14'
 # Homebrew and UV are fundamentally different tools that serve different purposes.
 
 # Homebrew is a general-purpose package manager for macOS, while UV is a
-# python-specific package and project manager. You would use Homebrew to
-# install system-level tools, including UV itself, while UV is used for managing
-# Python packages and projects, a task traditionally handled by pip.
+# python-specific package and project manager. You would use Homebrew to install
+# system-level tools, including UV itself, while UV is used for managing Python
+# packages and projects, a task traditionally handled by pip.
 
 
 
@@ -466,9 +476,9 @@ eval "$(/opt/homebrew/bin/brew shellenv)"
 # raised within a block of code. If the expected exception is NOT raised, the test
 # fails.
 
-# pytest.raises() makes your test explicitly state "I expect this code to fail with
-# this specific exception" - which is important for testing error handling and
-# validation logic.
+# pytest.raises() makes your test explicitly state "I expect this code to fail
+# with this specific exception" - which is important for testing error handling
+# and validation logic.
 
 # Why does this test use SystemExit?
 
