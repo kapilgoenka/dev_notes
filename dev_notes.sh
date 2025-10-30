@@ -338,6 +338,11 @@ eval "$(uv generate-shell-completion zsh)"
 # Upgrade: $ uv add --upgrade <package_name>
 # Remove: uv remove <package_name>
 # Add dev dependency: uv add --dev <package_name>
+# List: uv pip list
+#   This lists the packages installed in the project's virtual environment and their
+#   specific versions. Note, we used the pip interface of uv. In this case, that's
+#   perfectly valid because you aren't changing the environment but retrieving
+#   information from it.
 
 
 

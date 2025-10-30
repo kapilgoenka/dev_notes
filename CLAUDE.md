@@ -37,6 +37,13 @@ When editing `dev_notes.sh`:
 - Follow the pattern: concept introduction → characteristics → usage → examples
 - Add examples of actual shell commands in comments (prefixed with `#`)
 
+### Line Length Guidelines
+
+Maintain an 88 character line length limit for regular comment text, with exceptions:
+- Lines containing only commands or file paths may exceed 88 characters
+- Do not wrap commands, URLs, or file paths mid-line
+- Explanatory text should be wrapped to stay within the 88 character limit
+
 ### Content Philosophy
 
 The notes follow these principles:
