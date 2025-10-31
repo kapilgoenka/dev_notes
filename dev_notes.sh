@@ -593,6 +593,220 @@ eval "$(uv generate-shell-completion zsh)"
 
 
 
+####################################
+##### UV CACHE LOCATION #####
+####################################
+
+# UV cache location: ~/.cache/uv/
+
+
+
+#########################################################
+##### UV CACHE DIRECTORY STRUCTURE #####
+#########################################################
+
+# (version numbers in sub-directory names may vary)
+
+# ~/.cache/uv/
+#   ├── archive-v0/          # Extracted packages (PERSISTENT)
+#   │   ├── <hash1>/
+#   │   │   └── lib/python3.14/site-packages/requests/
+#   │   └── <hash2>/
+#   │       └── lib/python3.14/site-packages/urllib3/
+#   | 
+#   ├── builds-v0/           # Temporary environments (EPHEMERAL)
+#   │   └── .tmpXXXXXX/     # Created and deleted per run
+#   |
+#   ├── wheels-v5/           # Downloaded wheels (PERSISTENT)
+#   │   └── <hash>.whl
+#   |
+#   ├── sdists-v9/           # Downloaded source dists (PERSISTENT)
+#   |
+#   └── simple-v18/          # PyPI index cache (PERSISTENT)
+
+
+
+
+#########################################
+##### UV PACKAGE CACHE LOCATION #####
+#########################################
+
+#   Downloaded packages are stored in UV's package cache (persistent) and reused:
+#      ~/.cache/uv/archive-v0/<hash>/
+
+
+
+#####################################################
+##### UV TEMPORARY ENVIRONMENTS LOCATION #####
+#####################################################
+
+#   Temporary environments are created in:
+#      ~/.cache/uv/builds-v0/.tmpXXXXXX/
+
+
+
+##########################################################
+##### SAMPLE UV TEMPORARY ENVIRONMENT STRUCTURE #####
+##########################################################
+
+#   A temporary environment is a full Python virtual environment containing:
+#      .tmpX44ntz/
+#         ├── bin/
+#         │   ├── python -> python3.14
+#         │   ├── python3 -> python3.14
+#         │   └── python3.14
+#         ├── lib/
+#         │   └── python3.14/
+#         │       └── site-packages/
+#         │           ├── requests/
+#         │           ├── urllib3/
+#         │           └── ... (dependencies)
+#         └── pyvenv.cfg
+
+
+
+###################################
+##### `uv run --with` #####
+###################################
+
+#   `uv run --with` ALMOST ALWAYS creates a temporary environment, even when run inside
+#   a UV project! The only expection is when the packages requested in the --with flag
+#   are already in the project dependencies (along with compatible version for each).
+
+#   If a temporary environment is used, it's python interpreter's sys.path is configured
+#   to include:
+#      - Temporary environment location (for the Python interpreter)
+#      - Package cache (for --with packages)
+#      - Project's .venv/ (for project dependencies)
+
+#   UV uses symlinks from it's package cache to temp environments, so it's extremely
+#   fast and doesn't duplicate files. This design makes `uv run --with` perfect for
+#   one-off scripts and automation - you get the benefits of isolation without the
+#   overhead of managing virtual environments!
+
+#      Traditional virtualenv:
+#         python -m venv myenv      # ~2 seconds
+#         source myenv/bin/activate
+#         pip install requests      # ~5 seconds
+#         python script.py
+#         deactivate
+#         rm -rf myenv              # Manual cleanup
+#         # Total: ~7+ seconds
+
+#      UV's approach:
+#         uv run --with requests python script.py
+#         # First time: ~1 second
+#         # Subsequent: ~0.1 seconds ⚡
+
+#   Visual Representation
+
+#         ┌───────────────────────────────────────────┐
+#         │ uv run --with black script.py             |
+#         │ (inside a UV project)                     |
+#         │ (requests ALREADY in project)             │
+#         │ (black NOT in project)                    |
+#         ├───────────────────────────────────────────┤
+#         │                                           │
+#         │  ┌─────────────────────────────────────┐  │
+#         │  │ Temporary Environment               │  │
+#         │  │ ~/.cache/uv/builds-v0/.tmpXXXXXX    │  │
+#         │  │                                     │  │
+#         │  │ Contains:                           │  │
+#         │  │ - Python interpreter (isolated)     │  │
+#         │  │ - sys.path configured to find:      │  │
+#         │  │   • --with packages (cached)        │  │
+#         │  │   • Project packages (.venv)        │  │
+#         │  └─────────────────────────────────────┘  │
+#         │           │                  │            │
+#         │           │                  │            │
+#         │           ▼                  ▼            │
+#         │  ┌───────────────┐   ┌───────────────┐    │
+#         │  │ Project .venv │   │ Package Cache │    │
+#         │  │               │   │               │    │
+#         │  │ requests      │   │ black         │    │
+#         │  └───────────────┘   └───────────────┘    │
+#         │   (persistent)       (persistent)         │
+#         │                                           │
+#         └───────────────────────────────────────────┘
+
+#         ┌─────────────────────────────────────────────┐
+#         │ uv run --with "requests==2.31.0" script.py  │
+#         │ (inside a UV project)                       │
+#         │ (different version requested)               │
+#         ├─────────────────────────────────────────────┤
+#         │                                             │
+#         │   UV checks: Is requests in pyproject.toml? |
+#         |      Yes! Is version compatible?            │
+#         │      No! Project has >=2.32.5               │
+#         │                                             │
+#         │   → Create temporary environment            │
+#         │   → Install requested version               │
+#         │                                             │
+#         │   ┌─────────────────────────────────────┐   │
+#         │   │ Temporary Environment               │   │
+#         │   │ ~/.cache/uv/builds-v0/.tmpXXXXXX    │   │
+#         │   │                                     │   │
+#         │   │ Contains:                           │   │
+#         │   │ - Python interpreter (isolated)     │   │
+#         │   │ - sys.path configured to find:      │   │
+#         │   │   • --with packages (cached)        │   │
+#         │   │   • Project packages (.venv)        │   │
+#         │   └─────────────────────────────────────┘   │
+#         │           │                  │              │
+#         │           │ ← Not used       │ ← Used       │
+#         │           ▼                  ▼              │
+#         │   ┌───────────────┐   ┌───────────────┐     │
+#         │   │ Project .venv │   │ Package Cache │     │
+#         │   │               │   │               │     │
+#         │   │ requests      │   │ requests      |     │
+#         |   | (2.32.5)      |   | (2.31.0)      |     |
+#         │   └───────────────┘   └───────────────┘     │
+#         │    (persistent)       (persistent)          │
+#         └─────────────────────────────────────────────┘
+
+
+#         ┌───────────────────────────────────────────────────────────┐
+#         │ uv run --with requests script.py                          │
+#         │ (inside a UV project)                                     │
+#         │ (requests with compatible version ALREADY in project)     │
+#         ├───────────────────────────────────────────────────────────┤
+#         │                                                           │
+#         │   UV checks: Is requests in pyproject.toml?               │
+#         │      Yes! Version compatible?                             │
+#         │      Yes!                                                 │
+#         │                                                           │
+#         │   → Use existing .venv (optimization!)                    │
+#         │   → No temporary environment needed                       │
+#         │                                                           │
+#         │   ┌─────────────────────────────┐                         │
+#         │   │   Project .venv             │                         │
+#         │   │   ├── requests (2.32.5)     │ ← Import from here      │
+#         │   │   ├── urllib3               │                         │
+#         │   │   └── ...                   │                         │
+#         │   └─────────────────────────────┘                         │
+#         │                                                           │
+#         └───────────────────────────────────────────────────────────┘
+
+
+
+##############################################
+##### PYTHON sys.path #####
+##############################################
+
+# A fundamental concept in Python
+
+# sys.path is a list of directory paths that Python searches when you use import
+# statements.
+
+#   sys.path is:
+#      - A list of directories python searches (first to last) when you use import
+#        statements. First match wins.
+#      - Can be modified at runtime
+#      - Controls where Python finds modules
+#      - Virtual environments work by adding their `site-packages` to sys.path
+#      - UV's --with flag works by manipulating sys.path to include multiple locations
+
+
 
 ##################################################################
 ##### RUST-BASED TOOLS IN PYTHON TOOLING ECOSYSTEM #####
