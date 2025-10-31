@@ -460,7 +460,93 @@ eval "$(uv generate-shell-completion zsh)"
 
 
 
+########################################################################
+##### Source Distribution and binary distribution in Python #####
+########################################################################
 
+# When you build a Python package, you typically create two types of distributions:
+
+#   1. Source Distribution (sdist) - .tar.gz
+
+#         What it is:
+#         - A compressed archive of your source code as-is
+#         - Contains everything needed to build the package
+
+#         Contents:
+#         - All your source files (main.py, tests/, etc.)
+#         - pyproject.toml with build instructions
+#         - README, LICENSE, etc.
+#         - Basically your entire project directory
+
+#         Installation process:
+#         User runs: pip install uv_cats-0.1.0.tar.gz
+#             ↓
+#         1. Extract the archive
+#         2. Read [build-system] from pyproject.toml
+#         3. Install build dependencies (hatchling)
+#         4. Run the build backend to create a wheel
+#         5. Install the wheel
+
+#         Pros:
+#         - ✅ Works on any platform
+#         - ✅ Transparent - you can see all the source code
+
+#         Cons:
+#         - ❌ Slower to install (needs to build first)
+#         - ❌ Requires build tools to be available
+#         - ❌ Can fail if build dependencies are missing
+
+
+#   2. Binary Distribution (wheel) - .whl file
+
+#         What it is:
+#         - A pre-built package ready to install
+#         - No building required
+
+#         Breaking down the filename:
+#         uv_cats-0.1.0-py3-none-any.whl
+
+#         - uv_cats - package name
+#         - 0.1.0 - package version
+#         - py3 - Works with Python 3
+#         - none - No specific ABI (Application Binary Interface) required
+#         - any - Works on any platform (Linux, Windows, Mac)
+
+#         Contents:
+#         - Ready-to-use Python files
+#         - Metadata in .dist-info/ directory
+#         - Entry points already configured
+#         - No build files needed
+
+#         Installation process:
+#         User runs: pip install uv_cats-0.1.0-py3-none-any.whl
+#             ↓
+#         1. Extract the wheel
+#         2. Copy files to site-packages
+#         3. Install entry points (scripts)
+#         4. Done!
+
+#         Pros:
+#         - ✅ Fast installation (no build step)
+#         - ✅ Reliable (pre-built, tested)
+#         - ✅ No build tools required
+
+#         Cons:
+#         - ❌ Platform-specific for packages with C extensions
+#         - ❌ Larger file size (sometimes)
+
+
+#   Real-world analogy:
+
+#   Source Distribution = Recipe with ingredients
+#   - You get flour, eggs, sugar
+#   - You need to bake the cake yourself
+#   - Takes time and requires an oven (build tools)
+
+#   Binary Distribution = Pre-made cake
+#   - Already baked and ready to eat
+#   - Just open and serve
+#   - Fast and convenient
 
 ##################################################################
 ##### RUST-BASED TOOLS IN PYTHON TOOLING ECOSYSTEM #####
