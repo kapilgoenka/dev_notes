@@ -346,6 +346,109 @@ eval "$(uv generate-shell-completion zsh)"
 
 
 
+############################################################
+##### UV TOML FILE: [project.scripts] section #####
+############################################################
+
+# The [project.scripts] section in the TOML file defines command-line entry points
+# that get installed when someone installs your package.
+
+# Example:
+# 	[project.scripts]
+# 	uv-cats = "main:main"
+
+# This tells the build backend (e.g. Hatchling): "Create a command-line script
+# called uv-cats". The script essentially does this:
+
+#   #!/usr/bin/env python
+#   # Auto-generated entry point script
+# 
+#   from main import main
+# 
+#   if __name__ == '__main__':
+# 	  sys.exit(main())
+
+# Without the [project.scripts] section, users would need to know your internal
+# module structure in order to run the main.py script. With it, they can just run
+# `uv-cats` command, and it works!
+
+# What happens when you install the package?
+
+# Assume package name is 'uv-cats'.
+# When someone runs `pip install uv-cats` or `uv tool install uv-cats`, Python
+# puts the executable script in their PATH (like /usr/local/bin/uv-cats or similar)
+# that does essentially this:
+
+
+# Next, define the build system you want to use:
+
+# [build-system]
+# requires = ["hatchling"]
+# build-backend = "hatchling.build"
+
+# [tool.hatch.build.targets.wheel]
+# packages = ["."]
+
+
+
+
+############################################################
+##### UV TOML FILE: [build-system] section #####
+############################################################
+
+#   What is it?
+
+#   The [build-system] section tells Python packaging tools how to build your
+#   package - specifically, which build tool to use and what dependencies it needs.
+
+#   Example configuration:
+
+#   [build-system]
+#   requires = ["hatchling"]
+#   build-backend = "hatchling.build"
+
+#   This says:
+#   1. requires = ["hatchling"] - "To build this package, you need Hatchling installed"
+#   2. build-backend = "hatchling.build" - "Use Hatchling as the build tool"
+
+#   What are build backends?
+
+#   Build backends are tools that know how to:
+#   - Read your pyproject.toml
+#   - Find your Python files
+#   - Create wheel files (.whl)
+#   - Create source distributions (.tar.gz)
+#   - Install entry points (like our uv-cats command)
+
+#   Common build backends:
+
+#   1. Hatchling
+#   	- Modern, fast
+#   	- Part of PyPA (Python Packaging Authority)
+#   	- Good defaults, minimal configuration
+
+#   2. Setuptools (traditional, most common)
+#   	- The oldest and most widely used
+#   	- Lots of features and flexibility
+#   	- Sometimes requires more configuration
+
+#   3. Poetry
+#   	- All-in-one tool (dependency management + building)
+#   	- Popular in modern projects
+
+#   4. Flit
+#   	- Designed for simplicity
+#   	- Best for pure Python packages
+
+#   What happens without [build-system]?
+
+#   If you don't have this section, build tools will fall back to legacy behavior:
+#   - Look for a setup.py file
+#   - Use setuptools by default
+#   - May not work correctly with modern tools like uv or pip
+
+
+
 
 ##################################################################
 ##### RUST-BASED TOOLS IN PYTHON TOOLING ECOSYSTEM #####
