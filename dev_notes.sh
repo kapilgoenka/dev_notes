@@ -335,14 +335,20 @@ eval "$(uv generate-shell-completion zsh)"
 #######################################
 
 # Add: $ uv add <package_name>
+
 # Upgrade: $ uv add --upgrade <package_name>
+
 # Remove: uv remove <package_name>
+
 # Add dev dependency: uv add --dev <package_name>
+
 # List: uv pip list
 #   This lists the packages installed in the project's virtual environment and their
 #   specific versions. Note, we used the pip interface of uv. In this case, that's
 #   perfectly valid because you aren't changing the environment but retrieving
 #   information from it.
+
+# Build: uv build
 
 
 
@@ -377,17 +383,6 @@ eval "$(uv generate-shell-completion zsh)"
 # Assume package name is 'uv-cats'.
 # When someone runs `pip install uv-cats` or `uv tool install uv-cats`, Python
 # puts the executable script in their PATH (like /usr/local/bin/uv-cats or similar)
-# that does essentially this:
-
-
-# Next, define the build system you want to use:
-
-# [build-system]
-# requires = ["hatchling"]
-# build-backend = "hatchling.build"
-
-# [tool.hatch.build.targets.wheel]
-# packages = ["."]
 
 
 
@@ -395,8 +390,6 @@ eval "$(uv generate-shell-completion zsh)"
 ############################################################
 ##### UV TOML FILE: [build-system] section #####
 ############################################################
-
-#   What is it?
 
 #   The [build-system] section tells Python packaging tools how to build your
 #   package - specifically, which build tool to use and what dependencies it needs.
@@ -408,8 +401,8 @@ eval "$(uv generate-shell-completion zsh)"
 #   build-backend = "hatchling.build"
 
 #   This says:
-#   1. requires = ["hatchling"] - "To build this package, you need Hatchling installed"
-#   2. build-backend = "hatchling.build" - "Use Hatchling as the build tool"
+#   1. "To build this package, you need Hatchling installed"
+#   2. "Use Hatchling as the build tool"
 
 #   What are build backends?
 
@@ -446,6 +439,25 @@ eval "$(uv generate-shell-completion zsh)"
 #   - Look for a setup.py file
 #   - Use setuptools by default
 #   - May not work correctly with modern tools like uv or pip
+
+
+#   [tool.hatch.build.targets.wheel]
+#   packages = ["."]
+
+#   Why do we need this?
+
+#   By default, Hatchling expects your code to be in a directory that matches your
+#   package name. For example:
+
+#   uv_cats/
+#   ├── pyproject.toml
+#   └── uv_cats/          # Package directory matching project name
+#       ├── __init__.py
+#       └── main.py
+
+#   This tells Hatchling: "Include Python files from the current directory (.) in the
+#   wheel."
+
 
 
 
