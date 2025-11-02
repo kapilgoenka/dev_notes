@@ -1,7 +1,16 @@
+########################################################################################
+########################################################################################
+########################################################################################
+########################################################################################
+######################################## NodeJS ########################################
+########################################################################################
+########################################################################################
+########################################################################################
+########################################################################################
 
-#########################
-##### NVM #####
-#########################
+########################################################################################
+######################################### NVM ##########################################
+########################################################################################
 
 # When you install nvm using its standard installation script, it automatically
 # appends these lines to your shell configuration file (.zshrc for zsh, .bashrc
@@ -22,10 +31,19 @@ export NVM_DIR="$HOME/.nvm"
 
 
 
+########################################################################################
+########################################################################################
+########################################################################################
+########################################################################################
+######################################## Docker ########################################
+########################################################################################
+########################################################################################
+########################################################################################
+########################################################################################
 
-########################################
-##### Docker CLI completions
-########################################
+########################################################################################
+################################ Docker CLI Completions ################################
+########################################################################################
 
 # The following lines have been added by Docker Desktop to enable Docker CLI
 # completions.
@@ -36,43 +54,25 @@ compinit
 
 
 
-
-######################################################################
-##### Framework vs. Non-Framework Build for Python #####
-######################################################################
-
-# On macOS, a "framework build" of Python refers to an installation where Python
-# is packaged as a macOS Framework. This type of installation is common when using
-# installers from python.org or the XCode Command Line Tools.
-
-# Characteristics:
-#   Often installed by official Python installers.
-#   Owned by the 'root' account, meaning modifications may require sudo/admin
-#   privileges.
-#   Integrated with macOS's framework system.
-#   Designed to allow applications to embed and use Python, especially those with
-#   graphical user interfaces (GUIs).
-
-# A "non-framework build" on macOS, often called a "source build," means Python is
-# compiled and installed directly from its source code, usually into a location
-# like /usr/local/bin or a user-specific directory.
-
-# Characteristics:
-#   Installed by compiling from source code.
-#   Owned by the account that performed the installation, allowing easier
-#   modification.
-#   Provides more control over the compilation process and potential
-#   customizations.
-#   Intended for command-line use and general development.
+########################################################################################
+########################################################################################
+########################################################################################
+########################################################################################
+###################################### macOS Dev #######################################
+########################################################################################
+########################################################################################
+########################################################################################
+########################################################################################
 
 
 
+########################################################################################
+################################ macOS System Python ###################################
+########################################################################################
 
-######################################################################
-##### Xcode Command Line Tools Python Installation #####
-######################################################################
+# macOS System Python refers to the python installed by Xcode Command Line Tools.
 
-# The Python installed by Xcode Command Line Tools is a 'framework' build.
+# This python instllation is a 'framework' build.
 
 # This can be verified by running the command below. If it returns an empty string
 # or None, it's not a framework build. If it returns a value (like 'Python' or
@@ -94,9 +94,9 @@ compinit
 
 
 
-###############################################################################
-##### MACOS SYSTEM PYTHON's USER-SPECIFIC PACKAGE INSTALLATION LOCATION #####
-###############################################################################
+########################################################################################
+############### [macOS System Python] User-Specific Package Location ###################
+########################################################################################
 
 # MacOS comes with /usr/bin/python3 and /usr/bin/pip3 pre-installed.
 
@@ -137,68 +137,45 @@ export PATH="$HOME/Library/Python/3.9/bin:$PATH"
 
 
 
+########################################################################################
+####################################### Homebrew #######################################
+########################################################################################
 
-####################################################
-##### SYSTEM PROTECTION: /usr/bin #####
-####################################################
+# Install Using command here: https://brew.sh
 
-# /usr/bin is a system directory protected by macOS
-# This is why when you run `python3 -m ensurepip --upgrade` using the macos system
-# python to install pip, the following message is printed:
-# Defaulting to user installation because normal site-packages is not writeable
+# At the end, the command asked to add the follwoing line to .zprofile.
+# Added it to this file (.zshrc) instead.
 
-# The "user installation" location is determined by USER_BASE and USER_SITE
-
-
-
-####################################################
-#####  USER_BASE and USER_SITE #####
-####################################################
-
-# USER_BASE and USER_SITE are Python's standard locations for user-specific
-# package installations (as opposed to system-wide installations). USER_BASE and
-# USER_SITE values are set by the site module, which is imported by default when
-# the Python interpreter starts.
-
-# The 'PYTHONUSERBASE' environment variable is the primary mechanism to explicitly
-# control USER_BASE. If it is not set, Python uses platform-specific default
-# locations for USER_BASE (~/Library/Python/X.Y)
-
-# python3 -m site --user-base
-# Shows USER_BASE for Xcode-installed Python
-# /Users/kapil/Library/Python/3.9
-
-# python3 -m site --user-site
-# Shows USER_SITE for Xcode-installed Python
-# /Users/kapil/Library/Python/3.9/lib/python/site-packages
-
-# python3.14 -m site --user-base
-# Shows USER_BASE for UV-installed Python
-# /Users/kapil/.local
-
-# python3.14 -m site --user-site
-# Shows USER_SITE for UV-installed Python
-# /Users/kapil/.local/lib/python3.14/site-packages
-
-# When they're used:
-#   `pip install --user <package>` installs to these locations (on macos, when
-#      using the Xcode-installed python, even running without --user installs to
-#      the "user installation" location, with the message "Defaulting to user
-#      installation because normal site-packages is not writeable")
-#   Executables go in USER_BASE/bin
-#   Python packages go in USER_SITE
-
-# Why they exist:
-#   Allows installing packages without sudo/admin privileges
-#   Keeps user packages separate from system packages
-#   Useful when you don't have write access to system directories
+eval "$(/opt/homebrew/bin/brew shellenv)"
 
 
 
+########################################################################################
+###################### macOS Virtual Machine Install Using Tart ########################
+########################################################################################
 
-#########################
-##### UV #####
-#########################
+# Following steps here:
+# https://osxdaily.com/2025/10/06/create-a-macos-tahoe-vm-with-tart
+
+# More about tart
+# https://www.linkedin.com/pulse/understanding-tart-virtualization-developer-friendly-tool-singh-f1esc/
+
+# brew install cirruslabs/cli/tart
+# tart clone ghcr.io/cirruslabs/macos-tahoe-vanilla:latest my-tahoe-vanilla-vm
+# tart run my-tahoe-vanilla-vm
+
+
+
+########################################################################################
+########################################################################################
+########################################################################################
+########################################################################################
+########################################## UV ##########################################
+########################################################################################
+########################################################################################
+########################################################################################
+########################################################################################
+
 
 # A high-speed package and project manager for Python, written in Rust.
 
@@ -225,29 +202,43 @@ export PATH="$HOME/Library/Python/3.9/bin:$PATH"
 
 
 
-#########################
-##### UV INSTALL #####
-#########################
+########################################################################################
+#################################### Homebrew vs UV ####################################
+########################################################################################
+
+# Homebrew and UV are fundamentally different tools that serve different purposes.
+
+# Homebrew is a general-purpose package manager for macOS, while UV is a
+# python-specific package and project manager. You would use Homebrew to install
+# system-level tools, including UV itself, while UV is used for managing Python
+# packages and projects, a task traditionally handled by pip.
+
+
+
+########################################################################################
+################################### UV Install Cmd #####################################
+########################################################################################
 
 # curl -LsSf https://astral.sh/uv/install.sh | sh
 
 
 
-###############################
-##### UV PATH ADDITIONS #####
-###############################
+########################################################################################
+################################## UV Path Additions ###################################
+########################################################################################
 
 # This line sources (executes) a script called `env` located in your $HOME/.local/bin/
 # directory.
 
-# It was added by the UV install command, both to .zshrc and .bashrc
+# It is added by the UV install command, both to .zshrc and .bashrc
 
 # The file ~/.local/bin/env is a shell script created by the uv installer to
-# manage the PATH environment variable. When uv is installed, it places its
-# executables (like uv itself, uvx, env, and env.fish) into the ~/.local/bin
-# directory by default.
+# manage the PATH environment variable.
 
-# The env script ensures that ~/.local/bin is added to your PATH if it's not
+# When uv is installed, it places its executables (like uv itself, uvx, env, and
+# env.fish) into the ~/.local/bin directory by default.
+
+# The `env` script ensures that ~/.local/bin is added to your PATH if it's not
 # already present. This allows you to execute uv and its associated tools directly
 # from your terminal without specifying the full path to the executable.
 
@@ -258,7 +249,7 @@ export PATH="$HOME/Library/Python/3.9/bin:$PATH"
 # variables or functions defined in that script will persist in your current shell.
 
 # So essentially, when your shell starts up (since this is in .zshrc), it runs the
-# env script, which likely sets up environment variables, PATH modifications, or
+# `env` script, which likely sets up environment variables, PATH modifications, or
 # other shell configurations. This is a common pattern for keeping your .zshrc
 # cleaner by moving some configuration logic into separate files.
 
@@ -266,37 +257,17 @@ export PATH="$HOME/Library/Python/3.9/bin:$PATH"
 
 
 
-###############################################
-##### PYTHON 3.14 INSTALL USING UV #####
-###############################################
-
-# uv python install 3.14
-
-
-
-###############################
-##### UPGRADING UV #####
-###############################
-
-# When uv is installed via the standalone installer, it can update itself on-demand:
-# UV_NO_MODIFY_PATH=1 uv self update
-
-# Updating uv will re-run the installer and can modify your shell profiles.
-# To disable this behavior, set UV_NO_MODIFY_PATH=1.
-
-
-
-##################################
-##### UV SHELL COMPLETION #####
-##################################
+########################################################################################
+################################# UV Shell Completion ##################################
+########################################################################################
 
 eval "$(uv generate-shell-completion zsh)"
 
 
 
-##################################
-##### UV LOCK FILE (uv.lock) #####
-##################################
+########################################################################################
+################################ UV Lock File (uv.lock) ################################
+########################################################################################
 
 # A cross-platform lockfile that contains information about your project's
 # dependencies. This file ensures that other developers can quickly and exactly
@@ -330,53 +301,98 @@ eval "$(uv generate-shell-completion zsh)"
 
 
 
-#######################################
-##### UV COMMON CMDS #####
-#######################################
+########################################################################################
+################################# UV Common Commands ###################################
+########################################################################################
 
-# Add to project dependencies:
-#    $ uv add [OPTIONS] <PACKAGES>
-#       [PACKAGES] The packages to add
-
-# Install CLI tools globally:
-#    $ uv tool install [OPTIONS] <PACKAGE>
-#       <PACKAGE>  The package to install commands from
-
-# Upgrade package version:
-#    $ uv add --upgrade <PACKAGES>
-#       [PACKAGES] The packages to upgrade
-
-# Remove package:
-#    $ uv remove [OPTIONS] <PACKAGES>
-#       [PACKAGES] The packages to remove
-
-# Add dev dependency:
-#    $ uv add --dev <PACKAGES>
-#       [PACKAGES] The packages to add as dev dependencies
-
-# List packages installed in an environment:
-#    $ uv pip list
-#       This lists the packages installed in the project's virtual environment and their
-#       specific versions. Note, we used the pip interface of uv. In this case, that's
-#       perfectly valid because you aren't changing the environment but retrieving
-#       information from it.
-
-# Build Python packages into source distributions and wheels:
-#     $ uv build
-
-# Run a command or script:
-#    $ uv run [OPTIONS] [COMMAND]
-
-# Clear all UV caches (including the persistent package cache):
-#    $ uv cache clean
-#       - This removes everything in ~/.cache/uv/
-#       - Temporary environments in ~/.cache/uv/builds-v0/ are already auto-cleaned
-#         after each run.
+# Python versions
+# Installing and managing Python itself.
+#
+# ┌──────────────────────────┬───────────────────────────────────────────────────┐
+# │ Command                  │ Description                                       │
+# ├──────────────────────────┼───────────────────────────────────────────────────┤
+# │ uv python install        │ Install Python versions                           │
+# ├──────────────────────────┼───────────────────────────────────────────────────┤
+# │ uv python list           │ View available Python versions                    │
+# ├──────────────────────────┼───────────────────────────────────────────────────┤
+# │ uv python find           │ Find an installed Python version                  │
+# ├──────────────────────────┼───────────────────────────────────────────────────┤
+# │ uv python pin            │ Pin current project to a specific Python version  │
+# ├──────────────────────────┼───────────────────────────────────────────────────┤
+# │ uv python uninstall      │ Uninstall a Python version                        │
+# └──────────────────────────┴───────────────────────────────────────────────────┘
 
 
-############################################################
-##### UV TOML FILE: [project.scripts] section #####
-############################################################
+# Projects
+# Creating and working on Python projects, i.e., with a pyproject.toml.
+#
+# ┌──────────────────────────┬───────────────────────────────────────────────────┐
+# │ Command                  │ Description                                       │
+# ├──────────────────────────┼───────────────────────────────────────────────────┤
+# │ uv init                  │ Create a new Python project                       │
+# ├──────────────────────────┼───────────────────────────────────────────────────┤
+# │ uv add                   │ Add a dependency to the project                   │
+# ├──────────────────────────┼───────────────────────────────────────────────────┤
+# │ uv remove                │ Remove a dependency from the project              │
+# ├──────────────────────────┼───────────────────────────────────────────────────┤
+# │ uv sync                  │ Sync project's dependencies with the environment  │
+# ├──────────────────────────┼───────────────────────────────────────────────────┤
+# │ uv lock                  │ Create a lockfile for project's dependencies      │
+# ├──────────────────────────┼───────────────────────────────────────────────────┤
+# │ uv run                   │ Run a command in the project environment          │
+# ├──────────────────────────┼───────────────────────────────────────────────────┤
+# │ uv tree                  │ View the dependency tree for the project          │
+# ├──────────────────────────┼───────────────────────────────────────────────────┤
+# │ uv build                 │ Build project into distribution archives          │
+# ├──────────────────────────┼───────────────────────────────────────────────────┤
+# │ uv publish               │ Publish project to a package index                │
+# └──────────────────────────┴───────────────────────────────────────────────────┘
+
+
+# Tools
+# Running and installing tools published to Python package indexes, e.g., ruff or
+# black.
+#
+# ┌──────────────────────────┬───────────────────────────────────────────────────┐
+# │ Command                  │ Description                                       │
+# ├──────────────────────────┼───────────────────────────────────────────────────┤
+# │ uvx / uv tool run        │ Run a tool in a temporary environment             │
+# ├──────────────────────────┼───────────────────────────────────────────────────┤
+# │ uv tool install          │ Install a tool user-wide                          │
+# ├──────────────────────────┼───────────────────────────────────────────────────┤
+# │ uv tool uninstall        │ Uninstall a tool                                  │
+# ├──────────────────────────┼───────────────────────────────────────────────────┤
+# │ uv tool list             │ List installed tools                              │
+# ├──────────────────────────┼───────────────────────────────────────────────────┤
+# │ uv tool update-shell     │ Update shell to include tool executables          │
+# └──────────────────────────┴───────────────────────────────────────────────────┘
+
+
+# Utility
+# Managing and inspecting uv's state, such as the cache, storage directories, or
+# performing a self-update.
+#
+# ┌──────────────────────────┬───────────────────────────────────────────────────┐
+# │ Command                  │ Description                                       │
+# ├──────────────────────────┼───────────────────────────────────────────────────┤
+# │ uv cache clean           │ Remove cache entries                              │
+# ├──────────────────────────┼───────────────────────────────────────────────────┤
+# │ uv cache prune           │ Remove outdated cache entries                     │
+# ├──────────────────────────┼───────────────────────────────────────────────────┤
+# │ uv cache dir             │ Show the uv cache directory path                  │
+# ├──────────────────────────┼───────────────────────────────────────────────────┤
+# │ uv tool dir              │ Show the uv tool directory path                   │
+# ├──────────────────────────┼───────────────────────────────────────────────────┤
+# │ uv python dir            │ Show the uv installed Python versions path        │
+# ├──────────────────────────┼───────────────────────────────────────────────────┤
+# │ uv self update           │ Update uv to the latest version                   │
+# └──────────────────────────┴───────────────────────────────────────────────────┘
+
+
+
+########################################################################################
+################ UV pyproject.toml file: [project.scripts] section #####################
+########################################################################################
 
 # The [project.scripts] section in the TOML file defines command-line entry points
 # that get installed when someone installs your package.
@@ -409,9 +425,9 @@ eval "$(uv generate-shell-completion zsh)"
 
 
 
-############################################################
-##### UV TOML FILE: [build-system] section #####
-############################################################
+########################################################################################
+################# UV pyproject.toml file: [build-system] section #######################
+########################################################################################
 
 #   The [build-system] section tells Python packaging tools how to build your
 #   package - specifically, which build tool to use and what dependencies it needs.
@@ -482,128 +498,17 @@ eval "$(uv generate-shell-completion zsh)"
 
 
 
-########################################################################
-##### Source Distribution and binary distribution in Python #####
-########################################################################
-
-# When you build a Python package, you typically create two types of distributions:
-
-#   1. Source Distribution (sdist) - .tar.gz
-
-#      What it is:
-#         - A compressed archive of your source code as-is
-#         - Contains everything needed to build the package
-
-#      Contents:
-#         - All your source files (main.py, tests/, etc.)
-#         - pyproject.toml with build instructions
-#         - README, LICENSE, etc.
-#         - Basically your entire project directory
-
-#      Installation process:
-#         User runs: pip install uv_cats-0.1.0.tar.gz
-#                ↓
-#            1. Extract the archive
-#            2. Read [build-system] from pyproject.toml
-#            3. Install build dependencies (hatchling)
-#            4. Run the build backend to create a wheel
-#            5. Install the wheel
-
-#      Pros:
-#         - ✅ Works on any platform
-#         - ✅ Transparent - you can see all the source code
-
-#      Cons:
-#         - ❌ Slower to install (needs to build first)
-#         - ❌ Requires build tools to be available
-#         - ❌ Can fail if build dependencies are missing
-
-
-#   2. Binary Distribution (wheel) - .whl file
-
-#      What it is:
-#         - A pre-built package ready to install
-#         - No building required
-
-#      Breaking down the filename:
-#         uv_cats-0.1.0-py3-none-any.whl
-#            - uv_cats - package name
-#            - 0.1.0 - package version
-#            - py3 - Works with Python 3
-#            - none - No specific ABI (Application Binary Interface) required
-#            - any - Works on any platform (Linux, Windows, Mac)
-
-#      Contents:
-#         - Ready-to-use Python files
-#         - Metadata in .dist-info/ directory
-#         - Entry points already configured
-#         - No build files needed
-
-#      Installation process:
-#         User runs: pip install uv_cats-0.1.0-py3-none-any.whl
-#                ↓
-#            1. Extract the wheel
-#            2. Copy files to site-packages
-#            3. Install entry points (scripts)
-#            4. Done!
-
-#      Pros:
-#         - ✅ Fast installation (no build step)
-#         - ✅ Reliable (pre-built, tested)
-#         - ✅ No build tools required
-
-#      Cons:
-#         - ❌ Platform-specific for packages with C extensions
-#         - ❌ Larger file size (sometimes)
-
-
-#   Real-world analogy:
-
-#      Source Distribution = Recipe with ingredients
-#         - You get flour, eggs, sugar
-#         - You need to bake the cake yourself
-#         - Takes time and requires an oven (build tools)
-
-#      Binary Distribution = Pre-made cake
-#         - Already baked and ready to eat
-#         - Just open and serve
-#         - Fast and convenient
-
-
-#   What gets uploaded to PyPI?
-
-#      Typically both:
-#         uv build       # Creates both .tar.gz and .whl
-#         uv publish     # Uploads both to PyPI
-
-#      This gives users the best of both worlds:
-#         - Fast installation (wheel)
-#         - Fallback option (sdist) if wheel doesn't match
-
-
-#   What uv / pip prefer:
-
-#      When you run `pip install requests` or `uv add requests`:
-#         1. First choice: Look for a compatible wheel
-#           - Fast installation
-#           - No build required
-#         2. Fallback: Download source distribution
-#           - Build a wheel locally
-#           - Then install the wheel
-
-
-
-####################################
-##### UV CACHE LOCATION #####
-####################################
+########################################################################################
+################################## UV Cache Location ###################################
+########################################################################################
 
 # UV cache location: ~/.cache/uv/
 
 
 
-#########################################################
-##### UV CACHE DIRECTORY STRUCTURE #####
-#########################################################
+########################################################################################
+############################# UV Cache Directory Structure #############################
+########################################################################################
 
 # (version numbers in sub-directory names may vary)
 
@@ -627,29 +532,30 @@ eval "$(uv generate-shell-completion zsh)"
 
 
 
-#########################################
-##### UV PACKAGE CACHE LOCATION #####
-#########################################
+########################################################################################
+############################### UV Package Cache Location ##############################
+########################################################################################
 
 #   Downloaded packages are stored in UV's package cache (persistent) and reused:
-#      ~/.cache/uv/archive-v0/<hash>/
+#      ~/.cache/uv/archive-v0/
 
 
 
-#####################################################
-##### UV TEMPORARY ENVIRONMENTS LOCATION #####
-#####################################################
+########################################################################################
+######################### UV Temporary Environments Location ###########################
+########################################################################################
 
 #   Temporary environments are created in:
-#      ~/.cache/uv/builds-v0/.tmpXXXXXX/
+#      ~/.cache/uv/builds-v0/
 
 
 
-##########################################################
-##### SAMPLE UV TEMPORARY ENVIRONMENT STRUCTURE #####
-##########################################################
+########################################################################################
+##################### Sample UV Temporary Environment Structure ########################
+########################################################################################
 
 #   A temporary environment is a full Python virtual environment containing:
+#   ~/.cache/uv/builds-v0/
 #      .tmpX44ntz/
 #         ├── bin/
 #         │   ├── python -> python3.14
@@ -665,9 +571,9 @@ eval "$(uv generate-shell-completion zsh)"
 
 
 
-###################################
-##### `uv run --with` #####
-###################################
+########################################################################################
+################################### `uv run --with` ####################################
+########################################################################################
 
 #   `uv run --with` ALMOST ALWAYS creates a temporary environment, even when run inside
 #   a UV project! The only expection is when the packages requested in the --with flag
@@ -789,9 +695,232 @@ eval "$(uv generate-shell-completion zsh)"
 
 
 
-##############################################
-##### PYTHON sys.path #####
-##############################################
+########################################################################################
+########################################################################################
+########################################################################################
+########################################################################################
+############################ Python Build & Distribution ###############################
+########################################################################################
+########################################################################################
+########################################################################################
+########################################################################################
+
+########################################################################################
+############ Source Distribution and Binary Distribution in Python #####################
+########################################################################################
+
+# When you build a Python package, you typically create two types of distributions:
+
+#   1. Source Distribution (sdist) - .tar.gz
+
+#      What it is:
+#         - A compressed archive of your source code as-is
+#         - Contains everything needed to build the package
+
+#      Contents:
+#         - All your source files (main.py, tests/, etc.)
+#         - pyproject.toml with build instructions
+#         - README, LICENSE, etc.
+#         - Basically your entire project directory
+
+#      Installation process:
+#         User runs: pip install uv_cats-0.1.0.tar.gz
+#                ↓
+#            1. Extract the archive
+#            2. Read [build-system] from pyproject.toml
+#            3. Install build dependencies (hatchling)
+#            4. Run the build backend to create a wheel
+#            5. Install the wheel
+
+#      Pros:
+#         - ✅ Works on any platform
+#         - ✅ Transparent - you can see all the source code
+
+#      Cons:
+#         - ❌ Slower to install (needs to build first)
+#         - ❌ Requires build tools to be available
+#         - ❌ Can fail if build dependencies are missing
+
+
+#   2. Binary Distribution (wheel) - .whl file
+
+#      What it is:
+#         - A pre-built package ready to install
+#         - No building required
+
+#      Breaking down the filename:
+#         uv_cats-0.1.0-py3-none-any.whl
+#            - uv_cats - package name
+#            - 0.1.0 - package version
+#            - py3 - Works with Python 3
+#            - none - No specific ABI (Application Binary Interface) required
+#            - any - Works on any platform (Linux, Windows, Mac)
+
+#      Contents:
+#         - Ready-to-use Python files
+#         - Metadata in .dist-info/ directory
+#         - Entry points already configured
+#         - No build files needed
+
+#      Installation process:
+#         User runs: pip install uv_cats-0.1.0-py3-none-any.whl
+#                ↓
+#            1. Extract the wheel
+#            2. Copy files to site-packages
+#            3. Install entry points (scripts)
+#            4. Done!
+
+#      Pros:
+#         - ✅ Fast installation (no build step)
+#         - ✅ Reliable (pre-built, tested)
+#         - ✅ No build tools required
+
+#      Cons:
+#         - ❌ Platform-specific for packages with C extensions
+#         - ❌ Larger file size (sometimes)
+
+
+#   Real-world analogy:
+
+#      Source Distribution = Recipe with ingredients
+#         - You get flour, eggs, sugar
+#         - You need to bake the cake yourself
+#         - Takes time and requires an oven (build tools)
+
+#      Binary Distribution = Pre-made cake
+#         - Already baked and ready to eat
+#         - Just open and serve
+#         - Fast and convenient
+
+
+#   What gets uploaded to PyPI?
+
+#      Typically both:
+#         uv build       # Creates both .tar.gz and .whl
+#         uv publish     # Uploads both to PyPI
+
+#      This gives users the best of both worlds:
+#         - Fast installation (wheel)
+#         - Fallback option (sdist) if wheel doesn't match
+
+
+#   What uv / pip prefer:
+
+#      When you run `pip install requests` or `uv add requests`:
+#         1. First choice: Look for a compatible wheel
+#           - Fast installation
+#           - No build required
+#         2. Fallback: Download source distribution
+#           - Build a wheel locally
+#           - Then install the wheel
+
+
+
+########################################################################################
+############################## Python Package Index (PyPI) #############################
+########################################################################################
+
+# The Python Package Index, commonly known as PyPI, is the official third-party
+# software repository for the Python programming language hosted at pypi.org.
+
+# PyPI serves as a central hub for Python developers to share their projects and
+# make them available to the community. By using PyPI, you can leverage a vast
+# array of pre-built solutions to accelerate your development process, ensuring
+# you don't have to "reinvent the wheel" for common tasks.
+
+# Whether you're looking for web development frameworks, data analysis tools, or
+# utilities for scientific computing, PyPI has something for every Python
+# programmer.
+
+
+
+########################################################################################
+########################################################################################
+########################################################################################
+########################################################################################
+############################## Python Concepts (Misc) ##################################
+########################################################################################
+########################################################################################
+########################################################################################
+########################################################################################
+
+########################################################################################
+################### Framework vs. Non-Framework Build for Python #######################
+########################################################################################
+
+# On macOS, a "framework build" of Python refers to an installation where Python
+# is packaged as a macOS Framework. This type of installation is common when using
+# installers from python.org or the XCode Command Line Tools.
+
+# Characteristics:
+#   Often installed by official Python installers.
+#   Owned by the 'root' account, meaning modifications may require sudo/admin
+#   privileges.
+#   Integrated with macOS's framework system.
+#   Designed to allow applications to embed and use Python, especially those with
+#   graphical user interfaces (GUIs).
+
+# A "non-framework build" on macOS, often called a "source build," means Python is
+# compiled and installed directly from its source code, usually into a location
+# like /usr/local/bin or a user-specific directory.
+
+# Characteristics:
+#   Installed by compiling from source code.
+#   Owned by the account that performed the installation, allowing easier
+#   modification.
+#   Provides more control over the compilation process and potential
+#   customizations.
+#   Intended for command-line use and general development.
+
+
+
+########################################################################################
+############################### USER_BASE and USER_SITE ################################
+########################################################################################
+
+# USER_BASE and USER_SITE are Python's standard locations for user-specific
+# package installations (as opposed to system-wide installations). USER_BASE and
+# USER_SITE values are set by the site module, which is imported by default when
+# the Python interpreter starts.
+
+# The 'PYTHONUSERBASE' environment variable is the primary mechanism to explicitly
+# control USER_BASE. If it is not set, Python uses platform-specific default
+# locations for USER_BASE (~/Library/Python/X.Y)
+
+# python3 -m site --user-base
+# Shows USER_BASE for Xcode-installed Python
+# /Users/kapil/Library/Python/3.9
+
+# python3 -m site --user-site
+# Shows USER_SITE for Xcode-installed Python
+# /Users/kapil/Library/Python/3.9/lib/python/site-packages
+
+# python3.14 -m site --user-base
+# Shows USER_BASE for UV-installed Python
+# /Users/kapil/.local
+
+# python3.14 -m site --user-site
+# Shows USER_SITE for UV-installed Python
+# /Users/kapil/.local/lib/python3.14/site-packages
+
+# When they're used:
+#   `pip install --user <package>` installs to these locations (on macos, when
+#      using the Xcode-installed python, even running without --user installs to
+#      the "user installation" location, with the message "Defaulting to user
+#      installation because normal site-packages is not writeable")
+#   Executables go in USER_BASE/bin
+#   Python packages go in USER_SITE
+
+# Why they exist:
+#   Allows installing packages without sudo/admin privileges
+#   Keeps user packages separate from system packages
+#   Useful when you don't have write access to system directories
+
+
+
+########################################################################################
+################################### Python sys.path ####################################
+########################################################################################
 
 # A fundamental concept in Python
 
@@ -808,9 +937,9 @@ eval "$(uv generate-shell-completion zsh)"
 
 
 
-##################################################################
-##### RUST-BASED TOOLS IN PYTHON TOOLING ECOSYSTEM #####
-##################################################################
+########################################################################################
+################## Rust-Based Tools in Python Tooling Ecosystem ########################
+########################################################################################
 
 # Recently, a few exciting tools built with the Rust programming language have
 # appeared in the Python tooling ecosystem.
@@ -826,78 +955,9 @@ eval "$(uv generate-shell-completion zsh)"
 
 
 
-
-##############################
-##### Aliases #####
-##############################
-
-alias python='python3.14'
-alias s='git status'
-
-
-
-################################################
-##### Python Package Index (PyPI) #####
-################################################
-
-# The Python Package Index, commonly known as PyPI, is the official third-party
-# software repository for the Python programming language hosted at pypi.org.
-
-# PyPI serves as a central hub for Python developers to share their projects and
-# make them available to the community. By using PyPI, you can leverage a vast
-# array of pre-built solutions to accelerate your development process, ensuring
-# you don't have to "reinvent the wheel" for common tasks.
-
-# Whether you're looking for web development frameworks, data analysis tools, or
-# utilities for scientific computing, PyPI has something for every Python
-# programmer.
-
-
-
-###################################
-##### HOMEBREW VS UV #####
-###################################
-
-# Homebrew and UV are fundamentally different tools that serve different purposes.
-
-# Homebrew is a general-purpose package manager for macOS, while UV is a
-# python-specific package and project manager. You would use Homebrew to install
-# system-level tools, including UV itself, while UV is used for managing Python
-# packages and projects, a task traditionally handled by pip.
-
-
-
-
-###################################
-##### HOMEBREW INSTALL #####
-###################################
-
-# Using command here: https://brew.sh
-
-# At the end, the command asked to add the follwoing line to .zprofile.
-# Added it to this file (.zshrc) instead.
-
-eval "$(/opt/homebrew/bin/brew shellenv)"
-
-
-
-#######################################################
-##### MACOS VIRTUAL MACHINE INSTALL USING TART #####
-#######################################################
-
-# Following steps here:
-# https://osxdaily.com/2025/10/06/create-a-macos-tahoe-vm-with-tart
-
-# brew install cirruslabs/cli/tart
-# tart clone ghcr.io/cirruslabs/macos-tahoe-vanilla:latest my-tahoe-vanilla-vm
-# tart run my-tahoe-vanilla-vm
-
-
-
-
-#############################
-##### AIOHTTP #####
-#############################
+########################################################################################
+####################################### aiohttp ########################################
+########################################################################################
 
 # aiohttp is a popular Python library that allows you to write asynchronous HTTP
 # clients and servers. Think of it like Python's requests library but turbocharged
@@ -913,10 +973,19 @@ eval "$(/opt/homebrew/bin/brew shellenv)"
 
 
 
+########################################################################################
+########################################################################################
+########################################################################################
+########################################################################################
+################################### Python Testing #####################################
+########################################################################################
+########################################################################################
+########################################################################################
+########################################################################################
 
-##################################
-##### capsys (pytest) #####
-##################################
+########################################################################################
+################################### capsys (pytest) ####################################
+########################################################################################
 
 # capsys is a built-in pytest fixture that captures writes to sys.stdout and
 # sys.stderr. It allows you to test functions that print to the console by
@@ -935,9 +1004,9 @@ eval "$(/opt/homebrew/bin/brew shellenv)"
 
 
 
-##########################################
-##### pytest.raises() (pytest) #####
-##########################################
+########################################################################################
+############################### pytest.raises() (pytest) ###############################
+########################################################################################
 
 # pytest.raises() is a "context manager" that verifies a specific exception is
 # raised within a block of code. If the expected exception is NOT raised, the test
@@ -976,3 +1045,36 @@ eval "$(/opt/homebrew/bin/brew shellenv)"
 #       - ✅ If SystemExit was raised → Test PASSES
 #       - ❌ If NO exception was raised → Test FAILS
 #       - ❌ If DIFFERENT exception was raised → Test FAILS
+
+
+
+########################################################################################
+########################################################################################
+########################################################################################
+########################################################################################
+################################## Article Bookmarks ###################################
+########################################################################################
+########################################################################################
+########################################################################################
+########################################################################################
+
+# https://realpython.com/python-uv
+
+# https://realpython.com/async-io-python/
+
+# https://www.linkedin.com/pulse/comparing-python-build-backends-setuptools-hatchling-flit-sharma-cq2cf/
+
+
+########################################################################################
+########################################################################################
+########################################################################################
+########################################################################################
+####################################### Aliases ########################################
+########################################################################################
+########################################################################################
+########################################################################################
+########################################################################################
+
+alias python='python3.14'
+alias s='git status'
+alias d='git diff'
