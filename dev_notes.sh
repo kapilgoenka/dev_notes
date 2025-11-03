@@ -266,6 +266,179 @@ eval "$(uv generate-shell-completion zsh)"
 
 
 ########################################################################################
+##################################### UV Project #######################################
+########################################################################################
+
+# Projects help manage Python code spanning multiple files.
+
+# When creating projects, uv supports two basic templates:
+#    1. Applications
+#    2. Libraries
+
+# By default, uv will create a project for a non-packaged application. The --lib
+# flag can be used to create a project for a library instead.
+
+# There are two types of application projects: "packaged" and "non-packaged":
+
+#    You probably need a packaged-project if you want to:
+#       - Add commands to the project
+#       - Distribute the project to others
+#       - Use a src and test layout
+#       - Write a library
+
+#    You probably do not need a non-packaged project if you are:
+#       - Writing scripts
+#       - Building a simple application
+#       - Using a flat layout
+
+# You can create a new Python project using the `uv init` command:
+#    $ uv init hello-world
+#    $ cd hello-world
+
+# Initial project structure:
+#    .
+#    ├── .git
+#    ├── .gitignore
+#    ├── .python-version
+#    ├── README.md
+#    ├── main.py
+#    └── pyproject.toml
+
+# The --package flag can be used to create a packaged application with the
+# default build system. In this case, the source code is moved into a src
+# directory with a module directory and an __init__.py file:
+
+#    $ uv init --package example-pkg
+#    $ tree example-pkg
+#       .
+#       ├── .git
+#       ├── .gitignore
+#       ├── .python-version
+#       ├── README.md
+#       └── pyproject.toml
+#       └── src
+#            └── tree example_pkg
+#                 └── __init__.py
+
+#    Inside pyproject.toml:
+#       [build-system]
+#       requires = ["uv_build>=0.9.7,<0.10.0"]
+#       build-backend = "uv_build"
+
+# A library provides functions and objects for other projects to consume.
+# Libraries are intended to be built and distributed, e.g., by uploading them
+# to PyPI.
+
+# Using --lib implies --package. Libraries always require a packaged project.
+
+# $ uv init --lib example-lib
+
+# As with a packaged application, a src layout is used. A py.typed marker is
+# included to indicate to consumers that types can be read from the library:
+
+#    $ uv init --lib example-lib
+#    $ tree example-lib
+#       .
+#       ├── .git
+#       ├── .gitignore
+#       ├── .python-version
+#       ├── README.md
+#       └── pyproject.toml
+#       └── src
+#            └── tree example_lib
+#                 └── py.typed
+#                 └── __init__.py
+
+#    Inside pyproject.toml:
+#       [build-system]
+#       requires = ["uv_build>=0.9.7,<0.10.0"]
+#       build-backend = "uv_build"
+
+# The created module defines a simple API function:
+
+# __init__.py
+
+# def hello() -> str:
+#     return "Hello from example-lib!"
+# And you can import and execute it using uv run:
+
+
+# cd example-lib
+# uv run python -c "import example_lib; print(example_lib.hello())"
+# Hello from example-lib!
+
+
+# In addition to the files created by `uv init`, uv will create a virtual
+# environment and uv.lock file in the root of your project the first time you run a
+# project command, i.e., uv run, uv sync, or uv lock.
+#    .
+#    ├── .venv
+#    │   ├── bin
+#    │   ├── lib
+#    │   └── pyvenv.cfg
+#    ├── .git
+#    ├── .gitignore
+#    ├── .python-version
+#    ├── README.md
+#    ├── main.py
+#    ├── pyproject.toml
+#    └── uv.lock
+
+# pyproject.toml
+# Python project metadata is defined in a pyproject.toml file.
+
+# .python-version
+# The .python-version file contains the project's default Python version. This file
+# tells uv which Python version to use when creating the project's virtual
+# environment.
+
+# .venv
+# The .venv folder contains your project's virtual environment, a persistent Python
+# environment that is isolated from the rest of your system. This is where uv will
+# install your project's dependencies. Automatically excluded from git with an internal
+# .gitignore file
+
+# Prior to every `uv run` invocation, uv will verify that the lockfile is
+# up-to-date with the pyproject.toml, and that the environment is up-to-date with
+# the lockfile, keeping your project in-sync without the need for manual
+# intervention. uv run guarantees that your command is run in a consistent, locked
+# environment.
+
+
+
+########################################################################################
+################################ Build systems #########################################
+########################################################################################
+
+# A build system determines how the project should be packaged and installed.
+# Projects may declare and configure a build system in the [build-system] table
+# of the pyproject.toml.
+
+# uv uses the presence of a build system to determine if a project contains a
+# package that should be installed in the project virtual environment. If a
+# build system is not defined, uv will not attempt to build or install the
+# project itself, just its dependencies. If a build system is defined, uv will
+# build and install the project into the project environment.
+
+
+
+########################################################################################
+################ Managed and system Python installations in UV #########################
+########################################################################################
+
+# uv refers to Python versions it installs as managed Python installations and all
+# other Python installations as system Python installations.
+
+# uv does not distinguish between Python versions installed by the operating system
+# vs those installed and managed by other tools. For example, if a Python
+# installation is managed with pyenv, it would still be considered a system Python
+# version in uv.
+
+# The available Python versions are frozen for each uv release. To install new
+# Python versions, you may need upgrade uv.
+
+
+########################################################################################
 ################################ UV Lock File (uv.lock) ################################
 ########################################################################################
 
@@ -298,6 +471,83 @@ eval "$(uv generate-shell-completion zsh)"
 
 # To see this in action, you can go ahead and remove the .venv/ folder from the
 # project's root directory. `uv run` will recreate it.
+
+
+
+########################################################################################
+###################################### UV Tools ########################################
+########################################################################################
+
+# The uv tool interface
+
+# uv includes a dedicated interface for interacting with tools. Tools can be invoked
+# without installation using uv tool run, in which case their dependencies are
+# installed in a temporary virtual environment isolated from the current project.
+
+# Because it is very common to run tools without installing them, a uvx alias is
+# provided for uv tool run — the two commands are exactly equivalent. For brevity,
+# the documentation will mostly refer to uvx instead of uv tool run.
+
+# Tools can also be installed with uv tool install, in which case their executables
+# are available on the PATH — an isolated virtual environment is still used, but it
+# is not removed when the command completes.
+
+
+# The bin directory
+
+# Tool executables are symlinked into the user bin directory - ~/.local/bin
+
+# The bin directory must be in the PATH variable for tool executables to be
+# available from the shell. If it is not in the PATH, a warning will be displayed.
+# The uv tool update-shell command can be used to add the bin directory to the PATH
+# in common shell configuration files.
+
+
+# Overwriting executables
+
+# Installation of tools will not overwrite executables in the bin directory that
+# were not previously installed by uv. For example, if pipx has been used to install
+# a tool, uv tool install will fail. The --force flag can be used to override this
+# behavior.
+
+
+# Executing vs installing tools
+
+# In most cases, executing a tool with uvx is more appropriate than installing the
+# tool. Installing the tool is useful if you need the tool to be available to other
+# programs on your system, e.g., if some script you do not control requires the
+# tool, or if you are in a Docker image and want to make the tool available to
+# users.
+
+# Tool environments
+
+# When running a tool with uvx, a virtual environment is stored in the uv cache
+# directory and is treated as disposable, i.e., if you run uv cache clean the
+# environment will be deleted. The environment is only cached to reduce the overhead
+# of repeated invocations. If the environment is removed, a new one will be created
+# automatically.
+
+# When installing a tool with uv tool install, a virtual environment is created in
+# the uv tools directory. The environment will not be removed unless the tool is
+# uninstalled. If the environment is manually deleted, the tool will fail to run.
+
+
+
+########################################################################################
+################################# UV Python Versions ###################################
+########################################################################################
+
+# Upgrading Python versions
+
+# uv allows transparently upgrading Python versions to the latest patch release,
+# e.g., 3.13.4 to 3.13.5
+
+# uv does not allow transparently upgrading across minor Python versions, e.g.,
+# 3.12 to 3.13, because changing minor versions can affect dependency resolution.
+
+# uv-managed Python versions can be upgraded to the latest supported patch
+# release with the python upgrade command
+
 
 
 
@@ -341,12 +591,18 @@ eval "$(uv generate-shell-completion zsh)"
 # ├──────────────────────────┼───────────────────────────────────────────────────┤
 # │ uv run                   │ Run a command in the project environment          │
 # ├──────────────────────────┼───────────────────────────────────────────────────┤
+# │ uv run --isolated        │ Run a command in an isolated environment          │
+# ├──────────────────────────┼───────────────────────────────────────────────────┤
 # │ uv tree                  │ View the dependency tree for the project          │
 # ├──────────────────────────┼───────────────────────────────────────────────────┤
 # │ uv build                 │ Build project into distribution archives          │
 # ├──────────────────────────┼───────────────────────────────────────────────────┤
 # │ uv publish               │ Publish project to a package index                │
 # └──────────────────────────┴───────────────────────────────────────────────────┘
+# │ uv format                │ Format Python code in the project                 │
+# └──────────────────────────┴───────────────────────────────────────────────────┘
+
+
 
 
 # Tools
