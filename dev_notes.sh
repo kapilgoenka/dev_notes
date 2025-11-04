@@ -10,6 +10,9 @@
 #
 
 
+
+
+
 ########################################################################################
 ########################################################################################
 ########################################################################################
@@ -39,6 +42,8 @@ export NVM_DIR="$HOME/.nvm"
 
 
 
+
+
 ########################################################################################
 ########################################################################################
 ########################################################################################
@@ -55,6 +60,8 @@ export NVM_DIR="$HOME/.nvm"
 fpath=(/Users/kapil/.docker/completions $fpath)
 autoload -Uz compinit
 compinit
+
+
 
 
 
@@ -276,15 +283,24 @@ eval "$(uv generate-shell-completion zsh)"
 #    ├── pyproject.toml
 #    └── uv.lock
 
+
+# ---------------
 # pyproject.toml
+# ---------------
 # Python project metadata is defined in a pyproject.toml file.
 
+
+# ---------------
 # .python-version
+# ---------------
 # The .python-version file contains the project's default Python version. This file
 # tells uv which Python version to use when creating the project's virtual
 # environment.
 
+
+# -----
 # .venv
+# -----
 # The .venv folder contains your project's virtual environment, a persistent Python
 # environment that is isolated from the rest of your system. This is where uv will
 # install your project's dependencies. Automatically excluded from git with an internal
@@ -297,9 +313,9 @@ eval "$(uv generate-shell-completion zsh)"
 # environment.
 
 
-########################################################################################
-############################ Optional dependencies #####################################
-########################################################################################
+# ----------------------
+# Optional dependencies
+# ----------------------
 
 # It is common for projects that are published as libraries to make some features
 # optional to reduce the default dependency tree. For example, Pandas has an
@@ -318,9 +334,11 @@ eval "$(uv generate-shell-completion zsh)"
 
 #    [project.optional-dependencies]
 #    plot = [
-#      "matplotlib>=3.6.3"
+
+
+#      "matplotlib>-3.6.3"
 #    ]
-#    excel = [
+#    excel - [
 #      "odfpy>=1.4.1",
 #      "openpyxl>=3.1.0",
 #      "python-calamine>=0.1.7",
@@ -355,6 +373,7 @@ eval "$(uv generate-shell-completion zsh)"
 # about build configuration can be found in the respective tool's documentation.
 
 
+
 ########################################################################################
 ################ Managed and system Python installations in UV #########################
 ########################################################################################
@@ -369,6 +388,7 @@ eval "$(uv generate-shell-completion zsh)"
 
 # The available Python versions are frozen for each uv release. To install new
 # Python versions, you may need upgrade uv.
+
 
 
 ########################################################################################
@@ -411,7 +431,10 @@ eval "$(uv generate-shell-completion zsh)"
 ###################################### UV Tools ########################################
 ########################################################################################
 
+
+# ---------------------
 # The uv tool interface
+# ---------------------
 
 # uv includes a dedicated interface for interacting with tools. Tools can be invoked
 # without installation using uv tool run, in which case their dependencies are
@@ -426,7 +449,9 @@ eval "$(uv generate-shell-completion zsh)"
 # is not removed when the command completes.
 
 
+# ---------------------
 # The bin directory
+# ---------------------
 
 # Tool executables are symlinked into the user bin directory - ~/.local/bin
 
@@ -436,7 +461,9 @@ eval "$(uv generate-shell-completion zsh)"
 # in common shell configuration files.
 
 
+# -----------------------
 # Overwriting executables
+# -----------------------
 
 # Installation of tools will not overwrite executables in the bin directory that
 # were not previously installed by uv. For example, if pipx has been used to install
@@ -444,7 +471,9 @@ eval "$(uv generate-shell-completion zsh)"
 # behavior.
 
 
+# -----------------------------
 # Executing vs installing tools
+# -----------------------------
 
 # In most cases, executing a tool with uvx is more appropriate than installing the
 # tool. Installing the tool is useful if you need the tool to be available to other
@@ -452,7 +481,10 @@ eval "$(uv generate-shell-completion zsh)"
 # tool, or if you are in a Docker image and want to make the tool available to
 # users.
 
+
+# ------------------
 # Tool environments
+# ------------------
 
 # When running a tool with uvx, a virtual environment is stored in the uv cache
 # directory and is treated as disposable, i.e., if you run uv cache clean the
@@ -480,7 +512,6 @@ eval "$(uv generate-shell-completion zsh)"
 
 # uv-managed Python versions can be upgraded to the latest supported patch
 # release with the python upgrade command
-
 
 
 
@@ -613,7 +644,6 @@ eval "$(uv generate-shell-completion zsh)"
 
 
 
-
 ########################################################################################
 ################# UV pyproject.toml file: [build-system] section #######################
 ########################################################################################
@@ -621,7 +651,10 @@ eval "$(uv generate-shell-completion zsh)"
 #   The [build-system] section tells Python packaging tools how to build your
 #   package - specifically, which build tool to use and what dependencies it needs.
 
+
+# ------------------------
 #   Example configuration:
+# ------------------------
 
 #   [build-system]
 #   requires = ["hatchling"]
@@ -631,7 +664,10 @@ eval "$(uv generate-shell-completion zsh)"
 #   1. "To build this package, you need Hatchling installed"
 #   2. "Use Hatchling as the build tool"
 
+
+# --------------------------
 #   What are build backends?
+# --------------------------
 
 #   Build backends are tools that know how to:
 #   - Read your pyproject.toml
@@ -640,7 +676,10 @@ eval "$(uv generate-shell-completion zsh)"
 #   - Create source distributions (.tar.gz)
 #   - Install entry points (like our uv-cats command)
 
+
+# -------------------------
 #   Common build backends:
+# -------------------------
 
 #   1. Hatchling
 #   	- Modern, fast
@@ -660,18 +699,13 @@ eval "$(uv generate-shell-completion zsh)"
 #   	- Designed for simplicity
 #   	- Best for pure Python packages
 
-#   What happens without [build-system]?
 
-#   If you don't have this section, build tools will fall back to legacy behavior:
-#   - Look for a setup.py file
-#   - Use setuptools by default
-#   - May not work correctly with modern tools like uv or pip
-
+# -----------------------
+#   Why do we need this?
+# -----------------------
 
 #   [tool.hatch.build.targets.wheel]
 #   packages = ["."]
-
-#   Why do we need this?
 
 #   By default, Hatchling expects your code to be in a directory that matches your
 #   package name. For example:
@@ -717,7 +751,6 @@ eval "$(uv generate-shell-completion zsh)"
 #   ├── sdists-v9/           # Downloaded source dists (PERSISTENT)
 #   |
 #   └── simple-v18/          # PyPI index cache (PERSISTENT)
-
 
 
 
@@ -909,7 +942,10 @@ eval "$(uv generate-shell-completion zsh)"
 # print("hello world!")
 # EOF
 
+
+# ------------------------
 # Creating a Python script
+# ------------------------
 
 # Python recently added a standard format for inline script metadata. 
 # It allows for selecting Python versions and defining dependencies.
@@ -938,7 +974,10 @@ eval "$(uv generate-shell-completion zsh)"
 #          data = resp.json()
 #          pprint([(k, v["title"]) for k, v in data.items()][:10])
 
+
+# -----------------------------------------
 # Running scripts with iniline dependencies
+# -----------------------------------------
 
 # Scripts that declare inline metadata are automatically executed in
 # environments isolated from the project.
@@ -963,7 +1002,9 @@ eval "$(uv generate-shell-completion zsh)"
 # only the given dependencies listed.
 
 
+# ------------
 # Entry points
+# ------------
 
 # Entry points are the official term for an installed package to advertise
 # interfaces. These include:
@@ -981,6 +1022,8 @@ eval "$(uv generate-shell-completion zsh)"
 
 
 
+
+
 ########################################################################################
 ########################################################################################
 ########################################################################################
@@ -990,6 +1033,8 @@ eval "$(uv generate-shell-completion zsh)"
 ########################################################################################
 ########################################################################################
 ########################################################################################
+
+
 
 ########################################################################################
 ################################ macOS System Python ###################################
@@ -1015,7 +1060,6 @@ eval "$(uv generate-shell-completion zsh)"
 # You can check what executables Apple actually included with their Python
 # installation by running:
 # ls -la /Library/Developer/CommandLineTools/Library/Frameworks/Python3.framework/Versions/3.9/bin/
-
 
 
 
@@ -1320,6 +1364,8 @@ export PATH="$HOME/Library/Python/3.9/bin:$PATH"
 
 
 
+
+
 ########################################################################################
 ########################################################################################
 ########################################################################################
@@ -1329,6 +1375,8 @@ export PATH="$HOME/Library/Python/3.9/bin:$PATH"
 ########################################################################################
 ########################################################################################
 ########################################################################################
+
+
 
 ########################################################################################
 ################################### capsys (pytest) ####################################
@@ -1395,6 +1443,49 @@ export PATH="$HOME/Library/Python/3.9/bin:$PATH"
 
 
 
+
+
+########################################################################################
+########################################################################################
+########################################################################################
+########################################################################################
+###################################### NotebookLM ######################################
+########################################################################################
+########################################################################################
+########################################################################################
+########################################################################################
+
+# What is NotebookLM?
+
+# An AI-powered tool from Google that acts as a research and writing assistant.
+
+# Helps users analyze and interact with their own documents.
+
+# Users can upload various files or link to sources, and then ask questions or
+# request summaries that are grounded in that specific content.
+
+# Upload PDFs, websites, YouTube videos, audio files, Google Docs, Google Slides
+# and more, and NotebookLM will summarize them and make interesting connections
+# between topics, all powered by the latest version of Gemini's multimodal
+# understanding capabilities.
+
+# Upload lecture recordings, textbook chapters, and research papers. Ask
+# NotebookLM to explain complex concepts in simple terms, provide real-world
+# examples, and reinforce your understanding.
+
+# Upload your source material and let NotebookLM create a polished presentation
+# outline, complete with key talking points and supporting evidence.
+
+# NotebookLM is effectively an end-user customizable RAG product. It lets you
+# gather together multiple "sources" - documents, pasted text, links to web
+# pages and YouTube videos - into a single interface where you can then use chat
+# to ask questions of them. Under the hood it's powered by their long-context
+# Gemini 1.5 Pro LLM.
+
+
+
+
+
 ########################################################################################
 ########################################################################################
 ########################################################################################
@@ -1404,6 +1495,8 @@ export PATH="$HOME/Library/Python/3.9/bin:$PATH"
 ########################################################################################
 ########################################################################################
 ########################################################################################
+
+
 
 ########################################################################################
 ####################################### Homebrew #######################################
@@ -1433,6 +1526,9 @@ eval "$(/opt/homebrew/bin/brew shellenv)"
 # tart run my-tahoe-vanilla-vm
 
 
+
+
+
 ########################################################################################
 ########################################################################################
 ########################################################################################
@@ -1446,6 +1542,483 @@ eval "$(/opt/homebrew/bin/brew shellenv)"
 alias python='python3.14'
 alias s='git status'
 alias d='git diff'
+
+
+
+
+
+########################################################################################
+########################################################################################
+########################################################################################
+########################################################################################
+####################################### Django #########################################
+########################################################################################
+########################################################################################
+########################################################################################
+########################################################################################
+
+
+
+########################################################################################
+#################################### Django project ####################################
+########################################################################################
+
+# A Django project is the overall container for your application's settings and
+# configurations (e.g., database settings, installed apps, URL routing at the
+# project level). Django projects are composed of one or more "apps".
+
+
+
+########################################################################################
+###################################### Django App ######################################
+########################################################################################
+
+# An app is a self-contained module that handles a specific piece of
+# functionality (like a blog, a user management system, etc.)
+
+
+
+########################################################################################
+############################# Django’s MVT Architecture ################################
+########################################################################################
+
+# Django’s MVT (Model-View-Template) is a twist on the MVC pattern. 
+
+#    The “View” part deals with user requests.
+
+#    The “Model” part manages data and talks to the database.
+
+#    And the “Template” part shows the data to users.
+
+
+
+########################################################################################
+################################### Django ORM ########################################
+########################################################################################
+
+# The Django ORM (Object-Relational Mapping) lets developers work with databases
+# in Python. This means no need for raw SQL queries. It makes managing databases
+# easy and helps apps grow.
+
+# Using Django’s ORM correctly is key to handling complex queries & avoiding slowdowns.
+
+
+
+########################################################################################
+################################### django-admin #######################################
+########################################################################################
+
+# django-admin is Django’s command-line utility for administrative tasks.
+
+
+
+########################################################################################
+#################################### manage.py #########################################
+########################################################################################
+
+# manage.py is automatically created in each Django project.
+
+# It does the same thing as django-admin but also sets the DJANGO_SETTINGS_MODULE
+# environment variable so that it points to your project’s settings.py file.
+
+# Generally, when working on a single Django project, it's easier to use
+# manage.py than django-admin.
+
+
+
+########################################################################################
+#################################### Migrations ########################################
+########################################################################################
+
+# Migrations are Django's way of propagating changes you make to your models into
+# your database schema.
+
+
+# ------------------
+# Migration Commands
+# ------------------
+#
+# ┌──────────────────┬───────────────────────────────────────────────────────────────┐
+# │ Command          │ Description                                                   │
+# ├──────────────────┼───────────────────────────────────────────────────────────────┤
+# │ migrate          │ Responsible for applying and unapplying migrations.           │
+# ├──────────────────┼───────────────────────────────────────────────────────────────┤
+# │ makemigrations   │ Responsible for creating new migrations based on the changes  │
+# │                  │ you have made to your models.                                 │
+# ├──────────────────┼───────────────────────────────────────────────────────────────┤
+# │ sqlmigrate       │ Displays the SQL statements for a migration.                  │
+# ├──────────────────┼───────────────────────────────────────────────────────────────┤
+# │ showmigrations   │ Lists a project's migrations and their status.                │
+# └──────────────────┴───────────────────────────────────────────────────────────────┘
+
+# You can think of migrations as a version control system for your database
+# schema. `makemigrations` is responsible for packaging up your model changes into
+# individual migration files - analogous to commits - and `migrate` is responsible
+# for applying those to your database.
+
+# The migration files for each app live in a "migrations" directory inside of
+# that app, and are designed to be committed to, and distributed as part of, its
+# codebase. You should be making them once on your development machine and then
+# running the same migrations on your colleagues' machines, your staging
+# machines, and eventually your production machines.
+
+
+# ---------------
+# Backend Support
+# ---------------
+#
+# ┌────────────────┬─────────────────────────────────────────────────────────────────┐
+# │ DB Name        │ Support                                                         │
+# ├────────────────┼─────────────────────────────────────────────────────────────────┤
+# │ PostgreSQL     │ Is the most capable in terms of schema support.                 │
+# ├────────────────┼─────────────────────────────────────────────────────────────────┤
+# │ MySQL          │ Lacks support for transactions around schema alteration         │
+# │                │ operations, meaning that if a migration fails to apply you will │
+# │                │ have to manually unpick the changes in order to try again (it's │
+# │                │ impossible to roll back to an earlier point). MySQL also has a  │
+# │                │ relatively small limit on the combined size of all columns an   │
+# │                │ index covers. This means that indexes that are possible on      │
+# │                │ other backends will fail to be created under MySQL.             │
+# ├────────────────┼─────────────────────────────────────────────────────────────────┤
+# │ SQLite         │ Has very little built-in schema alteration support. Django      │
+# │                │ attempts to emulate it. It is not recommended that you run and  │
+# │                │ migrate SQLite in a production environment.                     │
+# └────────────────┴─────────────────────────────────────────────────────────────────┘
+
+
+# ------------------
+# Migration Workflow
+# ------------------
+#
+# ┌──────┬─────────────────────────────────┬──────────────────────────────────────────┐
+# │ Step │ Command                         │ Description                              │
+# ├──────┼─────────────────────────────────┼──────────────────────────────────────────┤
+# │ 1    │ uv run manage.py makemigrations │ Create migrations. Your models will be   │
+# │      │                                 │ scanned and compared to the versions     │
+# │      │                                 │ currently contained in your migration    │
+# │      │                                 │ files, and then a new set of migrations  │
+# │      │                                 │ will be written out.                     │
+# ├──────┼─────────────────────────────────┼──────────────────────────────────────────┤
+# │ 2    │ python manage.py migrate        │ Apply migrations to your database.       │
+# ├──────┼─────────────────────────────────┼──────────────────────────────────────────┤
+# │ 3    │ commit                          │ Once the migration is applied, commit    │
+# │      │                                 │ the migration and the models change to   │
+# │      │                                 │ your version control system as a single  │
+# │      │                                 │ commit - that way, when other developers │
+# │      │                                 │ (or your production servers) check out   │
+# │      │                                 │ the code, they'll get both the changes   │
+# │      │                                 │ to your models and the accompanying      │
+# │      │                                 │ migration at the same time.              │
+# └──────┴─────────────────────────────────┴──────────────────────────────────────────┘
+
+
+# ---------------
+# Version control
+# ---------------
+
+# Because migrations are stored in version control, you'll occasionally come
+# across situations where you and another developer have both committed a
+# migration to the same app at the same time, resulting in two migrations with
+# the same number.
+
+# Don't worry - the numbers are just there for developers' reference, Django
+# just cares that each migration has a different name. Migrations specify which
+# other migrations they depend on - including earlier migrations in the same app
+# - in the file, so it's possible to detect when there's two new migrations for
+# the same app that aren't ordered.
+
+# When this happens, Django will prompt you and give you some options. If it
+# thinks it's safe enough, it will offer to automatically linearize the two
+# migrations for you.
+
+
+# ---------------
+# Migration files
+# ---------------
+
+# Migrations are stored as an on-disk format, referred to here as "migration
+# files". These files are actually normal Python files with an agreed-upon
+# object layout, written in a declarative style.
+
+# A basic migration file looks like this:
+
+# from django.db import migrations, models
+# class Migration(migrations.Migration):
+#     dependencies = [("migrations", "0001_initial")]
+
+
+#     operations - [
+#         migrations.DeleteModel("Tribble"),
+#         migrations.AddField("Author", "rating", models.IntegerField(default-0)),
+#     ]
+
+# What Django looks for when it loads a migration file (as a Python module) is
+# a subclass of django.db.migrations.Migration called Migration. It then
+# inspects this object for four attributes, only two of which are used most of
+# the time:
+#    dependencies: a list of migrations this one depends on.
+#    operations: a list of Operation classes that define what this migration does.
+
+# The operations are the key; they are a set of declarative instructions which
+# tell Django what schema changes need to be made. Django scans them and builds
+# an in-memory representation of all of the schema changes to all apps, and uses
+# this to generate the SQL which makes the schema changes.
+
+# That in-memory structure is also used to work out what the differences are
+# between your models and the current state of your migrations; Django runs
+# through all the changes, in order, on an in-memory set of models to come up
+# with the state of your models last time you ran makemigrations. It then uses
+# these models to compare against the ones in your models.py files to work out
+# what you have changed.
+
+
+# ------------------
+# Initial migrations
+# ------------------
+
+# The "initial migrations" for an app are the migrations that create the first
+# version of that app's tables.
+
+# When the migrate --fake-initial option is used, these initial migrations are
+# treated specially. For an initial migration that creates one or more tables
+# (CreateModel operation), Django checks that all of those tables already exist
+# in the database and fake-applies the migration if so. Similarly, for an
+# initial migration that adds one or more fields (AddField operation), Django
+# checks that all of the respective columns already exist in the database and
+# fake-applies the migration if so.
+
+
+
+########################################################################################
+################################# Django Commands ######################################
+########################################################################################
+
+# ┌────────────────────────────────────────┬─────────────────────────────────────────┐
+# │ Command                                │ Description                             │
+# ├────────────────────────────────────────┼─────────────────────────────────────────┤
+# │ uv run manage.py help                  │ Display list of the commands provided   │
+# │                                        │ by each application                     │
+# ├────────────────────────────────────────┼─────────────────────────────────────────┤
+# │ uv run manage.py help <command>        │ Display a description of the given      │
+# │                                        │ command and a list of its available     │
+# │                                        │ options                                 │
+# ├────────────────────────────────────────┼─────────────────────────────────────────┤
+# │ uv run manage.py startproject name     │ Creates a Django project directory      │
+# │ [directory]                            │ structure for the given project name in │
+# │                                        │ the current directory or the given      │
+# │                                        │ destination. By default, the new        │
+# │                                        │ directory contains manage.py and a      │
+# │                                        │ project package (containing a           │
+# │                                        │ settings.py and other files). If only   │
+# │                                        │ the project name is given, both the     │
+# │                                        │ project directory and project package   │
+# │                                        │ will be named <projectname> and the     │
+# │                                        │ project directory will be created in    │
+# │                                        │ the current working directory. If the   │
+# │                                        │ optional destination is provided,       │
+# │                                        │ Django will use that existing directory │
+# │                                        │ as the project directory, and create    │
+# │                                        │ manage.py and the project package       │
+# │                                        │ within it.                              │
+# ├────────────────────────────────────────┼─────────────────────────────────────────┤
+# │ uv run manage.py test                  │ Runs tests for all installed apps.      │
+# ├────────────────────────────────────────┼─────────────────────────────────────────┤
+# │ uv run manage.py runserver             │ Starts a lightweight development web    │
+# │                                        │ server on the local machine. By         │
+# │                                        │ default, the server runs on port 8000   │
+# │                                        │ on the IP address 127.0.0.1. You can    │
+# │                                        │ pass in an IP address and port number   │
+# │                                        │ explicitly.                             │
+# │                                        │                                         │
+# │                                        │ The development server automatically    │
+# │                                        │ reloads Python code for each request,   │
+# │                                        │ as needed. You don't need to restart    │
+# │                                        │ the server for code changes to take     │
+# │                                        │ effect. However, some actions like      │
+# │                                        │ adding files don't trigger a restart,   │
+# │                                        │ so you'll have to restart the server in │
+# │                                        │ these cases.                            │
+# │                                        │                                         │
+# │                                        │ If you're using Linux or MacOS and      │
+# │                                        │ install both pywatchman and the         │
+# │                                        │ Watchman service, kernel signals will   │
+# │                                        │ be used to autoreload the server        │
+# │                                        │ (rather than polling file modification  │
+# │                                        │ timestamps each second). This offers    │
+# │                                        │ better performance on large projects,   │
+# │                                        │ reduced response time after code        │
+# │                                        │ changes, more robust change detection,  │
+# │                                        │ and a reduction in power usage. Django  │
+# │                                        │ supports pywatchman 1.2.0 and higher.   │
+# │                                        │                                         │
+# │                                        │ When using Watchman with a project that │
+# │                                        │ includes large non-Python directories   │
+# │                                        │ like node_modules, it's advisable to    │
+# │                                        │ ignore this directory for optimal       │
+# │                                        │ performance.                            │
+# │                                        │                                         │
+# │                                        │ When you start the server, and each     │
+# │                                        │ time you change Python code while the   │
+# │                                        │ server is running, the system "check"   │
+# │                                        │ framework will check your entire Django │
+# │                                        │ project for some common errors. If any  │
+# │                                        │ errors are found, they will be printed  │
+# │                                        │ to standard output.                     │
+# │                                        │                                         │
+# │                                        │ Note that the default IP address,       │
+# │                                        │ 127.0.0.1, is not accessible from other │
+# │                                        │ machines on your network. To make your  │
+# │                                        │ development server viewable to other    │
+# │                                        │ machines on the network, use its own IP │
+# │                                        │ address (e.g. 192.168.2.1), 0 (shortcut │
+# │                                        │ for 0.0.0.0), 0.0.0.0, or :: (with IPv6 │
+# │                                        │ enabled). You can provide an IPv6       │
+# │                                        │ address surrounded by brackets (e.g.    │
+# │                                        │ [200a::1]:8000). This will              │
+# │                                        │ automatically enable IPv6 support.      │
+# │                                        │                                         │
+# │                                        │ Logging of each request and response of │
+# │                                        │ the server is sent to the               │
+# │                                        │ django.server logger.                   │
+# │                                        │                                         │
+# │                                        │ If the staticfiles contrib app is       │
+# │                                        │ enabled (default in new projects) the   │
+# │                                        │ runserver command will be overridden    │
+# │                                        │ with its own runserver command. It adds │
+# │                                        │ automatic serving of static files.      │
+# └────────────────────────────────────────┴─────────────────────────────────────────┘
+
+
+
+########################################################################################
+################################### Django Tips ########################################
+########################################################################################
+
+
+# ------------------------
+# Database Design
+# ------------------------
+
+# You will continuously be using Django's Model to design the database schema.
+# Because the schema has such a big impact on the rest of the project it's
+# important to make sure you've designed it correctly. You'll need to be very
+# comfortable with Django's Model to up-skill in database design. This will
+# require you to understand all the different types of table relations such as
+# Foreign Keys, OneToOneFields, and ManyToManyFields.
+
+# A good understanding of database design is the foundation of having a good
+# understanding of Django.
+
+
+# ---------------------------------
+# Authentication and Authorization
+# ---------------------------------
+
+# The first step is to understand the difference between authentication and
+# authorization is. I recommend you to start by learning the built-in
+# authentication provided by Django. Django's auth module contains a lot of
+# views and forms that make up the authentication logic. Going through that code
+# and understanding what each form and view does will give you a good starting
+# point for how it works underneath the hood.
+
+# While learning the built-in authentication it would also be good to learn the
+# different types of authentication such as session and token authentication. If
+# you have a good understanding of these then you might want to look at JWT
+# authentication.
+
+# If you have a solid understanding of authentication you'll then want to start
+# going through the most commonly used packages such as Django AllAuth. You'll
+# most likely make use of third-party packages to handle authentication because
+# it's very repetitive. So start becoming familiar with the available packages
+# and what might be best for your use-case.
+
+
+# ------------------------
+# Flow of data
+# ------------------------
+
+# Part of understanding the flow of data is understanding how data moves
+# between the user and the database. This means understanding how data is
+# retrieved from the database, passed into the view, and displayed in the
+# template. Likewise from the other way around - understanding data being passed
+# into a form, submitted to the view, and stored in the database.
+
+# Take for example the Create action. To implement this action you will need to
+# implement a form that takes in data and creates a resource (normally through a
+# Django model). Django's Class-Based Views are very good at minimizing the
+# amount of code written in CRUD views.
+
+
+# ------------------------------------
+# Static and media file configuration
+# ------------------------------------
+
+# One of the more challenging concepts is that of static and media files. This
+# is because the setup is different depending on whether you're in local
+# development or production. Understanding the difference between the two is
+# important. I also recommend learning about the S3 protocol and why it's
+# advantageous to store your files on a separate server using a service such as
+# Digital Ocean Spaces.
+
+
+# -----------
+# Deployment
+# -----------
+
+# This is one of the most important sections of web development. Today there are
+# many services you can use to deploy your Django project, but what's important
+# to understand is the fundamentals of how a Django server is run in production.
+# A traditional setup would involve manually setting up gunicorn and nginx on a
+# server. A more modern approach would be to use Docker and deploy the docker
+# container.
+
+
+# --------------------------------
+# Integrating with 3rd party APIs
+# --------------------------------
+
+# If you're able to integrate with APIs such as GitHub, Stripe, Slack, Twitter,
+# and many others, you're showing that you understand almost all of the
+# fundamental aspects of Django.
+
+# Today there are entire businesses built on top of other companies' APIs. So
+# this skill is a big one for me, and I think a lot of other companies that
+# leverage APIs.
+
+
+# -------
+# Docker
+# -------
+
+# Docker is a great tool for creating consistent environments between team
+# members. If you're joining a large team you'll most likely be working with
+# Docker so developing this skill beforehand will make your life easier.
+
+
+# --------------
+# Building APIs
+# --------------
+
+# The Django Rest Framework is by far the most used project for building APIs.
+# There's an entire ecosystem of packages that integrate with the DRF for
+# various functionality.
+
+# This step is definitely a challenging learning curve and I'd recommend you
+# take it slow if you're struggling. Understanding the core of Django is much
+# more important before diving into the DRF.
+
+
+# -------------
+# Task Queuing
+# -------------
+
+# This is definitely the most project-dependent skill. Some projects don't have
+# any need for asynchronous tasks. It's also a very difficult skill to master. A
+# lot of developers have shared their knowledge on asynchronous tasks because
+# it's constantly provided a set of new challenges and pains to deal with. I
+# would consider this skill an entire area to specialize in.
+
+
 
 
 
@@ -1470,12 +2043,37 @@ alias d='git diff'
 
 # Configuring a Django project with uv
 # https://medium.com/@hmbarotov/configuring-a-django-project-with-uv-548f15ccbc63
+
 #    uv init --package django_uv
+
 #    uv add django
+
 #    uv add --dev django-debug-toolbar
+
 #    uv add --group prod gunicorn
+
 #    uv sync
+
 #    uv run django-admin startproject django_project .
+
 #    uv run manage.py runserver
+
+#    # Apply initial migrations
+#    # This command applies database migrations, setting up the necessary tables.
+#    # By default, Django uses an SQLite database stored in a file named db.sqlite3
+#    # in your project's root directory if no other database is configured.
+
 #    uv run manage.py migrate
+
 #    uv run manage.py startapp books
+
+
+# Django Key Concepts
+# https://medium.com/@iamyathz/django-key-concepts-368f2370bc67
+
+# 7 concepts you should know to get a job as a Django developer
+# https://justdjango.com/blog/7-concepts-to-get-a-job
+
+# Important Django Concepts for Developers
+# https://edu.koderbox.com/important-django-concepts-for-developers/
+
