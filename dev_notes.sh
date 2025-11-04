@@ -1,3 +1,16 @@
+#
+# This file started out as the .zshrc file on my local dev machine (mac). To understand 
+# it better, I decided to elaborate how each line in the file got there and what it
+# meant. Along the way, the file has evolved to be primarily my dev-notes file where I
+# am documenting my learnings about Python, AI etc.
+#
+# File structure:
+# Top-level sections have four rows of #s before & after the section title
+# With the top-level sections, sub-sections have one row of #s before / after the title
+#
+
+
+
 ########################################################################################
 ########################################################################################
 ########################################################################################
@@ -6,10 +19,6 @@
 ########################################################################################
 ########################################################################################
 ########################################################################################
-########################################################################################
-
-########################################################################################
-######################################### NVM ##########################################
 ########################################################################################
 
 # When you install nvm using its standard installation script, it automatically
@@ -39,10 +48,6 @@ export NVM_DIR="$HOME/.nvm"
 ########################################################################################
 ########################################################################################
 ########################################################################################
-########################################################################################
-
-########################################################################################
-################################ Docker CLI Completions ################################
 ########################################################################################
 
 # The following lines have been added by Docker Desktop to enable Docker CLI
@@ -405,6 +410,42 @@ eval "$(uv generate-shell-completion zsh)"
 # environment.
 
 
+########################################################################################
+############################ Optional dependencies #####################################
+########################################################################################
+
+# It is common for projects that are published as libraries to make some features
+# optional to reduce the default dependency tree. For example, Pandas has an
+# "excel" extra and a "plot" extra to avoid installation of Excel parsers and
+# matplotlib unless someone explicitly requires them.
+
+# Optional dependencies are specified in [project.optional-dependencies], a TOML
+# table that maps from extra name to its dependencies, following dependency
+# specifiers syntax.
+
+# pyproject.toml
+
+#    [project]
+#    name = "pandas"
+#    version = "1.0.0"
+
+#    [project.optional-dependencies]
+#    plot = [
+#      "matplotlib>=3.6.3"
+#    ]
+#    excel = [
+#      "odfpy>=1.4.1",
+#      "openpyxl>=3.1.0",
+#      "python-calamine>=0.1.7",
+#      "pyxlsb>=1.0.10",
+#      "xlrd>=2.0.1",
+#      "xlsxwriter>=3.0.5"
+#    ]
+
+# To add an optional dependency, use the --optional <extra> option:
+#    uv add httpx --optional network
+
+
 
 ########################################################################################
 ################################ Build systems #########################################
@@ -420,6 +461,11 @@ eval "$(uv generate-shell-completion zsh)"
 # project itself, just its dependencies. If a build system is defined, uv will
 # build and install the project into the project environment.
 
+# When using `uv build`, uv acts as a build frontend and only determines the
+# Python version to use and invokes the build backend. The details of the
+# builds, such as the included files and the distribution filenames, are
+# determined by the build backend, as defined in [build-system]. Information
+# about build configuration can be found in the respective tool's documentation.
 
 
 ########################################################################################
@@ -949,6 +995,102 @@ eval "$(uv generate-shell-completion zsh)"
 #         │                                                           │
 #         └───────────────────────────────────────────────────────────┘
 
+
+
+########################################################################################
+################################### Running scripts ####################################
+########################################################################################
+
+# A Python script is a file intended for standalone execution, e.g., with
+# python <script>.py.
+
+# Using uv to execute scripts ensures that script dependencies are managed
+# without manually managing environments.
+
+# If your script has no dependencies, you can execute it with uv run
+# $ uv run example.py
+
+# Similarly, if your script depends on a module in the standard library,
+# there's nothing more to do:
+# $ uv run example.py
+
+# Your script can be read directly from stdin:
+# $ echo 'print("hello world!")' | uv run -
+
+# If your shell supports here-documents:
+# uv run - <<EOF
+# print("hello world!")
+# EOF
+
+# Creating a Python script
+
+# Python recently added a standard format for inline script metadata. 
+# It allows for selecting Python versions and defining dependencies.
+
+# Use uv init --script to initialize scripts with the inline metadata:
+#    $ uv init --script example.py --python 3.12
+
+# uv supports adding and updating inline script metadata for you.
+
+# Use uv add --script to declare the dependencies for the script:
+#    $ uv add --script example.py 'requests<3' 'rich'
+
+#       This will add a script section at the top of the script declaring the
+#       dependencies using TOML:
+#          # /// script
+#          # dependencies = [
+#          #   "requests<3",
+#          #   "rich",
+#          # ]
+#          # ///
+
+#          import requests
+#          from rich.pretty import pprint
+
+#          resp = requests.get("https://peps.python.org/api/peps.json")
+#          data = resp.json()
+#          pprint([(k, v["title"]) for k, v in data.items()][:10])
+
+# Running scripts with iniline dependencies
+
+# Scripts that declare inline metadata are automatically executed in
+# environments isolated from the project.
+
+# For example, given a script:
+
+#    example.py
+
+#    # /// script
+#    # dependencies = [
+#    #   "httpx",
+#    # ]
+#    # ///
+
+#    import httpx
+
+#    resp = httpx.get("https://peps.python.org/api/peps.json")
+#    data = resp.json()
+#    print([(k, v["title"]) for k, v in data.items()][:10])
+
+# The invocation `uv run example.py` would run isolated from the project with
+# only the given dependencies listed.
+
+
+# Entry points
+
+# Entry points are the official term for an installed package to advertise
+# interfaces. These include:
+
+# Command line interfaces
+# Graphical user interfaces
+# Plugin entry points
+
+# Projects may define command line interfaces (CLIs) for the project in the
+# [project.scripts] table of the pyproject.toml.
+# Projects may define graphical user interfaces (GUIs) for the project in the
+# [project.gui-scripts] table of the pyproject.toml.
+# Projects may define entry points for plugin discovery in the
+# [project.entry-points] table of the pyproject.toml.
 
 
 ########################################################################################
