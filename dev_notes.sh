@@ -10,7 +10,6 @@
 #
 
 
-
 ########################################################################################
 ########################################################################################
 ########################################################################################
@@ -56,118 +55,6 @@ export NVM_DIR="$HOME/.nvm"
 fpath=(/Users/kapil/.docker/completions $fpath)
 autoload -Uz compinit
 compinit
-
-
-
-########################################################################################
-########################################################################################
-########################################################################################
-########################################################################################
-###################################### macOS Dev #######################################
-########################################################################################
-########################################################################################
-########################################################################################
-########################################################################################
-
-
-
-########################################################################################
-################################ macOS System Python ###################################
-########################################################################################
-
-# macOS System Python refers to the python installed by Xcode Command Line Tools.
-
-# This python instllation is a 'framework' build.
-
-# This can be verified by running the command below. If it returns an empty string
-# or None, it's not a framework build. If it returns a value (like 'Python' or
-# 'Python3'), it's a framework build.
-# python3 -c "import sysconfig; print(sysconfig.get_config_var('PYTHONFRAMEWORK'))"
-# Python3
-
-# To see where the Python framework is actually installed, run:
-# python3 -c "import sys; print(sys.prefix)"
-# /Library/Developer/CommandLineTools/Library/Frameworks/Python3.framework/Versions/3.9
-
-# You can find the REAL Python executable at something like:
-# /Library/Developer/CommandLineTools/Library/Frameworks/Python3.framework/Versions/3.9/bin/python3
-
-# You can check what executables Apple actually included with their Python
-# installation by running:
-# ls -la /Library/Developer/CommandLineTools/Library/Frameworks/Python3.framework/Versions/3.9/bin/
-
-
-
-
-########################################################################################
-############### [macOS System Python] User-Specific Package Location ###################
-########################################################################################
-
-# MacOS comes with /usr/bin/python3 and /usr/bin/pip3 pre-installed.
-
-# They are actually small "shim" binaries provided by Apple's xcode-select system.
-#
-# Besides these, many common developer tools in /usr/bin, such as git, swiftc, and
-# clang, are also shim binaries.
-
-# This can be confirmed by running:
-# otool -L /usr/bin/python3
-# /usr/bin/python3:
-	# /usr/lib/libxcselect.dylib (compatibility version 1.0.0, current version 1.0.0)
-	# /usr/lib/libSystem.B.dylib (compatibility version 1.0.0, current version 1356.0.0)
-
-# These shims load libxcselect.dylib to dynamically locate and execute the real
-# versions of these tools within the active Xcode or Command Line Tools
-# installation. This allows for flexibility in managing multiple Xcode versions
-# and ensures that the correct tools are always used. If XCode Command Line Tools
-# are not installed, running the shims triggers a popup for install.
-
-# Installing XCode Command Line Tools makes shims like `python3` & `pip3`
-# functional. However, upgraging pip using `python3 -m ensurepip --upgrade`
-# installs the upgraded version in the location site.USER_BASE, which defaults to
-# ~/Library/Python/X.Y for MacOS. Similarly, any packages installed using pip
-# (e.g. `pip3 install streamlit`) are also installed in the site.USER_BASE
-# location.
-
-# Upon upgrading pip or installing a package, if pip finds that USER_BASE/bin is
-# not in $PATH, it asks you add it to $PATH.
-
-# Sequence of steps that led to this export line:
-# 1. Xcode Command Line Tools provided Python 3.9
-# 2. You ran `python3 -m ensurepip --upgrade` using that python. This command
-#    installed pip to your user directory.
-# 4. You added the export line to your .zshrc as per output of above command.
-
-export PATH="$HOME/Library/Python/3.9/bin:$PATH"
-
-
-
-########################################################################################
-####################################### Homebrew #######################################
-########################################################################################
-
-# Install Using command here: https://brew.sh
-
-# At the end, the command asked to add the follwoing line to .zprofile.
-# Added it to this file (.zshrc) instead.
-
-eval "$(/opt/homebrew/bin/brew shellenv)"
-
-
-
-########################################################################################
-###################### macOS Virtual Machine Install Using Tart ########################
-########################################################################################
-
-# Following steps here:
-# https://osxdaily.com/2025/10/06/create-a-macos-tahoe-vm-with-tart
-
-# More about tart
-# https://www.linkedin.com/pulse/understanding-tart-virtualization-developer-friendly-tool-singh-f1esc/
-
-# brew install cirruslabs/cli/tart
-# tart clone ghcr.io/cirruslabs/macos-tahoe-vanilla:latest my-tahoe-vanilla-vm
-# tart run my-tahoe-vanilla-vm
 
 
 
@@ -1093,15 +980,180 @@ eval "$(uv generate-shell-completion zsh)"
 # [project.entry-points] table of the pyproject.toml.
 
 
+
 ########################################################################################
 ########################################################################################
 ########################################################################################
 ########################################################################################
-############################ Python Build & Distribution ###############################
+################################## Python (Misc) #######################################
 ########################################################################################
 ########################################################################################
 ########################################################################################
 ########################################################################################
+
+########################################################################################
+################################ macOS System Python ###################################
+########################################################################################
+
+# macOS System Python refers to the python installed by Xcode Command Line Tools.
+
+# This python instllation is a 'framework' build.
+
+# This can be verified by running the command below. If it returns an empty string
+# or None, it's not a framework build. If it returns a value (like 'Python' or
+# 'Python3'), it's a framework build.
+# python3 -c "import sysconfig; print(sysconfig.get_config_var('PYTHONFRAMEWORK'))"
+# Python3
+
+# To see where the Python framework is actually installed, run:
+# python3 -c "import sys; print(sys.prefix)"
+# /Library/Developer/CommandLineTools/Library/Frameworks/Python3.framework/Versions/3.9
+
+# You can find the REAL Python executable at something like:
+# /Library/Developer/CommandLineTools/Library/Frameworks/Python3.framework/Versions/3.9/bin/python3
+
+# You can check what executables Apple actually included with their Python
+# installation by running:
+# ls -la /Library/Developer/CommandLineTools/Library/Frameworks/Python3.framework/Versions/3.9/bin/
+
+
+
+
+########################################################################################
+############### [macOS System Python] User-Specific Package Location ###################
+########################################################################################
+
+# MacOS comes with /usr/bin/python3 and /usr/bin/pip3 pre-installed.
+
+# They are actually small "shim" binaries provided by Apple's xcode-select system.
+#
+# Besides these, many common developer tools in /usr/bin, such as git, swiftc, and
+# clang, are also shim binaries.
+
+# This can be confirmed by running:
+# otool -L /usr/bin/python3
+# /usr/bin/python3:
+	# /usr/lib/libxcselect.dylib (compatibility version 1.0.0, current version 1.0.0)
+	# /usr/lib/libSystem.B.dylib (compatibility version 1.0.0, current version 1356.0.0)
+
+# These shims load libxcselect.dylib to dynamically locate and execute the real
+# versions of these tools within the active Xcode or Command Line Tools
+# installation. This allows for flexibility in managing multiple Xcode versions
+# and ensures that the correct tools are always used. If XCode Command Line Tools
+# are not installed, running the shims triggers a popup for install.
+
+# Installing XCode Command Line Tools makes shims like `python3` & `pip3`
+# functional. However, upgraging pip using `python3 -m ensurepip --upgrade`
+# installs the upgraded version in the location site.USER_BASE, which defaults to
+# ~/Library/Python/X.Y for MacOS. Similarly, any packages installed using pip
+# (e.g. `pip3 install streamlit`) are also installed in the site.USER_BASE
+# location.
+
+# Upon upgrading pip or installing a package, if pip finds that USER_BASE/bin is
+# not in $PATH, it asks you add it to $PATH.
+
+# Sequence of steps that led to this export line:
+# 1. Xcode Command Line Tools provided Python 3.9
+# 2. You ran `python3 -m ensurepip --upgrade` using that python. This command
+#    installed pip to your user directory.
+# 4. You added the export line to your .zshrc as per output of above command.
+
+export PATH="$HOME/Library/Python/3.9/bin:$PATH"
+
+
+
+########################################################################################
+################### Framework vs. Non-Framework Build for Python #######################
+########################################################################################
+
+# On macOS, a "framework build" of Python refers to an installation where Python
+# is packaged as a macOS Framework. This type of installation is common when using
+# installers from python.org or the XCode Command Line Tools.
+
+# Characteristics:
+#   Often installed by official Python installers.
+#   Owned by the 'root' account, meaning modifications may require sudo/admin
+#   privileges.
+#   Integrated with macOS's framework system.
+#   Designed to allow applications to embed and use Python, especially those with
+#   graphical user interfaces (GUIs).
+
+# A "non-framework build" on macOS, often called a "source build," means Python is
+# compiled and installed directly from its source code, usually into a location
+# like /usr/local/bin or a user-specific directory.
+
+# Characteristics:
+#   Installed by compiling from source code.
+#   Owned by the account that performed the installation, allowing easier
+#   modification.
+#   Provides more control over the compilation process and potential
+#   customizations.
+#   Intended for command-line use and general development.
+
+
+
+########################################################################################
+############################### USER_BASE and USER_SITE ################################
+########################################################################################
+
+# USER_BASE and USER_SITE are Python's standard locations for user-specific
+# package installations (as opposed to system-wide installations). USER_BASE and
+# USER_SITE values are set by the site module, which is imported by default when
+# the Python interpreter starts.
+
+# The 'PYTHONUSERBASE' environment variable is the primary mechanism to explicitly
+# control USER_BASE. If it is not set, Python uses platform-specific default
+# locations for USER_BASE (~/Library/Python/X.Y)
+
+# python3 -m site --user-base
+# Shows USER_BASE for Xcode-installed Python
+# /Users/kapil/Library/Python/3.9
+
+# python3 -m site --user-site
+# Shows USER_SITE for Xcode-installed Python
+# /Users/kapil/Library/Python/3.9/lib/python/site-packages
+
+# python3.14 -m site --user-base
+# Shows USER_BASE for UV-installed Python
+# /Users/kapil/.local
+
+# python3.14 -m site --user-site
+# Shows USER_SITE for UV-installed Python
+# /Users/kapil/.local/lib/python3.14/site-packages
+
+# When they're used:
+#   `pip install --user <package>` installs to these locations (on macos, when
+#      using the Xcode-installed python, even running without --user installs to
+#      the "user installation" location, with the message "Defaulting to user
+#      installation because normal site-packages is not writeable")
+#   Executables go in USER_BASE/bin
+#   Python packages go in USER_SITE
+
+# Why they exist:
+#   Allows installing packages without sudo/admin privileges
+#   Keeps user packages separate from system packages
+#   Useful when you don't have write access to system directories
+
+
+
+########################################################################################
+################################### Python sys.path ####################################
+########################################################################################
+
+# A fundamental concept in Python
+
+# sys.path is a list of directory paths that Python searches when you use import
+# statements.
+
+#   sys.path is:
+#      - A list of directories python searches (first to last) when you use import
+#        statements. First match wins.
+#      - Can be modified at runtime
+#      - Controls where Python finds modules
+#      - Virtual environments work by adding their `site-packages` to sys.path
+#      - UV's --with flag works by manipulating sys.path to include multiple locations
+
+
 
 ########################################################################################
 ############ Source Distribution and Binary Distribution in Python #####################
@@ -1233,109 +1285,6 @@ eval "$(uv generate-shell-completion zsh)"
 
 
 ########################################################################################
-########################################################################################
-########################################################################################
-########################################################################################
-############################## Python Concepts (Misc) ##################################
-########################################################################################
-########################################################################################
-########################################################################################
-########################################################################################
-
-########################################################################################
-################### Framework vs. Non-Framework Build for Python #######################
-########################################################################################
-
-# On macOS, a "framework build" of Python refers to an installation where Python
-# is packaged as a macOS Framework. This type of installation is common when using
-# installers from python.org or the XCode Command Line Tools.
-
-# Characteristics:
-#   Often installed by official Python installers.
-#   Owned by the 'root' account, meaning modifications may require sudo/admin
-#   privileges.
-#   Integrated with macOS's framework system.
-#   Designed to allow applications to embed and use Python, especially those with
-#   graphical user interfaces (GUIs).
-
-# A "non-framework build" on macOS, often called a "source build," means Python is
-# compiled and installed directly from its source code, usually into a location
-# like /usr/local/bin or a user-specific directory.
-
-# Characteristics:
-#   Installed by compiling from source code.
-#   Owned by the account that performed the installation, allowing easier
-#   modification.
-#   Provides more control over the compilation process and potential
-#   customizations.
-#   Intended for command-line use and general development.
-
-
-
-########################################################################################
-############################### USER_BASE and USER_SITE ################################
-########################################################################################
-
-# USER_BASE and USER_SITE are Python's standard locations for user-specific
-# package installations (as opposed to system-wide installations). USER_BASE and
-# USER_SITE values are set by the site module, which is imported by default when
-# the Python interpreter starts.
-
-# The 'PYTHONUSERBASE' environment variable is the primary mechanism to explicitly
-# control USER_BASE. If it is not set, Python uses platform-specific default
-# locations for USER_BASE (~/Library/Python/X.Y)
-
-# python3 -m site --user-base
-# Shows USER_BASE for Xcode-installed Python
-# /Users/kapil/Library/Python/3.9
-
-# python3 -m site --user-site
-# Shows USER_SITE for Xcode-installed Python
-# /Users/kapil/Library/Python/3.9/lib/python/site-packages
-
-# python3.14 -m site --user-base
-# Shows USER_BASE for UV-installed Python
-# /Users/kapil/.local
-
-# python3.14 -m site --user-site
-# Shows USER_SITE for UV-installed Python
-# /Users/kapil/.local/lib/python3.14/site-packages
-
-# When they're used:
-#   `pip install --user <package>` installs to these locations (on macos, when
-#      using the Xcode-installed python, even running without --user installs to
-#      the "user installation" location, with the message "Defaulting to user
-#      installation because normal site-packages is not writeable")
-#   Executables go in USER_BASE/bin
-#   Python packages go in USER_SITE
-
-# Why they exist:
-#   Allows installing packages without sudo/admin privileges
-#   Keeps user packages separate from system packages
-#   Useful when you don't have write access to system directories
-
-
-
-########################################################################################
-################################### Python sys.path ####################################
-########################################################################################
-
-# A fundamental concept in Python
-
-# sys.path is a list of directory paths that Python searches when you use import
-# statements.
-
-#   sys.path is:
-#      - A list of directories python searches (first to last) when you use import
-#        statements. First match wins.
-#      - Can be modified at runtime
-#      - Controls where Python finds modules
-#      - Virtual environments work by adding their `site-packages` to sys.path
-#      - UV's --with flag works by manipulating sys.path to include multiple locations
-
-
-
-########################################################################################
 ################## Rust-Based Tools in Python Tooling Ecosystem ########################
 ########################################################################################
 
@@ -1450,17 +1399,38 @@ eval "$(uv generate-shell-completion zsh)"
 ########################################################################################
 ########################################################################################
 ########################################################################################
-################################## Article Bookmarks ###################################
+##################################### macOS Dev ########################################
 ########################################################################################
 ########################################################################################
 ########################################################################################
 ########################################################################################
 
-# https://realpython.com/python-uv
+########################################################################################
+####################################### Homebrew #######################################
+########################################################################################
 
-# https://realpython.com/async-io-python/
+# Install Using command here: https://brew.sh
 
-# https://www.linkedin.com/pulse/comparing-python-build-backends-setuptools-hatchling-flit-sharma-cq2cf/
+# At the end, the command asked to add the follwoing line to .zprofile.
+# Added it to this file (.zshrc) instead.
+
+eval "$(/opt/homebrew/bin/brew shellenv)"
+
+
+
+########################################################################################
+###################### macOS Virtual Machine Install Using Tart ########################
+########################################################################################
+
+# Following steps here:
+# https://osxdaily.com/2025/10/06/create-a-macos-tahoe-vm-with-tart
+
+# More about tart
+# https://www.linkedin.com/pulse/understanding-tart-virtualization-developer-friendly-tool-singh-f1esc/
+
+# brew install cirruslabs/cli/tart
+# tart clone ghcr.io/cirruslabs/macos-tahoe-vanilla:latest my-tahoe-vanilla-vm
+# tart run my-tahoe-vanilla-vm
 
 
 ########################################################################################
@@ -1476,3 +1446,36 @@ eval "$(uv generate-shell-completion zsh)"
 alias python='python3.14'
 alias s='git status'
 alias d='git diff'
+
+
+
+########################################################################################
+########################################################################################
+########################################################################################
+########################################################################################
+################################## Article Bookmarks ###################################
+########################################################################################
+########################################################################################
+########################################################################################
+########################################################################################
+
+# https://realpython.com/python-uv
+
+# https://realpython.com/async-io-python/
+
+# https://www.linkedin.com/pulse/comparing-python-build-backends-setuptools-hatchling-flit-sharma-cq2cf/
+
+# Getting started with oh-my-zsh
+# https://dev.to/joebui/getting-started-with-oh-my-zsh-3ecl
+
+# Configuring a Django project with uv
+# https://medium.com/@hmbarotov/configuring-a-django-project-with-uv-548f15ccbc63
+#    uv init --package django_uv
+#    uv add django
+#    uv add --dev django-debug-toolbar
+#    uv add --group prod gunicorn
+#    uv sync
+#    uv run django-admin startproject django_project .
+#    uv run manage.py runserver
+#    uv run manage.py migrate
+#    uv run manage.py startapp books
