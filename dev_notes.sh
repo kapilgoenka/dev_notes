@@ -2068,6 +2068,70 @@ alias d='git diff'
 # A {% comment %} tag provides multi-line comments.
 
 
+# --------
+# Comments
+# --------
+
+# Templates allow us to define HTML documents with dynamic content, where the dynamic
+# content is set by Django based on data we generate in our views, which we then pass
+# into our templates with the render function for example.
+
+# The interpolation syntax {{ }} is used to render a value in the HTML document.
+
+# We can also use filters optionally if we want to, to adjust the look or the
+# formatting of certain values.
+
+# Besides interpolation, we also have tags.
+#    - For example, the {% for %} tag for repeating content and rendering a list of
+#    content based on some data.
+#    - We also have the {% if %} tag to render content conditionally.
+
+# And then we have this important feature of template inheritance where we define a
+# base template with some blocks reserved in them, which will be replaced by the
+# inheriting templates.
+
+# And we then do inherit by using the {% extends %} tag and pointing at the base
+# template,
+
+# We insert the block tags in inheriting template as well to inject content into the
+# base template. We can inject anything - some text, some HTML tags or also some static
+# file imports.
+
+# For placing our templates, we use this best practice structure of repeating the app
+# name in the app specific templates folder to avoid name clashes and we're doing the
+# same for static files.
+
+# And we also learned about the feature of including template files to {% include %}
+# snippets into our templates and have nice feature which helps us with reusing code
+# and the whiting code duplication.
+
+# The overall goal with that is to keep our views files lean and to really focus on
+# the logic for extracting and transforming data here and not on formatting and
+# constructing HTML code. That's the task of the template.
+
+
+
+
+########################################################################################
+######################## Building Static URLs Dynamically ##############################
+########################################################################################
+
+# Imagine, that you want to build a static URL where some part of the URL (e.g. the
+# filename) is actually stored in a variable that's exposed to the template.
+
+# So you might want to build the URL like this:
+
+# {% static "my_path/to/" + the_file %}
+
+# Here, "the_file" would be a variable holding the actual filename.
+
+# The above code would fail.
+
+# Instead, you can use the "add" filter provided by Django to construct this path
+# dynamically:
+
+# {% static "my_path/to/"|add:the_file %}
+
 
 
 ########################################################################################
