@@ -1989,6 +1989,157 @@ alias d='git diff'
 
 
 ########################################################################################
+################################ Django Templates ######################################
+########################################################################################
+
+# A template contains the static parts of the desired HTML output as well as some
+# special syntax describing how dynamic content will be inserted.
+
+# Django ships built-in backends for its own template system, called the Django
+# template language (DTL), and for the popular alternative Jinja2.
+
+# Rendering replaces variables with their values, which are looked up in the context,
+# and executes tags.
+
+# The syntax of the Django template language involves four constructs.
+
+
+# -----------
+# Variables
+# -----------
+
+# A variable outputs a value from the context, which is a dict-like object mapping keys
+# to values.
+
+# Variables are surrounded by {{ and }} like this:
+
+# My first name is {{ first_name }}. My last name is {{ last_name }}.
+# With a context of {'first_name': 'John', 'last_name': 'Doe'}, this template renders:
+# My first name is John. My last name is Doe.
+
+# If a variable resolves to a callable, the template system will call it with no
+# arguments and use its result instead of the callable.
+
+
+# ------
+# Tags
+# ------
+
+# Tags provide arbitrary logic in the rendering process.
+
+# This definition is deliberately vague. For example, a tag can output content, serve
+# as a control structure e.g. an "if" statement or a "for" loop, grab content from a
+# database, or even enable access to other template tags.
+
+# Tags are surrounded by {% and %} 
+
+# Most tags accept arguments:
+# {% cycle 'odd' 'even' %}
+
+# Some tags require beginning and ending tags:
+# {% if user.is_authenticated %}Hello, {{ user.username }}.{% endif %}
+
+
+# --------
+# Filters
+# --------
+
+# Filters transform the values of variables and tag arguments.
+
+# They look like this:
+
+# {{ django|title }}
+# With a context of {'django': 'the web framework for perfectionists with deadlines'},
+# this template renders to:
+# The Web Framework For Perfectionists With Deadlines
+
+# Some filters take an argument:
+# {{ my_date|date:"Y-m-d" }}
+
+
+# --------
+# Comments
+# --------
+
+# Comments look like this:
+
+# {# this won't be rendered #}
+
+# A {% comment %} tag provides multi-line comments.
+
+
+
+
+########################################################################################
+################################ Django Settings #######################################
+########################################################################################
+
+# ----------
+# TEMPLATES
+# ----------
+
+# A list containing the settings for all template engines to be used with Django.
+
+# Each item of the list is a dictionary containing the options for an individual engine.
+
+# Here's a setup that tells the Django template engine to load templates from the
+# templates subdirectory inside each installed application:
+
+# TEMPLATES = [
+#     {
+#         "BACKEND": "django.template.backends.django.DjangoTemplates",
+#         "APP_DIRS": True,
+#     },
+# ]
+
+# The "DIR" key specifies directories where the template engine should look for
+# template source files, in search order.
+
+# The "APP_DIRS" key specifies Whether the engine should look for template source
+# files inside installed applications.
+
+
+# -----------------
+# STATICFILES_DIRS
+# -----------------
+
+# This setting defines the additional locations the staticfiles app will traverse
+
+# STATICFILES_DIRS = [
+#     "/home/special.polls.com/polls/static",
+#     "/home/polls.com/polls/static",
+#     "/opt/webfiles/common",
+# ]
+
+
+
+########################################################################################
+########################## HttpRequest and HttpResponse ################################
+########################################################################################
+
+# Django uses request and response objects to pass state through the system.
+
+# When a page is requested, Django creates an HttpRequest object that contains
+# metadata about the request. Then Django loads the appropriate view, passing the
+# HttpRequest as the first argument to the view function. Each view is responsible for
+# returning an HttpResponse object.
+
+# HttpRequest and HttpResponse are defined in the django.http module.
+
+# In contrast to HttpRequest objects, which are created automatically by Django,
+# HttpResponse objects are your responsibility. Each view you write is responsible for
+# instantiating, populating, and returning an HttpResponse.
+
+# Passing iterators
+
+# You can pass HttpResponse an iterator rather than strings. HttpResponse will consume
+# the iterator immediately, store its content as a string, and discard it. Objects with
+# a close() method such as files and generators are immediately closed. If you need the
+# response to be streamed from the iterator to the client, you must use the
+# StreamingHttpResponse class instead.
+
+
+########################################################################################
 ################################### Django Tips ########################################
 ########################################################################################
 
