@@ -1518,6 +1518,230 @@ alias d='git diff'
 ########################################################################################
 
 
+# ------------
+# Auto Reload
+# ------------
+
+# When you run the Django development server, it keeps checking for changes in your
+# code. It reloads automatically, freeing you from manually reloading it after code
+# changes. However, it might not notice some actions, such as adding new files to your
+# project, so you will have to restart the server manually in these cases.
+
+
+# ------------
+# WSGI / ASGI
+# ------------
+
+# To deploy Django in a production environment, you should run it as a WSGI application
+# using a web server, such as Apache, Gunicorn, or uWSGI, or as an ASGI application
+# using a server such as Daphne or Uvicorn.
+
+# --------------------------------------
+# Default auto-incrementing primary key
+# --------------------------------------
+
+# By default, Django adds an auto-incrementing primary key field to each model. The
+# field type for this field is specified in each application configuration or globally
+# in the DEFAULT_AUTO_FIELD setting. When creating an application with the startapp
+# command, the default value for DEFAULT_AUTO_FIELD is BigAutoField. This is a 64-bit
+# integer that automatically increments according to available IDs. If you don't specify
+# a primary key for your model, Django adds this field automatically. You can also
+# define one of the model fields to be the primary key by setting primary_key=True on
+# it.
+
+
+# ---------------------------------------------
+# DateTimeField and auto_now / auto_now_add
+# ---------------------------------------------
+
+# from django.db import models
+# class Post(models.Model):
+#     created = models.DateTimeField(auto_now_add=True)
+#     updated = models.DateTimeField(auto_now=True)”
+
+# created: This is a DateTimeField field. We will use it to store the date and time
+# when the post was created. By using auto_now_add, the date will be saved automatically
+# when creating an object.
+
+# updated: This is a DateTimeField field. We will use it to store the last date and time
+# when the post was updated. By using auto_now, the date will be updated automatically
+# when saving an object.
+
+# Utilizing the auto_now_add and auto_now datetime fields in your Django models is
+# highly beneficial for tracking the creation and last modification times of objects.
+
+
+# ------------
+# Enumeration
+# ------------
+
+# Django provides enumeration types that you can subclass to define choices simply.
+# These are based on the enum object of Python's standard library.
+
+# class Status(models.TextChoices):
+#   DRAFT = 'DF', 'Draft'
+#   PUBLISHED = 'PB', 'Published'
+
+# Here, we define the enumeration class Status by subclassing models.TextChoices. The
+# available choices for the post status are DRAFT and PUBLISHED. Their respective values
+# are DF and PB, and their labels or readable names are Draft and Published.
+
+# We can access Post.Status.choices to obtain the available choices, Post.Status.names
+# to obtain the names of the choices, Post.Status.labels to obtain the human-readable
+# names, and Post.Status.values to obtain the actual values of the choices.
+
+# Post.Status.choices
+# [('DF', 'Draft'), ('PB', 'Published')]
+
+# >>> Post.Status.labels
+# ['Draft', 'Published']
+
+# >>> Post.Status.values
+# ['DF', 'PB']
+
+# >>> Post.Status.names
+# ['DRAFT', 'PUBLISHED']
+
+# status = models.CharField(
+# 	max_length=2,
+# 	choices=Status,
+# 	default=Status.DRAFT
+# )
+
+# We have added a new status field to the model that is an instance of CharField. It
+# includes a choices parameter to limit the value of the field to the choices in Status.
+# We have also set a default value for the field using the default parameter. We use
+# DRAFT as the default choice for this field
+
+
+# ------------
+# Foreign Key
+# ------------
+
+# Django comes with an authentication framework that handles user accounts. The Django
+# authentication framework comes in the django.contrib.auth package and contains a User
+# model.
+
+# from django.conf import settings
+# author = models.ForeignKey(
+# 	settings.AUTH_USER_MODEL,
+# 	on_delete=models.CASCADE,
+# 	related_name='blog_posts'
+# )
+
+# Here, we import the project's settings and add an author field to the Post
+# model. This field defines a many-to-one relationship with the default user model,
+# meaning that each post is written by a user, and a user can write any number of posts.
+# For this field, Django will create a foreign key in the database using the primary key
+# of the related model.
+
+# The on_delete parameter specifies the behavior to adopt when the referenced object is
+# deleted. This is not specific to Django; it is a SQL standard. Using CASCADE, you
+# specify that when the referenced user is deleted, the database will also delete all
+# related blog posts.
+
+# We use related_name to specify the name of the reverse relationship, from User to
+# Post. This will allow us to access related objects easily from a user object by using
+# the user.blog_posts notation.
+
+
+# -----------------------
+# Composite Primary Key
+# -----------------------
+
+# A composite key could be used for a new model to track a user's favorite posts, where
+# the important data comes from two foreign keys – first to the user, and then to the
+# post – and these columns help to ensure uniqueness in the composite key:
+
+# class FavoritePost(models.Model):
+# 	pk = models.CompositePrimaryKey(
+# 		"user", "post"
+# 	)
+# 	user = models.ForeignKey(
+# 		settings.AUTH_USER_MODEL,
+# 		on_delete=models.CASCADE
+# 	)
+# 	post = models.ForeignKey(
+# 		'blog.Post',
+# 		on_delete=models.CASCADE
+# 	) 
+# 	created = models.DateTimeField(auto_now_add=True)
+
+
+# -----------
+# sqlmigrate
+# -----------
+
+# The sqlmigrate command takes the migration names and returns their SQL without
+# executing it.
+
+
+# ---------------
+# DB Table Name
+# ---------------
+
+# Django generates the table names by combining the application name and the lowercase
+# name of the model (blog_post), but you can also specify a custom database name for
+# your model in the Meta class of the model using the db_table attribute.
+
+
+# ----------------
+# Default Indexes
+# ----------------
+
+# SlugField fields imply an index by default.
+# Unique fields imply an index by default.
+# ForeignKey fields imply an index by default.
+
+
+# ------------------------------------
+# Circular Relations & Lazy Relations
+# ------------------------------------
+
+# Sometimes, you might have two models that depend on each other - i.e. you end up with
+# a circular relationship.
+
+# Or you have a model that has a relation with itself.
+
+# Or you have a model that should have a relation with some built-in model (i.e. built
+# into Django) or a model defined in another application.
+
+# Below, you find examples for all three cases that include Django's solution for these
+# kinds of "problems": Lazy relationships. You can also check out the official docs in
+# addition.
+
+# 1) Two models that have a circular relationship
+
+# class Product(models.Model):
+#   # ... other fields ...
+#   last_buyer = models.ForeignKey('User')
+  
+# class User(models.Model):
+#   # ... other fields ...
+#   created_products = models.ManyToManyField('Product')
+# In this example, we have multiple relationships between the same two models. Hence we
+# might need to define them in both models. By using the model name as a string instead
+# of a direct reference, Django is able to resolve such dependencies.
+
+# 2) Relation with the same model
+
+# class User(models.Model):
+#   # ... other fields ...
+#   friends = models.ManyToManyField('self') 
+# The special self keyword (used as a string value) tells Django that it should form a
+# relationship with (other) instances of the same model.
+
+# 3) Relationships with other apps and their models (built-in or custom apps)
+
+# class Review(models.Model):
+#   # ... other fields ...
+#   product = models.ForeignKey('store.Product') # '<appname>.<modelname>'
+# You can reference models defined in other Django apps (no matter if created by you,
+# via python manage.py startapp <appname> or if it's a built-in or third-party app) by
+# using the app name and then the name of the model inside the app.
+
+
+
 
 ########################################################################################
 #################################### Django project ####################################
@@ -2068,9 +2292,9 @@ alias d='git diff'
 # A {% comment %} tag provides multi-line comments.
 
 
-# --------
-# Comments
-# --------
+# -----------------
+# Templates Summary
+# -----------------
 
 # Templates allow us to define HTML documents with dynamic content, where the dynamic
 # content is set by Django based on data we generate in our views, which we then pass
@@ -2108,6 +2332,16 @@ alias d='git diff'
 # The overall goal with that is to keep our views files lean and to really focus on
 # the logic for extracting and transforming data here and not on formatting and
 # constructing HTML code. That's the task of the template.
+
+
+# ------
+# SQLite
+# ------
+
+# “SQLite is a lightweight database that you can use with Django for development.”
+
+# "SQLite comes bundled with Python 3 and can be used in any of your Python
+# applications."
 
 
 
@@ -2174,6 +2408,53 @@ alias d='git diff'
 #     "/home/polls.com/polls/static",
 #     "/opt/webfiles/common",
 # ]
+
+
+# -------
+# DEBUG
+# -------
+
+# DEBUG is a Boolean that turns the debug mode of the project on and off. If it is set
+# to True, Django will display detailed error pages when an uncaught exception is thrown
+# by your application. When you move to a production environment, remember that you have
+# to set it to False. Never deploy a site into production with DEBUG turned on because
+# you will expose sensitive project-related data.
+
+
+# -----------------
+# ALLOWED_HOSTS
+# -----------------
+
+# ALLOWED_HOSTS is not applied while debug mode is on or when the tests are run. Once
+# you move your site to production and set DEBUG to False, you will have to add your
+# domain/host to this setting to allow it to serve your Django site.
+
+
+# -----------------
+# INSTALLED_APPS
+# -----------------
+
+# INSTALLED_APPS is a setting you will have to edit for all projects.
+
+# This setting tells Django which applications are active for this site.
+
+# By default, Django includes the following applications:
+#    django.contrib.admin: An administration site.
+#    django.contrib.auth: An authentication framework.
+#    django.contrib.contenttypes: A framework for handling content types.
+#    django.contrib.sessions: A session framework.
+#    django.contrib.messages: A messaging framework.
+#    django.contrib.staticfiles: A framework for managing static files, such as CSS,
+#    JavaScript files, and images.
+
+
+# ----------
+# DATABASES
+# ----------
+
+# "The settings.py file contains the database configuration for your project in the
+# DATABASES setting. The default configuration is a SQLite3 database."
+
 
 
 
@@ -2364,14 +2645,15 @@ alias d='git diff'
 
 #    uv run django-admin startproject django_project .
 
-#    uv run manage.py runserver
+#    To complete the project setup, you need to create the tables associated with the
+#    models of the default Django applications included in the INSTALLED_APPS setting.
 
-#    # Apply initial migrations
-# # This command applies database migrations, setting up the necessary tables. # By
-# default, Django uses an SQLite database stored in a file named db.sqlite3 # in your
-# project's root directory if no other database is configured.
+#    By applying the initial migrations, the tables for the applications listed in the
+#    INSTALLED_APPS setting are created in the database.
 
 #    uv run manage.py migrate
+
+#    uv run manage.py runserver
 
 #    uv run manage.py startapp books
 
