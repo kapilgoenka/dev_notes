@@ -282,12 +282,10 @@ eval "$(uv generate-shell-completion zsh)"
 #    ├── pyproject.toml
 #    └── uv.lock
 
-
 # ------------------
 # pyproject.toml
 # ------------------
 # Python project metadata is defined in a pyproject.toml file.
-
 
 # -------------------
 # .python-version
@@ -295,7 +293,6 @@ eval "$(uv generate-shell-completion zsh)"
 # The .python-version file contains the project's default Python version. This file
 # tells uv which Python version to use when creating the project's virtual
 # environment.
-
 
 # ---------
 # .venv
@@ -309,7 +306,6 @@ eval "$(uv generate-shell-completion zsh)"
 # with the pyproject.toml, and that the environment is up-to-date with the lockfile,
 # keeping your project in-sync without the need for manual intervention. uv run
 # guarantees that your command is run in a consistent, locked environment.
-
 
 # -------------------------
 # Optional dependencies
@@ -425,7 +421,6 @@ eval "$(uv generate-shell-completion zsh)"
 ###################################### UV Tools ########################################
 ########################################################################################
 
-
 # -------------------------
 # The uv tool interface
 # -------------------------
@@ -442,7 +437,6 @@ eval "$(uv generate-shell-completion zsh)"
 # are available on the PATH — an isolated virtual environment is still used, but it
 # is not removed when the command completes.
 
-
 # ---------------------
 # The bin directory
 # ---------------------
@@ -454,7 +448,6 @@ eval "$(uv generate-shell-completion zsh)"
 # update-shell command can be used to add the bin directory to the PATH in common shell
 # configuration files.
 
-
 # ---------------------------
 # Overwriting executables
 # ---------------------------
@@ -462,7 +455,6 @@ eval "$(uv generate-shell-completion zsh)"
 # Installation of tools will not overwrite executables in the bin directory that were
 # not previously installed by uv. For example, if pipx has been used to install a tool,
 # uv tool install will fail. The --force flag can be used to override this behavior.
-
 
 # ---------------------------------
 # Executing vs installing tools
@@ -472,7 +464,6 @@ eval "$(uv generate-shell-completion zsh)"
 # Installing the tool is useful if you need the tool to be available to other programs
 # on your system, e.g., if some script you do not control requires the tool, or if you
 # are in a Docker image and want to make the tool available to users.
-
 
 # ---------------------
 # Tool environments
@@ -641,7 +632,6 @@ eval "$(uv generate-shell-completion zsh)"
 # The [build-system] section tells Python packaging tools how to build your package -
 # specifically, which build tool to use and what dependencies it needs.
 
-
 # ----------------------------
 #   Example configuration:
 # ----------------------------
@@ -654,7 +644,6 @@ eval "$(uv generate-shell-completion zsh)"
 #   1. "To build this package, you need Hatchling installed"
 #   2. "Use Hatchling as the build tool"
 
-
 # ------------------------------
 #   What are build backends?
 # ------------------------------
@@ -665,7 +654,6 @@ eval "$(uv generate-shell-completion zsh)"
 #   - Create wheel files (.whl)
 #   - Create source distributions (.tar.gz)
 #   - Install entry points (like our uv-cats command)
-
 
 # ----------------------------
 #   Common build backends:
@@ -688,7 +676,6 @@ eval "$(uv generate-shell-completion zsh)"
 #   4. Flit
 #   	- Designed for simplicity
 #   	- Best for pure Python packages
-
 
 # --------------------------
 #   Why do we need this?
@@ -931,7 +918,6 @@ eval "$(uv generate-shell-completion zsh)"
 # print("hello world!")
 # EOF
 
-
 # ----------------------------
 # Creating a Python script
 # ----------------------------
@@ -956,7 +942,6 @@ eval "$(uv generate-shell-completion zsh)"
 #          resp = requests.get("https://peps.python.org/api/peps.json")
 #          data = resp.json()
 #          pprint([(k, v["title"]) for k, v in data.items()][:10])
-
 
 # ---------------------------------------------
 # Running scripts with iniline dependencies
@@ -983,7 +968,6 @@ eval "$(uv generate-shell-completion zsh)"
 
 # The invocation `uv run example.py` would run isolated from the project with only the
 # given dependencies listed.
-
 
 # ----------------
 # Entry points
@@ -1517,7 +1501,6 @@ alias ssh-ec2='ssh my-first-ec2'
 ########################################################################################
 ########################################################################################
 
-
 # ---------------
 # Auto Reload
 # ---------------
@@ -1527,7 +1510,6 @@ alias ssh-ec2='ssh my-first-ec2'
 # changes. However, it might not notice some actions, such as adding new files to your
 # project, so you will have to restart the server manually in these cases.
 
-
 # ---------------
 # WSGI / ASGI
 # ---------------
@@ -1535,7 +1517,6 @@ alias ssh-ec2='ssh my-first-ec2'
 # To deploy Django in a production environment, you should run it as a WSGI application
 # using a web server, such as Apache, Gunicorn, or uWSGI, or as an ASGI application
 # using a server such as Daphne or Uvicorn.
-
 # -----------------------------------------
 # Default auto-incrementing primary key
 # -----------------------------------------
@@ -1548,7 +1529,6 @@ alias ssh-ec2='ssh my-first-ec2'
 # a primary key for your model, Django adds this field automatically. You can also
 # define one of the model fields to be the primary key by setting primary_key=True on
 # it.
-
 
 # ---------------------------------------------
 # DateTimeField and auto_now / auto_now_add
@@ -1569,7 +1549,6 @@ alias ssh-ec2='ssh my-first-ec2'
 
 # Utilizing the auto_now_add and auto_now datetime fields in your Django models is
 # highly beneficial for tracking the creation and last modification times of objects.
-
 
 # ---------------
 # Enumeration
@@ -1613,7 +1592,6 @@ alias ssh-ec2='ssh my-first-ec2'
 # We have also set a default value for the field using the default parameter. We use
 # DRAFT as the default choice for this field
 
-
 # ---------------
 # Foreign Key
 # ---------------
@@ -1644,7 +1622,6 @@ alias ssh-ec2='ssh my-first-ec2'
 # Post. This will allow us to access related objects easily from a user object by using
 # the user.blog_posts notation.
 
-
 # -------------------------
 # Composite Primary Key
 # -------------------------
@@ -1667,14 +1644,12 @@ alias ssh-ec2='ssh my-first-ec2'
 # 	) 
 # 	created = models.DateTimeField(auto_now_add=True)
 
-
 # --------------
 # sqlmigrate
 # --------------
 
 # The sqlmigrate command takes the migration names and returns their SQL without
 # executing it.
-
 
 # -----------------
 # DB Table Name
@@ -1684,7 +1659,6 @@ alias ssh-ec2='ssh my-first-ec2'
 # name of the model (blog_post), but you can also specify a custom database name for
 # your model in the Meta class of the model using the db_table attribute.
 
-
 # -------------------
 # Default Indexes
 # -------------------
@@ -1692,7 +1666,6 @@ alias ssh-ec2='ssh my-first-ec2'
 # SlugField fields imply an index by default.
 # Unique fields imply an index by default.
 # ForeignKey fields imply an index by default.
-
 
 # ---------------------------------------
 # Circular Relations & Lazy Relations
@@ -1817,7 +1790,6 @@ alias ssh-ec2='ssh my-first-ec2'
 # Migrations are Django's way of propagating changes you make to your models into your
 # database schema.
 
-
 # ----------------------
 # Migration Commands
 # ----------------------
@@ -1846,7 +1818,6 @@ alias ssh-ec2='ssh my-first-ec2'
 # migrations on your colleagues' machines, your staging machines, and eventually your
 # production machines.
 
-
 # -------------------
 # Backend Support
 # -------------------
@@ -1868,7 +1839,6 @@ alias ssh-ec2='ssh my-first-ec2'
 # │                │ attempts to emulate it. It is not recommended that you run and  │
 # │                │ migrate SQLite in a production environment.                     │
 # └────────────────┴─────────────────────────────────────────────────────────────────┘
-
 
 # ----------------------
 # Migration Workflow
@@ -1895,7 +1865,6 @@ alias ssh-ec2='ssh my-first-ec2'
 # │      │                                 │ migration at the same time.              │
 # └──────┴─────────────────────────────────┴──────────────────────────────────────────┘
 
-
 # -------------------
 # Version control
 # -------------------
@@ -1912,7 +1881,6 @@ alias ssh-ec2='ssh my-first-ec2'
 
 # When this happens, Django will prompt you and give you some options. If it thinks it's
 # safe enough, it will offer to automatically linearize the two migrations for you.
-
 
 # -------------------
 # Migration files
@@ -1949,7 +1917,6 @@ alias ssh-ec2='ssh my-first-ec2'
 # models last time you ran makemigrations. It then uses these models to compare against
 # the ones in your models.py files to work out what you have changed.
 
-
 # ----------------------
 # Initial migrations
 # ----------------------
@@ -1963,7 +1930,6 @@ alias ssh-ec2='ssh my-first-ec2'
 # fake-applies the migration if so. Similarly, for an initial migration that adds one or
 # more fields (AddField operation), Django checks that all of the respective columns
 # already exist in the database and fake-applies the migration if so.
-
 
 # -------------------
 # Data migrations
@@ -2020,7 +1986,6 @@ alias ssh-ec2='ssh my-first-ec2'
 # You can pass a second callable to RunPython to run whatever logic you want executed
 # when migrating backwards. If this callable is omitted, migrating backwards will raise
 # an exception.
-
 
 # ------------------------
 # Squashing migrations
@@ -2227,7 +2192,6 @@ alias ssh-ec2='ssh my-first-ec2'
 
 # The syntax of the Django template language involves four constructs.
 
-
 # -------------
 # Variables
 # -------------
@@ -2243,7 +2207,6 @@ alias ssh-ec2='ssh my-first-ec2'
 
 # If a variable resolves to a callable, the template system will call it with no
 # arguments and use its result instead of the callable.
-
 
 # --------
 # Tags
@@ -2263,7 +2226,6 @@ alias ssh-ec2='ssh my-first-ec2'
 # Some tags require beginning and ending tags:
 # {% if user.is_authenticated %}Hello, {{ user.username }}.{% endif %}
 
-
 # -----------
 # Filters
 # -----------
@@ -2280,7 +2242,6 @@ alias ssh-ec2='ssh my-first-ec2'
 # Some filters take an argument:
 # {{ my_date|date:"Y-m-d" }}
 
-
 # ------------
 # Comments
 # ------------
@@ -2290,7 +2251,6 @@ alias ssh-ec2='ssh my-first-ec2'
 # {# this won't be rendered #}
 
 # A {% comment %} tag provides multi-line comments.
-
 
 # ---------------------
 # Templates Summary
@@ -2333,7 +2293,6 @@ alias ssh-ec2='ssh my-first-ec2'
 # the logic for extracting and transforming data here and not on formatting and
 # constructing HTML code. That's the task of the template.
 
-
 # ----------
 # SQLite
 # ----------
@@ -2371,7 +2330,6 @@ alias ssh-ec2='ssh my-first-ec2'
 ########################################################################################
 ################################ Django Settings #######################################
 ########################################################################################
-
 # -------------
 # TEMPLATES
 # -------------
@@ -2396,7 +2354,6 @@ alias ssh-ec2='ssh my-first-ec2'
 # The "APP_DIRS" key specifies Whether the engine should look for template source
 # files inside installed applications.
 
-
 # --------------------
 # STATICFILES_DIRS
 # --------------------
@@ -2409,7 +2366,6 @@ alias ssh-ec2='ssh my-first-ec2'
 #     "/opt/webfiles/common",
 # ]
 
-
 # ---------
 # DEBUG
 # ---------
@@ -2420,7 +2376,6 @@ alias ssh-ec2='ssh my-first-ec2'
 # to set it to False. Never deploy a site into production with DEBUG turned on because
 # you will expose sensitive project-related data.
 
-
 # -----------------
 # ALLOWED_HOSTS
 # -----------------
@@ -2428,7 +2383,6 @@ alias ssh-ec2='ssh my-first-ec2'
 # ALLOWED_HOSTS is not applied while debug mode is on or when the tests are run. Once
 # you move your site to production and set DEBUG to False, you will have to add your
 # domain/host to this setting to allow it to serve your Django site.
-
 
 # ------------------
 # INSTALLED_APPS
@@ -2446,7 +2400,6 @@ alias ssh-ec2='ssh my-first-ec2'
 #    django.contrib.messages: A messaging framework.
 #    django.contrib.staticfiles: A framework for managing static files, such as CSS,
 #    JavaScript files, and images.
-
 
 # -------------
 # DATABASES
@@ -2488,7 +2441,6 @@ alias ssh-ec2='ssh my-first-ec2'
 ################################### Django Tips ########################################
 ########################################################################################
 
-
 # -------------------
 # Database Design
 # -------------------
@@ -2502,7 +2454,6 @@ alias ssh-ec2='ssh my-first-ec2'
 
 # A good understanding of database design is the foundation of having a good
 # understanding of Django.
-
 
 # ------------------------------------
 # Authentication and Authorization
@@ -2525,7 +2476,6 @@ alias ssh-ec2='ssh my-first-ec2'
 # repetitive. So start becoming familiar with the available packages and what might be
 # best for your use-case.
 
-
 # ----------------
 # Flow of data
 # ----------------
@@ -2541,7 +2491,6 @@ alias ssh-ec2='ssh my-first-ec2'
 # model). Django's Class-Based Views are very good at minimizing the amount of code
 # written in CRUD views.
 
-
 # ---------------------------------------
 # Static and media file configuration
 # ---------------------------------------
@@ -2552,7 +2501,6 @@ alias ssh-ec2='ssh my-first-ec2'
 # recommend learning about the S3 protocol and why it's advantageous to store your files
 # on a separate server using a service such as Digital Ocean Spaces.
 
-
 # --------------
 # Deployment
 # --------------
@@ -2562,7 +2510,6 @@ alias ssh-ec2='ssh my-first-ec2'
 # is the fundamentals of how a Django server is run in production. A traditional setup
 # would involve manually setting up gunicorn and nginx on a server. A more modern
 # approach would be to use Docker and deploy the docker container.
-
 
 # -----------------------------------
 # Integrating with 3rd party APIs
@@ -2575,7 +2522,6 @@ alias ssh-ec2='ssh my-first-ec2'
 # Today there are entire businesses built on top of other companies' APIs. So this skill
 # is a big one for me, and I think a lot of other companies that leverage APIs.
 
-
 # ----------
 # Docker
 # ----------
@@ -2583,7 +2529,6 @@ alias ssh-ec2='ssh my-first-ec2'
 # Docker is a great tool for creating consistent environments between team members. If
 # you're joining a large team you'll most likely be working with Docker so developing
 # this skill beforehand will make your life easier.
-
 
 # -----------------
 # Building APIs
@@ -2595,7 +2540,6 @@ alias ssh-ec2='ssh my-first-ec2'
 # This step is definitely a challenging learning curve and I'd recommend you take it
 # slow if you're struggling. Understanding the core of Django is much more important
 # before diving into the DRF.
-
 
 # ----------------
 # Task Queuing
@@ -2623,7 +2567,6 @@ alias ssh-ec2='ssh my-first-ec2'
 ########## https://gale.udemy.com/course/aws-certified-cloud-practitioner-new ##########
 # https://media.datacumulus.com/aws-ccp/AWS%20Certified%20Cloud%20Practitioner%20Slides%20v41.pdf
 ########################################################################################
-
 # ---------------
 # AWS Regions
 # ---------------
@@ -2631,7 +2574,6 @@ alias ssh-ec2='ssh my-first-ec2'
 # • Names can be us-east-1, eu-west-3…
 # • A region is a cluster of data centers
 # • Most AWS services are region-scoped
-
 
 # --------------------------
 # AWS Availability Zones
@@ -2643,8 +2585,7 @@ alias ssh-ec2='ssh my-first-ec2'
 # • Each availability zone (AZ) is one or more discrete data centers with redundant
 #   power, networking, and connectivity
 # • They’re separate from each other, so that they’re isolated from disasters
-# • They’re connected with high bandwidth, ultra-low latency networking
-
+# • They're connected with high bandwidth, ultra-low latency networking
 
 # -------------------------------------------
 # AWS Points of Presence (Edge Locations)
@@ -2666,15 +2607,13 @@ alias ssh-ec2='ssh my-first-ec2'
 # • Root account created by default, shouldn’t be used or shared
 # • Users are people within your organization, and can be grouped
 # • Groups only contain users, not other groups
-# • Users don’t have to belong to a group, and user can belong to multiple groups
-
+# • Users don't have to belong to a group, and user can belong to multiple groups
 
 # --------------------
 # IAM: Permissions
 # --------------------
 # • Users or Groups can be assigned JSON documents called policies
 # • These policies define the permissions of the users
-
 
 # -------------------------
 # IAM – Password Policy
@@ -2691,7 +2630,6 @@ alias ssh-ec2='ssh my-first-ec2'
 # • Require users to change their password after some time (password expiration)
 # • Prevent password re-use
 
-
 # --------------------------
 # IAM Roles for Services
 # --------------------------
@@ -2701,7 +2639,6 @@ alias ssh-ec2='ssh my-first-ec2'
 # 	• EC2 Instance Roles
 # 	• Lambda Function Roles
 # 	• Roles for CloudFormation
-
 
 # ----------------------
 # IAM Security Tools
@@ -2715,7 +2652,6 @@ alias ssh-ec2='ssh my-first-ec2'
 # 	• Access advisor shows the service permissions granted to a user and when those
 # 	services were last accessed.
 # 	• You can use this information to revise your policies.
-
 
 # -----------------
 # IAM – Summary
@@ -2748,7 +2684,6 @@ alias ssh-ec2='ssh my-first-ec2'
 # 	• Scaling the services using an auto-scaling group (ASG)
 # • Knowing EC2 is fundamental to understanding how the Cloud works
 
-
 # --------------------------------------
 # EC2 sizing & configuration options
 # --------------------------------------
@@ -2762,7 +2697,6 @@ alias ssh-ec2='ssh my-first-ec2'
 # • Firewall rules: security group
 # • Bootstrap script (configure at first launch): EC2 User Data
 
-
 # ------------------------
 # EC2 User Data Script
 # ------------------------
@@ -2775,7 +2709,6 @@ alias ssh-ec2='ssh my-first-ec2'
 # 	• Downloading common files from the internet
 # 	• Anything you can think of
 # • The EC2 User Data Script runs with the root user
-
 
 # ----------------------
 # EC2 Instance Types
@@ -2794,7 +2727,6 @@ alias ssh-ec2='ssh my-first-ec2'
 #	 • Compute Optimized
 #	 • Memory Optimized
 #	 • Storage Optimized
-
 
 # -------------------
 # Security Groups
@@ -2826,7 +2758,6 @@ alias ssh-ec2='ssh my-first-ec2'
 # • 443 = HTTPS – access secured websites
 # • 3389 = RDP (Remote Desktop Protocol) – log into a Windows instance
 
-
 # ------------------------------------
 # EC2 Instances Purchasing Options
 # ------------------------------------
@@ -2839,7 +2770,6 @@ alias ssh-ec2='ssh my-first-ec2'
 # • Dedicated Hosts – book an entire physical server, control instance placement
 # • Dedicated Instances – no other customers will share your hardware
 # • Capacity Reservations – reserve capacity in a specific AZ for any duration
-
 
 # -----------------
 # EC2 - Summary
@@ -2892,7 +2822,6 @@ alias ssh-ec2='ssh my-first-ec2'
 # 			accidental deletion
 # 		• Specify retention (from 1 day to 1 year)
 
-
 # ---------------------
 # EC2 Image Builder
 # ---------------------
@@ -2900,7 +2829,6 @@ alias ssh-ec2='ssh my-first-ec2'
 # • => Automate the creation, maintain, validate and test EC2 AMIs
 # • Can be run on a schedule (weekly, whenever packages are updated, etc…)
 # • Free service (only pay for the underlying resources)
-
 
 # ----------------------
 # EC2 Instance Store
@@ -2913,14 +2841,12 @@ alias ssh-ec2='ssh my-first-ec2'
 # • Risk of data loss if hardware fails
 # • Backups and Replication are your responsibility
 
-
 # -----------------------------
 # EFS – Elastic File System
 # -----------------------------
 # • Managed NFS (network file system) that can be mounted on 100s of EC2
 # • EFS works with Linux EC2 instances in multi-AZ
 # • Highly available, scalable, expensive (3x gp2), pay per use, no capacity planning
-
 
 # ----------------------------------
 # EFS Infrequent Access (EFS-IA)
