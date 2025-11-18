@@ -62,7 +62,15 @@ The `dev_notes.sh` file follows a three-level header hierarchy:
 3. **Third-level sections** (1 row of `-` above and below title):
    - Preceded by 2 empty rows
    - Detailed subsections
-   - Example: "Variables", "Filters", "Tags" under Django Templates
+   - **Hyphen formatting rule**: Hyphens must extend exactly 2 characters beyond the text length on each side
+   - Example: "Variables" (9 chars) requires 13 hyphens (9+2+2)
+   - Example: "Auto Reload" (11 chars) requires 15 hyphens (11+2+2)
+   - Format:
+     ```
+     # ---------------
+     # Auto Reload
+     # ---------------
+     ```
 
 ## Line Length Requirements
 
