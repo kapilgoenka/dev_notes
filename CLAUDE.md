@@ -12,14 +12,14 @@ This is a personal developer notes repository containing a single comprehensive 
 - macOS system architecture (framework builds, system protection, user directories)
 - Shell configuration patterns for zsh/bash
 - Development tools (Docker, Homebrew, Tart)
-- AWS (EC2 instances, storage volumes, instance categories)
+- AWS (Cloud Practitioner certification topics, IAM, EC2, regions, availability zones)
 - Python testing (pytest, capsys, pytest.raises)
 - NotebookLM
 - Article bookmarks and learning resources
 
 ## File Structure
 
-- `dev_notes.sh` - Main documentation file (~3000 lines) structured as an annotated shell configuration script with extensive comments
+- `dev_notes.sh` - Main documentation file (~3300 lines) structured as an annotated shell configuration script with extensive comments
 - `CLAUDE.md` - This file, providing guidance for working with the repository
 
 ## Major Topics in dev_notes.sh
@@ -34,7 +34,7 @@ The file is organized into these major sections (in order):
 7. **macOS Dev** - System architecture, framework builds, system integrity protection
 8. **Aliases** - Shell aliases and shortcuts
 9. **Django** - Web framework (extensive coverage of models, migrations, ORM)
-10. **AWS** - EC2 configuration and instance types
+10. **AWS** - Cloud Practitioner certification study notes (IAM, EC2, infrastructure concepts)
 11. **Article Bookmarks** - Learning resources and reference articles
 
 ## File Origin and Purpose
@@ -125,6 +125,25 @@ Extensive UV package manager documentation includes:
 - `uv run --with` behavior and temporary environment creation
 - Running scripts with inline dependencies
 - Build backends (Hatchling, Setuptools, Poetry, Flit)
+
+## AWS Documentation Coverage
+
+AWS Cloud Practitioner certification notes include:
+- AWS global infrastructure (Regions, Availability Zones, Edge Locations)
+- IAM (Identity and Access Management):
+  - Users, Groups, Roles, and Policies
+  - Password policies and MFA
+  - IAM Credentials Report and Access Advisor
+  - Service roles (EC2, Lambda, CloudFormation)
+- EC2 (Elastic Compute Cloud):
+  - Instance types and sizing options
+  - EC2 User Data scripts for bootstrapping
+  - Security Groups (firewall rules, inbound/outbound traffic)
+  - Purchasing options (On-Demand, Reserved, Spot, Dedicated)
+  - Classic ports (SSH, HTTP, HTTPS, RDP, FTP, SFTP)
+- EBS (Elastic Block Store) volume configuration
+- EC2 instance categories (General Purpose, Compute, Memory, Storage, Accelerated, HPC)
+- Linux commands for EC2 (yum, httpd, systemctl)
 
 ## Django Documentation Coverage
 

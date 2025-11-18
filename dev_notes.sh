@@ -2741,12 +2741,12 @@ alias ssh-ec2='ssh my-first-ec2'
 # ------------------------------------
 # • EC2 is one of the most popular of AWS’ offering
 # • EC2 = Elastic Compute Cloud = Infrastructure as a Service
-# • It mainly consists in the capability of :
+# • It mainly consists of:
 # 	• Renting virtual machines (EC2)
 # 	• Storing data on virtual drives (EBS)
 # 	• Distributing load across machines (ELB)
 # 	• Scaling the services using an auto-scaling group (ASG)
-# • Knowing EC2 is fundamental to understand how the Cloud works
+# • Knowing EC2 is fundamental to understanding how the Cloud works
 
 
 # ------------------------------------
@@ -2756,8 +2756,8 @@ alias ssh-ec2='ssh my-first-ec2'
 # • How much compute power & cores (CPU)
 # • How much random-access memory (RAM)
 # • How much storage space:
-# • Network-attached (EBS & EFS)
-# • hardware (EC2 Instance Store)
+#	 • Network-attached (EBS & EFS)
+#	 • hardware (EC2 Instance Store)
 # • Network card: speed of the card, Public IP address
 # • Firewall rules: security group
 # • Bootstrap script (configure at first launch): EC2 User Data
@@ -2853,6 +2853,111 @@ alias ssh-ec2='ssh my-first-ec2'
 # • Purchasing Options: On-Demand, Spot, Reserved (Standard + Convertible), Dedicated
 #   Host, Dedicated Instance
 
+
+
+########################################################################################
+############################# EC2 Instance Storage #####################################
+########################################################################################
+
+# -------------------------------------------
+# What’s an EBS (Elastic Block Store) Volume?
+# -------------------------------------------
+# • A network drive you can attach to your instances while they run
+# • It allows your instances to persist data, even after their termination
+# • They can only be mounted to one instance at a time (at the CCPlevel)
+# • They are bound to a specific availability zone
+# • Analogy: Think of them as a “network USB stick”
+# • Have a provisioned capacity (size in GBs, and IOPS)
+# 	• You get billed for all the provisioned capacity
+# 	• You can increase the capacity of the drive over time
+
+# -------------------------------------------
+# EBS – Delete on Termination attribute
+# -------------------------------------------
+# • Controls the EBS behaviour when an EC2 instance terminates
+# 	• By default, the root EBS volume is deleted (attribute enabled)
+# 	• By default, any other attached EBS volume is not deleted (attribute disabled)
+
+# --------------
+# EBS Snapshots
+# --------------
+# • Make a backup (snapshot) of your EBS volume at a point in time
+# • Not necessary to detach volume to do snapshot, but recommended
+# • Can copy snapshots across AZ or Region
+# • EBS Snapshot Archive
+# 	• Move a Snapshot to an ”archive tier” that is 75% cheaper
+# 		• Takes within 24 to 72 hours for restoring the archive
+# 	• Recycle Bin for EBS Snapshots
+# 		• 	Setup rules to retain deleted snapshots so you can recover them after an
+# 			accidental deletion
+# 		• Specify retention (from 1 day to 1 year)
+
+
+# ----------------------------
+# EC2 Image Builder
+# ----------------------------
+# • Used to automate the creation of Virtual Machines or container images
+# • => Automate the creation, maintain, validate and test EC2 AMIs
+# • Can be run on a schedule (weekly, whenever packages are updated, etc…)
+# • Free service (only pay for the underlying resources)
+
+
+# ----------------------------
+# EC2 Instance Store
+# ----------------------------
+# • EBS volumes are network drives with good but “limited” performance
+# • If you need a high-performance hardware disk, use EC2 Instance Store
+# • Better I/O performance
+# • EC2 Instance Store lose their storage if they’re stopped (ephemeral)
+# • Good for buffer / cache / scratch data / temporary content
+# • Risk of data loss if hardware fails
+# • Backups and Replication are your responsibility
+
+
+# ----------------------------
+# EFS – Elastic File System
+# ----------------------------
+# • Managed NFS (network file system) that can be mounted on 100s of EC2
+# • EFS works with Linux EC2 instances in multi-AZ
+# • Highly available, scalable, expensive (3x gp2), pay per use, no capacity planning
+
+
+# ------------------------------------------
+# EFS Infrequent Access (EFS-IA)
+# ------------------------------------------
+# • Storage class that is cost-optimized for files not accessed every day
+# • Up to 92% lower cost compared to EFS Standard
+# • EFS will automatically move your files to EFS-IA based on the last access time
+# • Enable EFS-IA with a Lifecycle Policy
+# • Example: move files that are not accessed for 60 days to EFS-IA
+# • Transparent to the applications accessing EFS
+
+
+
+########################################################################################
+##################################### AMI ##############################################
+########################################################################################
+
+# --------------
+# AMI Overview
+# --------------
+# • AMI = Amazon Machine Image
+# • AMI are a customization of an EC2 instance
+# • You add your own software, configuration, operating system, monitoring…
+# • Faster boot / configuration time because all your software is pre-packaged
+# • AMI are built for a specific region (and can be copied across regions)
+# • You can launch EC2 instances from:
+# • A Public AMI: AWS provided
+# • Your own AMI: you make and maintain them yourself
+# • An AWS Marketplace AMI: an AMI someone else made (and potentially sells)
+
+# ------------------------------------------
+# AMI Process (from an EC2 instance)
+# ------------------------------------------
+# • Start an EC2 instance and customize it
+# • Stop the instance (for data integrity)
+# • Build an AMI – this will also create EBS snapshots
+# • Launch instances from other AMIs
 
 
 ########################################################################################
