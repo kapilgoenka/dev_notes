@@ -2618,6 +2618,242 @@ alias ssh-ec2='ssh my-first-ec2'
 ########################################################################################
 ########################################################################################
 
+########################################################################################
+############# [NEW] Ultimate AWS Certified Cloud Practitioner CLF-C02 2025 #############
+########## https://gale.udemy.com/course/aws-certified-cloud-practitioner-new ##########
+# https://media.datacumulus.com/aws-ccp/AWS%20Certified%20Cloud%20Practitioner%20Slides%20v41.pdf
+########################################################################################
+
+# ------------------------------------
+# AWS Regions
+# ------------------------------------
+# • AWS has Regions all around the world
+# • Names can be us-east-1, eu-west-3…
+# • A region is a cluster of data centers
+# • Most AWS services are region-scoped
+
+
+# ------------------------------------
+# AWS Availability Zones
+# ------------------------------------
+# • Each region has many availability zones. Example:
+# • ap-southeast-2a
+# • ap-southeast-2b
+# • ap-southeast-2c
+# • Each availability zone (AZ) is one or more discrete data centers with redundant
+#   power, networking, and connectivity
+# • They’re separate from each other, so that they’re isolated from disasters
+# • They’re connected with high bandwidth, ultra-low latency networking
+
+
+# -----------------------------------------
+# AWS Points of Presence (Edge Locations)
+# -----------------------------------------
+# • Amazon has 400+ Points of Presence (400+ Edge Locations & 10+
+#   Regional Caches) in 90+ cities across 40+ countries
+# • Content is delivered to end users with lower latency
+
+
+
+########################################################################################
+###################################### IAM #############################################
+########################################################################################
+
+# ------------------------------------
+# IAM: Users & Groups
+# ------------------------------------
+# • IAM = Identity and Access Management, Global service
+# • Root account created by default, shouldn’t be used or shared
+# • Users are people within your organization, and can be grouped
+# • Groups only contain users, not other groups
+# • Users don’t have to belong to a group, and user can belong to multiple groups
+
+
+# ------------------------------------
+# IAM: Permissions
+# ------------------------------------
+# • Users or Groups can be assigned JSON documents called policies
+# • These policies define the permissions of the users
+
+
+# ------------------------------------
+# IAM – Password Policy
+# ------------------------------------
+# • Strong passwords = higher security for your account
+# • In AWS, you can setup a password policy:
+# • Set a minimum password length
+# • Require specific character types:
+# 	• including uppercase letters
+# 	• lowercase letters
+# 	• numbers
+# 	• non-alphanumeric characters
+# • Allow all IAM users to change their own passwords
+# • Require users to change their password after some time (password expiration)
+# • Prevent password re-use
+
+
+# ------------------------------------
+# IAM Roles for Services
+# ------------------------------------
+# • Some AWS service will need to perform actions on your behalf
+# • To do so, we will assign permissions to AWS services with IAM Roles
+# • Common roles:
+# 	• EC2 Instance Roles
+# 	• Lambda Function Roles
+# 	• Roles for CloudFormation
+
+
+# ------------------------------------
+# IAM Security Tools
+# ------------------------------------
+
+# • IAM Credentials Report (account-level)
+# 	• a report that lists all your account's users and the status of their various
+# 	credentials
+
+# • IAM Access Advisor (user-level)
+# 	• Access advisor shows the service permissions granted to a user and when those
+# 	services were last accessed.
+# 	• You can use this information to revise your policies.
+
+
+# ------------------------
+# IAM – Summary
+# ------------------------
+# • Users: mapped to a physical user, has a password for AWS Console
+# • Groups: contains users only
+# • Policies: JSON document that outlines permissions for users or groups
+# • Roles: for EC2 instances or AWS services
+# • Security: MFA + Password Policy
+# • AWS CLI: manage your AWS services using the command-line
+# • AWS SDK: manage your AWS services using a programming language
+# • Access Keys: access AWS using the CLI or SDK
+# • Audit: IAM Credential Reports & IAM Access Advisor
+
+
+
+########################################################################################
+###################################### EC2 #############################################
+########################################################################################
+
+# ------------------------------------
+# Amazon EC2
+# ------------------------------------
+# • EC2 is one of the most popular of AWS’ offering
+# • EC2 = Elastic Compute Cloud = Infrastructure as a Service
+# • It mainly consists in the capability of :
+# 	• Renting virtual machines (EC2)
+# 	• Storing data on virtual drives (EBS)
+# 	• Distributing load across machines (ELB)
+# 	• Scaling the services using an auto-scaling group (ASG)
+# • Knowing EC2 is fundamental to understand how the Cloud works
+
+
+# ------------------------------------
+# EC2 sizing & configuration options
+# ------------------------------------
+# • Operating System (OS): Linux, Windows or Mac OS
+# • How much compute power & cores (CPU)
+# • How much random-access memory (RAM)
+# • How much storage space:
+# • Network-attached (EBS & EFS)
+# • hardware (EC2 Instance Store)
+# • Network card: speed of the card, Public IP address
+# • Firewall rules: security group
+# • Bootstrap script (configure at first launch): EC2 User Data
+
+
+# ------------------------------------
+# EC2 User Data Script
+# ------------------------------------
+# • It is possible to bootstrap our instances using an EC2 User data script.
+# • bootstrapping means launching commands when a machine starts
+# • That script is only run once at the instance first start
+# • EC2 user data is used to automate boot tasks such as:
+# 	• Installing updates
+# 	• Installing software
+# 	• Downloading common files from the internet
+# 	• Anything you can think of
+# • The EC2 User Data Script runs with the root user
+
+
+# ------------------------------------
+# EC2 Instance Types
+# ------------------------------------
+# • You can use different types of EC2 instances that are optimised for
+# different use cases (https://aws.amazon.com/ec2/instance-types/)
+
+# • AWS has the following naming convention:
+# 	m5.2xlarge
+# 	• m: instance class
+# 	• 5: generation (AWS improves them over time)
+# 	• 2xlarge: size within the instance class
+
+# EC2 Instance Types
+# 	• General Purpose
+#	 • Compute Optimized
+#	 • Memory Optimized
+#	 • Storage Optimized
+
+
+# ----------------------
+# Security Groups
+# ----------------------
+# • Act as a “firewall” on EC2 instances
+# • They regulate:
+# 	• Access to Ports
+# 	• Authorised IP ranges – IPv4 and IPv6
+# 	• Control of inbound network (from other to the instance)
+# 	• Control of outbound network (from the instance to other)
+# • Security groups rules can reference by IP or by security group
+# • Can be attached to multiple instances
+# • Locked down to a region / VPC combination
+# • Does live “outside” the EC2 – if traffic is blocked the EC2 instance won’t see it
+# • It’s good to maintain one separate security group for SSH access
+# • If your application is not accessible (time out), then it’s a security group issue
+# • If your application gives a “connection refused“ error, then it’s an application
+# error or it’s not launched
+# • All inbound traffic is blocked by default
+# • All outbound traffic is authorised by default
+
+# ----------------------
+# Classic Ports to know
+# ----------------------
+# • 22 = SSH (Secure Shell) - log into a Linux instance
+# • 21 = FTP (File Transfer Protocol) – upload files into a file share
+# • 22 = SFTP (Secure File Transfer Protocol) – upload files using SSH
+# • 80 = HTTP – access unsecured websites
+# • 443 = HTTPS – access secured websites
+# • 3389 = RDP (Remote Desktop Protocol) – log into a Windows instance
+
+
+# ------------------------------------
+# EC2 Instances Purchasing Options
+# ------------------------------------
+# • On-Demand Instances – short workload, predictable pricing, pay by second
+# • Reserved (1 & 3 years)
+# • Reserved Instances – long workloads
+# • Convertible Reserved Instances – long workloads with flexible instances
+# • Savings Plans (1 & 3 years) – commitment to an amount of usage, long workload
+# • Spot Instances – short workloads, cheap, can lose instances (less reliable)
+# • Dedicated Hosts – book an entire physical server, control instance placement
+# • Dedicated Instances – no other customers will share your hardware
+# • Capacity Reservations – reserve capacity in a specific AZ for any duration
+
+
+# ------------------------------------
+# EC2 - Summary
+# ------------------------------------
+# • EC2 Instance: AMI (OS) + Instance Size (CPU + RAM) + Storage + security groups +
+#   EC2 User Data
+# • Security Groups: Firewall attached to the EC2 instance
+# • EC2 User Data: Script launched at the first start of an instance
+# • SSH: start a terminal into our EC2 Instances (port 22)
+# • EC2 Instance Role: link to IAM roles
+# • Purchasing Options: On-Demand, Spot, Reserved (Standard + Convertible), Dedicated
+#   Host, Dedicated Instance
+
+
 
 ########################################################################################
 ################################# yum update -y ########################################
