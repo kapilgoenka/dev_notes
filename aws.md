@@ -14,7 +14,7 @@ Sources:
 
 * AWS has Regions all around the world
 
-* Names can be us-east-1, eu-west-3…
+* Names can be `us-east-1`, `eu-west-3`…
 
 * A region is a cluster of data centers
 
@@ -25,11 +25,11 @@ Sources:
 ### Availability Zones
 
 * Each region has many availability zones. Example:
-    * ap-southeast-2a
-    * ap-southeast-2b
-    * ap-southeast-2c
+    * `ap-southeast-2a`
+    * `ap-southeast-2b`
+    * `ap-southeast-2c`
 
-* Each availability zone (AZ) is one or more discrete data centers with redundant power, networking, and connectivity
+* Each availability zone (AZ) is one or more discrete data centers
 
 * They're separate from each other, so that they're isolated from disasters
 
@@ -38,6 +38,7 @@ Sources:
 <br>
 
 ### Points of Presence (Edge Locations)
+
 * Amazon has 400+ Points of Presence (400+ Edge Locations & 10+ Regional Caches) in 90+ cities across 40+ countries
 
 * Content is delivered to end users with lower latency
@@ -65,55 +66,78 @@ Sources:
 <br>
 
 ### Permissions
-- Users or Groups can be assigned JSON documents called policies
-- These policies define the permissions of the users
+
+* Users or Groups can be assigned JSON documents called policies
+
+* These policies define the permissions of the users
 
 <br>
 
 ### Password Policy
-- Strong passwords = higher security for your account
-- In AWS, you can setup a password policy:
-    - Set a minimum password length
-    - Require specific character types:
-    	- including uppercase letters
-    	- lowercase letters
-    	- numbers
-    	- non-alphanumeric characters
-    - Allow all IAM users to change their own passwords
-    - Require users to change their password after some time (password expiration)
-    - Prevent password re-use
+
+* Strong passwords = higher security for your account
+
+* In AWS, you can setup a password policy:
+
+* Set a minimum password length
+
+* Require specific character types:
+    * including uppercase letters
+    * lowercase letters
+    * numbers
+    * non-alphanumeric characters
+
+* Allow all IAM users to change their own passwords
+
+* Require users to change their password after some time (password expiration)
+
+* Prevent password re-use
 
 <br>
 
 ### Roles for Services
-- Some AWS service will need to perform actions on your behalf
-- To do so, we will assign permissions to AWS services with IAM Roles
-- Common roles:
-	- EC2 Instance Roles
-	- Lambda Function Roles
-	- Roles for CloudFormation
+
+* Some AWS service will need to perform actions on your behalf
+
+* To do so, we will assign permissions to AWS services with IAM Roles
+
+* Common roles:
+    * EC2 Instance Roles
+    * Lambda Function Roles
+    * Roles for CloudFormation
 
 <br>
 
 ### IAM Security Tools
-- IAM Credentials Report (account-level)
-	- A report that lists all your account's users and the status of their various credentials
-- IAM Access Advisor (user-level)
-	- Access advisor shows the service permissions granted to a user and when those services were last accessed.
-	- You can use this information to revise your policies.
+
+* IAM Credentials Report (account-level)
+    * A report that lists all your account's users and the status of their various credentials
+
+* IAM Access Advisor (user-level)
+    * Access advisor shows the service permissions granted to a user and when those services were last accessed.
+    * You can use this information to revise your policies.
 
 <br>
 
 ### Summary
-- Users: mapped to a physical user, has a password for AWS Console
-- Groups: contains users only
-- Policies: JSON document that outlines permissions for users or groups
-- Roles: for EC2 instances or AWS services
-- Security: MFA + Password Policy
-- AWS CLI: manage your AWS services using the command-line
-- AWS SDK: manage your AWS services using a programming language
-- Access Keys: access AWS using the CLI or SDK
-- Audit: IAM Credential Reports & IAM Access Advisor
+
+* Users: mapped to a physical user, has a password for AWS Console
+
+* Groups: contains users only
+
+* Policies: JSON document that outlines permissions for users or groups
+
+* Roles: for EC2 instances or AWS services
+
+* Security: MFA + Password Policy
+
+* AWS CLI: manage your AWS services using the command-line
+
+* AWS SDK: manage your AWS services using a programming language
+
+* Access Keys: access AWS using the CLI or SDK
+
+* Audit: IAM Credential Reports & IAM Access Advisor
 
 <br>
 <br>
@@ -124,27 +148,38 @@ Sources:
 
 ## EC2
 ### Overview
-- EC2 is one of the most popular of AWS' offering
-- EC2 = Elastic Compute Cloud = Infrastructure as a Service
-- It mainly consists of:
-	- Renting virtual machines (EC2)
-	- Storing data on virtual drives (EBS)
-	- Distributing load across machines (ELB)
-	- Scaling the services using an auto-scaling group (ASG)
-- Knowing EC2 is fundamental to understanding how the Cloud works
+
+* EC2 is one of the most popular of AWS' offering
+
+* EC2 = Elastic Compute Cloud = Infrastructure as a Service
+
+* It mainly consists of:
+    * Renting virtual machines (EC2)
+    * Storing data on virtual drives (EBS)
+    * Distributing load across machines (ELB)
+    * Scaling the services using an auto-scaling group (ASG)
+
+* Knowing EC2 is fundamental to understanding how the Cloud works
 
 <br>
 
 ### Sizing & Configuration
-- Operating System (OS): Linux, Windows or Mac OS
-- How much compute power & cores (CPU)
-- How much random-access memory (RAM)
-- How much storage space:
-	 - Network-attached (EBS & EFS)
-	 - hardware (EC2 Instance Store)
-- Network card: speed of the card, Public IP address
-- Firewall rules: security group
-- Bootstrap script (configure at first launch): EC2 User Data
+
+* Operating System (OS): Linux, Windows or Mac OS
+
+* How much compute power & cores (CPU)
+
+* How much random-access memory (RAM)
+
+* How much storage space:
+    * Network-attached (EBS & EFS)
+    * hardware (EC2 Instance Store)
+
+* Network card: speed of the card, Public IP address
+
+* Firewall rules: security group
+
+* Bootstrap script (configure at first launch): EC2 User Data
 
 <br>
 
