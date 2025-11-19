@@ -25,8 +25,11 @@ Sources:
 ### Availability Zones
 
 * Each region has many availability zones. Example:
+
     * `ap-southeast-2a`
+
     * `ap-southeast-2b`
+
     * `ap-southeast-2c`
 
 * Each availability zone (AZ) is one or more discrete data centers
@@ -82,9 +85,13 @@ Sources:
 * Set a minimum password length
 
 * Require specific character types:
+
     * including uppercase letters
+
     * lowercase letters
+
     * numbers
+
     * non-alphanumeric characters
 
 * Allow all IAM users to change their own passwords
@@ -102,8 +109,11 @@ Sources:
 * To do so, we will assign permissions to AWS services with IAM Roles
 
 * Common roles:
+
     * EC2 Instance Roles
+
     * Lambda Function Roles
+
     * Roles for CloudFormation
 
 <br>
@@ -114,7 +124,9 @@ Sources:
     * A report that lists all your account's users and the status of their various credentials
 
 * IAM Access Advisor (user-level)
+
     * Access advisor shows the service permissions granted to a user and when those services were last accessed.
+
     * You can use this information to revise your policies.
 
 <br>
@@ -154,9 +166,13 @@ Sources:
 * EC2 = Elastic Compute Cloud = Infrastructure as a Service
 
 * It mainly consists of:
+
     * Renting virtual machines (EC2)
+
     * Storing data on virtual drives (EBS)
+
     * Distributing load across machines (ELB)
+
     * Scaling the services using an auto-scaling group (ASG)
 
 * Knowing EC2 is fundamental to understanding how the Cloud works
@@ -172,7 +188,9 @@ Sources:
 * How much random-access memory (RAM)
 
 * How much storage space:
+
     * Network-attached (EBS & EFS)
+
     * hardware (EC2 Instance Store)
 
 * Network card: speed of the card, Public IP address
@@ -184,75 +202,97 @@ Sources:
 <br>
 
 ### User Data Script
-- It is possible to bootstrap our instances using an EC2 User data script.
-- bootstrapping means launching commands when a machine starts
-- That script is only run once at the instance first start
-- EC2 user data is used to automate boot tasks such as:
-	- Installing updates
-	- Installing software
-	- Downloading common files from the internet
-	- Anything you can think of
-- The EC2 User Data Script runs with the root user
+
+* It is possible to bootstrap our instances using an EC2 User data script.
+
+* bootstrapping means launching commands when a machine starts
+
+* That script is only run once at the instance first start
+
+* EC2 user data is used to automate boot tasks such as:
+
+    * Installing updates
+
+    * Installing software
+
+    * Downloading common files from the internet
+
+    * Anything you can think of
+
+* The EC2 User Data Script runs with the root user
 
 #### yum update -y
 
-The command yum update -y is used on Red Hat-based Linux distributions (like RHEL, CentOS, Fedora, Amazon Linux) to update installed packages.
+* The command `yum update -y` is used on Red Hat-based Linux distributions (like RHEL, CentOS, Fedora, Amazon Linux) to update installed packages.
 
-  Breaking it down:
-  - yum - Package manager for RPM-based Linux distributions (similar to apt on Debian/Ubuntu)
-  - update - Downloads and installs updates for all currently installed packages on the system
-  - -y - Automatically answers "yes" to all prompts, so the update runs without requiring user interaction
+* Breaking it down:
 
-  What it does:
-  1. Checks for available updates for all installed packages
-  2. Downloads the updated packages
-  3. Installs them without asking for confirmation (due to -y flag)
-  4. Updates system libraries, security patches, and software versions
+    * `yum` - Package manager for RPM-based Linux distributions (similar to apt on Debian/Ubuntu)
 
-  Common use cases:
-  - Used in automated scripts and Dockerfiles
-  - Initial server setup to ensure all packages are current
-  - Regular system maintenance to get security updates
+    * `update` - Downloads and installs updates for all currently installed packages on the system
+
+    * `-y` - Automatically answers "yes" to all prompts, so the update runs without requiring user interaction
+
+* What it does:
+
+    * Checks for available updates for all installed packages
+
+    * Downloads the updated packages
+
+    * Installs them without asking for confirmation (due to -y flag)
+
+    * Updates system libraries, security patches, and software versions
+ 
+* Common use cases:
+
+    * Used in automated scripts and Dockerfiles
+
+    * Initial server setup to ensure all packages are current
+
+    * Regular system maintenance to get security updates
 
 <br>
 
 #### yum install -y httpd
 
-The command yum install -y httpd installs the Apache HTTP Server (web server) on Red Hat-based Linux distributions.
+* The command yum install -y httpd installs the Apache HTTP Server (web server) on Red Hat-based Linux distributions.
 
-Breaking it down:
+* Breaking it down:
 
-- yum - Package manager for RPM-based Linux distributions
-- install - Installs the specified package(s)
-- -y - Automatically answers "yes" to all prompts (no user confirmation required)
-- httpd - Package name for Apache HTTP Server
+    * `yum` - Package manager for RPM-based Linux distributions
 
-What it does:
-1. Downloads the Apache web server package (httpd) and its dependencies
-2. Installs Apache automatically without asking for confirmation
-3. Makes the web server software available on the system (but doesn't start it)
+    * `install` - Installs the specified package(s)
 
-After installation, you typically need to:
+    * `-y` - Automatically answers "yes" to all prompts (no user confirmation required)
 
-<!----> # Start the Apache service
-```python
-systemctl start httpd
-```
+    * `httpd` - Package name for Apache HTTP Server
 
-<!----> # Enable it to start on boot
-```python
-systemctl enable httpd
-```
+* What it does:
 
-<!----> # Check status
-```python
-systemctl status httpd
-```
+    * Downloads the Apache web server package (httpd) and its dependencies
 
-Common use cases:
-- Setting up a web server to host websites
-- Used in provisioning scripts and Dockerfiles
-- Creating a LAMP stack (Linux, Apache, MySQL, PHP)
+    * Installs Apache automatically without asking for confirmation
+
+    * Makes the web server software available on the system (but doesn't start it)
+
+* After installation, you typically need to:
+
+        # Start the Apache service
+        systemctl start httpd
+        
+        # Enable it to start on boot
+        systemctl enable httpd
+        
+        # Check status
+        systemctl status httpd
+
+* Common use cases:
+
+    * Setting up a web server to host websites
+
+    * Used in provisioning scripts and Dockerfiles
+
+    * Creating a LAMP stack (Linux, Apache, MySQL, PHP)
 
 <br>
 
