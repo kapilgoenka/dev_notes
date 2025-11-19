@@ -1434,27 +1434,145 @@ The default settings shown are perfectly fine for most learning/testing scenario
 
 ## EMR
 
-### Overview
-
 * EMR stands for “Elastic MapReduce”
 
-* Big data processing service that accelerates analytics workloads
+* A managed service that makes it easy to process large amounts of data using frameworks like Apache Spark and Hadoop.
 
-* Creates clusters containing hundreds of EC2 instances
+* It allows you to launch and manage clusters of Amazon EC2 instances that work together to analyze data.
 
 * EMR takes care of all the provisioning and configuration
 
 * Auto-scaling and integrated with Spot instances
 
+* EMR Serverless
+
+    * Run open-source big data analytics frameworks like Apache Spark without configuring, managing, and scaling clusters or servers
+    
+    * Fastest way to get started with all the features and benefits of Amazon EMR without the need for experts to plan and manage clusters
+
 <br>
 
-### EMR Serverless
+## Athena
 
-* Run open-source big data analytics frameworks like Apache Spark without configuring, managing, and scaling clusters or servers
+* Serverless service that simplifies data analysis in Amazon S3 using standard SQL
 
-* Fastest way to get started with all the features and benefits of Amazon EMR without the need for experts to plan and manage clusters
+* Analyze petabyte-scale data where it lives with ease and flexibility
 
+* No infrastructure to set up or manage, and you only pay for the resources your query needs to run
 
+* Use Athena to process logs, perform data analytics, and run interactive queries.
+
+<br>
+
+## Quick Sight
+
+* Cloud-based, serverless business intelligence (BI) service to create interactive dashboards
+
+* Provides unified intelligence across all your enterprise data sources
+
+* Use cases:
+
+    * Business analytics
+
+    * Building visualizations
+
+    * Perform ad-hoc analysis
+
+    * Get business insights using data
+
+    * Integrated with RDS, Aurora, Athena, Redshift, S3 ...
+
+<br>
+
+## DocumentDB
+
+* Serverless, fully managed, MongoDB API-compatible document database service
+
+* Compatible with MongoDB APIs and drivers so you can migrate applications, typically without application code changes or downtime.
+
+* Automatically scales capacity up or down in fine grained increments based on your application’s demands, offering up to 90% cost savings compared to provisioning for peak capacity
+
+* Similar “deployment concepts” as Aurora
+
+* DocumentDB storage automatically grows in increments of 10GB
+
+<br>
+
+## Neptune
+
+* Serverless graph database service for connected data
+
+* Instantly scales graph workloads, removing the need to manage capacity
+
+* The only database that gives you the power of connected data with the enterprise capabilities and value of AWS
+
+* A popular graph dataset would be a social network
+
+    * Users have friends
+
+    * Posts have comments
+
+    * Comments have likes from users
+
+    * Users share and like posts ...
+
+* Great for knowledge graphs (Wikipedia), fraud detection, recommendation engines, social networking
+
+<br>
+
+## Timestream
+
+* Fully managed, fast, scalable, serverless time series database
+
+* Automatically scales up/down to adjust capacity
+
+* Store and analyze trillions of events per day
+
+* 1000s times faster & 1/10th the cost of relational databases
+
+* Built-in time series analytics functions (helps you identify patterns in your data in near real-time)
+
+<br>
+
+## Managed Blockchain
+
+* Blockchain makes it possible to build applications where multiple parties can execute transactions without the need for a trusted, central authority.
+
+* Amazon Managed Blockchain is a managed service to:
+
+    * Join public blockchain networks
+
+    * Or create your own scalable private network
+
+* Compatible with the frameworks Hyperledger Fabric & Ethereum
+
+<br>
+
+## Glue
+
+* Managed extract, transform, and load (ETL) service
+
+* Useful to prepare and transform data for analytics
+
+* Fully serverless service
+
+* Glue Data Catalog: catalog of datasets
+
+* Can be used by Athena, Redshift, EMR
+
+<br>
+
+## Database Migration Service
+
+* Quickly and securely migrate databases to AWS
+
+* The source database remains available during the migration
+
+* Supports
+
+    * Homogeneous migrations: Oracle to Oracle
+    
+    * Heterogeneous migrations: Microsoft SQL Server to Aurora
 
 
 
