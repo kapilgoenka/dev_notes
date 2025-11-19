@@ -2,33 +2,16 @@
 
 
 ### Auto Reload
-
-
-When you run the Django development server, it keeps checking for changes in your
-code. It reloads automatically, freeing you from manually reloading it after code
-changes. However, it might not notice some actions, such as adding new files to your
-project, so you will have to restart the server manually in these cases.
+When you run the Django development server, it keeps checking for changes in your code. It reloads automatically, freeing you from manually reloading it after code changes. However, it might not notice some actions, such as adding new files to your project, so you will have to restart the server manually in these cases.
 
 ### WSGI / ASGI
+To deploy Django in a production environment, you should run it as a WSGI application using a web server, such as Apache, Gunicorn, or uWSGI, or as an ASGI application using a server such as Daphne or Uvicorn.
 
 
-To deploy Django in a production environment, you should run it as a WSGI application
-using a web server, such as Apache, Gunicorn, or uWSGI, or as an ASGI application
-using a server such as Daphne or Uvicorn.
 ### Default auto-incrementing primary key
-
-
-By default, Django adds an auto-incrementing primary key field to each model. The
-field type for this field is specified in each application configuration or globally
-in the DEFAULT_AUTO_FIELD setting. When creating an application with the startapp
-command, the default value for DEFAULT_AUTO_FIELD is BigAutoField. This is a 64-bit
-integer that automatically increments according to available IDs. If you don't specify
-a primary key for your model, Django adds this field automatically. You can also
-define one of the model fields to be the primary key by setting primary_key=True on
-it.
+By default, Django adds an auto-incrementing primary key field to each model. The field type for this field is specified in each application configuration or globally in the DEFAULT_AUTO_FIELD setting. When creating an application with the startapp command, the default value for DEFAULT_AUTO_FIELD is BigAutoField. This is a 64-bit integer that automatically increments according to available IDs. If you don't specify a primary key for your model, Django adds this field automatically. You can also define one of the model fields to be the primary key by setting primary_key=True on it.
 
 ### DateTimeField and auto_now / auto_now_add
-
 
 ```python
 from django.db import models
@@ -36,23 +19,13 @@ class Post(models.Model):
     created = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)"
 ```
+- created: This is a DateTimeField field. We will use it to store the date and time when the post was created. By using auto_now_add, the date will be saved automatically when creating an object.
+- updated: This is a DateTimeField field. We will use it to store the last date and time when the post was updated. By using auto_now, the date will be updated automatically when saving an object.
+- Utilizing the auto_now_add and auto_now datetime fields in your Django models is highly beneficial for tracking the creation and last modification times of objects.
 
-created: This is a DateTimeField field. We will use it to store the date and time
-when the post was created. By using auto_now_add, the date will be saved automatically
-when creating an object.
-
-updated: This is a DateTimeField field. We will use it to store the last date and time
-when the post was updated. By using auto_now, the date will be updated automatically
-when saving an object.
-
-Utilizing the auto_now_add and auto_now datetime fields in your Django models is
-highly beneficial for tracking the creation and last modification times of objects.
 
 ### Enumeration
-
-
-Django provides enumeration types that you can subclass to define choices simply.
-These are based on the enum object of Python's standard library.
+Django provides enumeration types that you can subclass to define choices simply. These are based on the enum object of Python's standard library.
 
 ```python
 class Status(models.TextChoices):
@@ -60,55 +33,43 @@ class Status(models.TextChoices):
   PUBLISHED = 'PB', 'Published'
 ```
 
-Here, we define the enumeration class Status by subclassing models.TextChoices. The
-available choices for the post status are DRAFT and PUBLISHED. Their respective values
-are DF and PB, and their labels or readable names are Draft and Published.
+Here, we define the enumeration class Status by subclassing models.TextChoices. The available choices for the post status are DRAFT and PUBLISHED. Their respective values are DF and PB, and their labels or readable names are Draft and Published.
 
-We can access Post.Status.choices to obtain the available choices, Post.Status.names
-to obtain the names of the choices, Post.Status.labels to obtain the human-readable
-names, and Post.Status.values to obtain the actual values of the choices.
+We can access Post.Status.choices to obtain the available choices, Post.Status.names to obtain the names of the choices, Post.Status.labels to obtain the human-readable names, and Post.Status.values to obtain the actual values of the choices.
 
-Post.Status.choices
+```python
+>>> Post.Status.choices
 [('DF', 'Draft'), ('PB', 'Published')]
+```
 
 ```python
 >>> Post.Status.labels
-```
-
 ['Draft', 'Published']
+```
 
 ```python
 >>> Post.Status.values
-```
-
 ['DF', 'PB']
+```
 
 ```python
 >>> Post.Status.names
-```
-
 ['DRAFT', 'PUBLISHED']
+```
 
 ```python
 status = models.CharField(
 	max_length=2,
 	choices=Status,
 	default=Status.DRAFT
+)
 ```
 
-)
 
-We have added a new status field to the model that is an instance of CharField. It
-includes a choices parameter to limit the value of the field to the choices in Status.
-We have also set a default value for the field using the default parameter. We use
-DRAFT as the default choice for this field
+We have added a new status field to the model that is an instance of CharField. It includes a choices parameter to limit the value of the field to the choices in Status. We have also set a default value for the field using the default parameter. We use DRAFT as the default choice for this field
 
 ### Foreign Key
-
-
-Django comes with an authentication framework that handles user accounts. The Django
-authentication framework comes in the django.contrib.auth package and contains a User
-model.
+Django comes with an authentication framework that handles user accounts. The Django authentication framework comes in the django.contrib.auth package and contains a User model.
 
 ```python
 from django.conf import settings
@@ -116,31 +77,17 @@ author = models.ForeignKey(
 	settings.AUTH_USER_MODEL,
 	on_delete=models.CASCADE,
 	related_name='blog_posts'
+)
 ```
 
-)
+Here, we import the project's settings and add an author field to the Post model. This field defines a many-to-one relationship with the default user model, meaning that each post is written by a user, and a user can write any number of posts. For this field, Django will create a foreign key in the database using the primary key of the related model.
 
-Here, we import the project's settings and add an author field to the Post
-model. This field defines a many-to-one relationship with the default user model,
-meaning that each post is written by a user, and a user can write any number of posts.
-For this field, Django will create a foreign key in the database using the primary key
-of the related model.
+The on_delete parameter specifies the behavior to adopt when the referenced object is deleted. This is not specific to Django; it is a SQL standard. Using CASCADE, you specify that when the referenced user is deleted, the database will also delete all related blog posts.
 
-The on_delete parameter specifies the behavior to adopt when the referenced object is
-deleted. This is not specific to Django; it is a SQL standard. Using CASCADE, you
-specify that when the referenced user is deleted, the database will also delete all
-related blog posts.
-
-We use related_name to specify the name of the reverse relationship, from User to
-Post. This will allow us to access related objects easily from a user object by using
-the user.blog_posts notation.
+We use related_name to specify the name of the reverse relationship, from User to Post. This will allow us to access related objects easily from a user object by using the user.blog_posts notation.
 
 ### Composite Primary Key
-
-
-A composite key could be used for a new model to track a user's favorite posts, where
-the important data comes from two foreign keys – first to the user, and then to the
-post – and these columns help to ensure uniqueness in the composite key:
+A composite key could be used for a new model to track a user's favorite posts, where the important data comes from two foreign keys – first to the user, and then to the post – and these columns help to ensure uniqueness in the composite key:
 
 ```python
 class FavoritePost(models.Model):
@@ -159,165 +106,98 @@ class FavoritePost(models.Model):
 ```
 
 ### sqlmigrate
-
-
-The sqlmigrate command takes the migration names and returns their SQL without
-executing it.
+The sqlmigrate command takes the migration names and returns their SQL without executing it.
 
 ### DB Table Name
-
-
-Django generates the table names by combining the application name and the lowercase
-name of the model (blog_post), but you can also specify a custom database name for
-your model in the Meta class of the model using the db_table attribute.
+Django generates the table names by combining the application name and the lowercase name of the model (blog_post), but you can also specify a custom database name for your model in the Meta class of the model using the db_table attribute.
 
 ### Default Indexes
-
-
-SlugField fields imply an index by default.
-Unique fields imply an index by default.
-ForeignKey fields imply an index by default.
+- SlugField fields imply an index by default.
+- Unique fields imply an index by default.
+- ForeignKey fields imply an index by default.
 
 ### Circular Relations & Lazy Relations
 
 
-Sometimes, you might have two models that depend on each other - i.e. you end up with
-a circular relationship.
+Sometimes, you might have two models that depend on each other - i.e. you end up with a circular relationship. Or you have a model that has a relation with itself. Or you have a model that should have a relation with some built-in model (i.e. built into Django) or a model defined in another application.
 
-Or you have a model that has a relation with itself.
-
-Or you have a model that should have a relation with some built-in model (i.e. built
-into Django) or a model defined in another application.
-
-Below, you find examples for all three cases that include Django's solution for these
-kinds of "problems": Lazy relationships. You can also check out the official docs in
-addition.
+Below, you find examples for all three cases that include Django's solution for these kinds of "problems": Lazy relationships.
 
 1) Two models that have a circular relationship
 
 ```python
 class Product(models.Model):
-```
-
   # ... other fields ...
-```python
   last_buyer = models.ForeignKey('User')
 ```
 
 ```python
 class User(models.Model):
-```
-
   # ... other fields ...
-```python
   created_products = models.ManyToManyField('Product')
 ```
 
-In this example, we have multiple relationships between the same two models. Hence we
-might need to define them in both models. By using the model name as a string instead
-of a direct reference, Django is able to resolve such dependencies.
+In this example, we have multiple relationships between the same two models. Hence we might need to define them in both models. By using the model name as a string instead of a direct reference, Django is able to resolve such dependencies.
 
 2) Relation with the same model
 
 ```python
 class User(models.Model):
-```
-
   # ... other fields ...
-```python
   friends = models.ManyToManyField('self')
 ```
 
-The special self keyword (used as a string value) tells Django that it should form a
-relationship with (other) instances of the same model.
+The special self keyword (used as a string value) tells Django that it should form a relationship with (other) instances of the same model.
 
 3) Relationships with other apps and their models (built-in or custom apps)
 
 ```python
 class Review(models.Model):
-```
-
   # ... other fields ...
-```python
   product = models.ForeignKey('store.Product') # '<appname>.<modelname>'
 ```
 
-You can reference models defined in other Django apps (no matter if created by you,
-via python manage.py startapp <appname> or if it's a built-in or third-party app) by
-using the app name and then the name of the model inside the app.
+You can reference models defined in other Django apps (no matter if created by you, via python manage.py startapp <appname> or if it's a built-in or third-party app) by using the app name and then the name of the model inside the app.
 
 
 
-## Django project
+#### Django project
+- A Django project is the overall container for your application's settings and
+configurations (e.g., database settings, installed apps, URL routing at the project level). Django projects are composed of one or more "apps".
 
 
-A Django project is the overall container for your application's settings and
-configurations (e.g., database settings, installed apps, URL routing at the project
-level). Django projects are composed of one or more "apps".
-
-
-
-## Django App
-
-
-An app is a self-contained module that handles a specific piece of
+#### Django App
+- An app is a self-contained module that handles a specific piece of
 functionality (like a blog, a user management system, etc.)
 
 
-
-## Django's MVT Architecture
-
-
-Django's MVT (Model-View-Template) is a twist on the MVC pattern.
-
-   The "View" part deals with user requests.
-
-   The "Model" part manages data and talks to the database.
-
-   And the "Template" part shows the data to users.
+#### Django's MVT Architecture
+- Django's MVT (Model-View-Template) is a twist on the MVC pattern.
+  - The "View" part deals with user requests.
+  - The "Model" part manages data and talks to the database.
+  - And the "Template" part shows the data to users.
 
 
-
-## Django ORM
-
-
-The Django ORM (Object-Relational Mapping) lets developers work with databases in
-Python. This means no need for raw SQL queries. It makes managing databases easy and
-helps apps grow.
-
-Using Django's ORM correctly is key to handling complex queries & avoiding slowdowns.
+#### Django ORM
+- The Django ORM (Object-Relational Mapping) lets developers work with databases in Python. This means no need for raw SQL queries. It makes managing databases easy and helps apps grow.
+- Using Django's ORM correctly is key to handling complex queries & avoiding slowdowns.
 
 
+#### django-admin
+* django-admin is Django's command-line utility for administrative tasks.
 
-## django-admin
-
-
-django-admin is Django's command-line utility for administrative tasks.
-
-
-
-## manage.py
-
-
-manage.py is automatically created in each Django project.
-
-It does the same thing as django-admin but also sets the DJANGO_SETTINGS_MODULE
-environment variable so that it points to your project's settings.py file.
-
-Generally, when working on a single Django project, it's easier to use
-manage.py than django-admin.
+#### manage.py
+* manage.py is automatically created in each Django project.
+* It does the same thing as django-admin but also sets the DJANGO_SETTINGS_MODULE environment variable so that it points to your project's settings.py file.
+* Generally, when working on a single Django project, it's easier to use
+* manage.py than django-admin.
 
 
 
 ## Migrations
-
-
-Migrations are Django's way of propagating changes you make to your models into your
-database schema.
+* Migrations are Django's way of propagating changes you make to your models into your database schema.
 
 ### Migration Commands
-
-
 ```
 ┌──────────────────┬───────────────────────────────────────────────────────────────┐
 │ Command          │ Description                                                   │
@@ -332,21 +212,12 @@ database schema.
 │ showmigrations   │ Lists a project's migrations and their status.                │
 └──────────────────┴───────────────────────────────────────────────────────────────┘
 ```
-
-You can think of migrations as a version control system for your database schema.
-`makemigrations` is responsible for packaging up your model changes into individual
-migration files - analogous to commits - and `migrate` is responsible for applying
-those to your database.
-
-The migration files for each app live in a "migrations" directory inside of that app,
-and are designed to be committed to, and distributed as part of, its codebase. You
-should be making them once on your development machine and then running the same
-migrations on your colleagues' machines, your staging machines, and eventually your
-production machines.
+* You can think of migrations as a version control system for your database schema.
+    * `makemigrations` is responsible for packaging up your model changes into individual migration files - analogous to commits
+    * `migrate` is responsible for applying those to your database.
+* The migration files for each app live in a "migrations" directory inside of that app, and are designed to be committed to, and distributed as part of, its codebase. You should be making them once on your development machine and then running the same migrations on your colleagues' machines, your staging machines, and eventually your production machines.
 
 ### Backend Support
-
-
 ```
 ┌────────────────┬─────────────────────────────────────────────────────────────────┐
 │ DB Name        │ Support                                                         │
@@ -394,85 +265,36 @@ production machines.
 ```
 
 ### Version control
-
-
-Because migrations are stored in version control, you'll occasionally come across
-situations where you and another developer have both committed a migration to the same
-app at the same time, resulting in two migrations with the same number.
-
-Don't worry - the numbers are just there for developers' reference, Django just cares
-that each migration has a different name. Migrations specify which other migrations
-they depend on - including earlier migrations in the same app - in the file, so it's
-possible to detect when there's two new migrations for the same app that aren't
-ordered.
-
-When this happens, Django will prompt you and give you some options. If it thinks it's
-safe enough, it will offer to automatically linearize the two migrations for you.
+* Because migrations are stored in version control, you'll occasionally come across situations where you and another developer have both committed a migration to the same app at the same time, resulting in two migrations with the same number.
+* Don't worry - the numbers are just there for developers' reference, Django just cares that each migration has a different name. Migrations specify which other migrations they depend on - including earlier migrations in the same app - in the file, so it's possible to detect when there's two new migrations for the same app that aren't ordered.
+* When this happens, Django will prompt you and give you some options. If it thinks it's safe enough, it will offer to automatically linearize the two migrations for you.
 
 ### Migration files
-
-
-Migrations are stored as an on-disk format, referred to here as "migration files".
-These files are actually normal Python files with an agreed-upon object layout,
-written in a declarative style.
-
-A basic migration file looks like this:
-
-```python
-from django.db import migrations, models
-class Migration(migrations.Migration):
-    dependencies = [("migrations", "0001_initial")]
-```
-
-
-operations - [ migrations.DeleteModel("Tribble"), migrations.AddField("Author",
-"rating", models.IntegerField(default-0)), ]
-
-What Django looks for when it loads a migration file (as a Python module) is a
-subclass of django.db.migrations.Migration called Migration. It then inspects this
-object for four attributes, only two of which are used most of the time: dependencies:
-a list of migrations this one depends on. operations: a list of Operation classes that
-define what this migration does.
-
-The operations are the key; they are a set of declarative instructions which tell
-Django what schema changes need to be made. Django scans them and builds an in-memory
-representation of all of the schema changes to all apps, and uses this to generate the
-SQL which makes the schema changes.
-
-That in-memory structure is also used to work out what the differences are between
-your models and the current state of your migrations; Django runs through all the
-changes, in order, on an in-memory set of models to come up with the state of your
-models last time you ran makemigrations. It then uses these models to compare against
-the ones in your models.py files to work out what you have changed.
+* Migrations are stored as an on-disk format, referred to here as "migration files". These files are actually normal Python files with an agreed-upon object layout, written in a declarative style.
+* A basic migration file looks like this:
+    ```python
+    from django.db import migrations, models
+    class Migration(migrations.Migration):
+        dependencies = [("migrations", "0001_initial")]
+        operations = [
+            migrations.DeleteModel("Tribble"),
+            migrations.AddField("Author", "rating", models.IntegerField(default=0)),
+        ]
+    ```
+* What Django looks for when it loads a migration file (as a Python module) is a subclass of django.db.migrations.Migration called Migration. It then inspects this object for four attributes, only two of which are used most of the time: dependencies: a list of migrations this one depends on. operations: a list of Operation classes that define what this migration does.
+* The operations are the key; they are a set of declarative instructions which tell Django what schema changes need to be made. Django scans them and builds an in-memory representation of all of the schema changes to all apps, and uses this to generate the SQL which makes the schema changes.
+* That in-memory structure is also used to work out what the differences are between your models and the current state of your migrations; Django runs through all the changes, in order, on an in-memory set of models to come up with the state of your models last time you ran makemigrations. It then uses these models to compare against the ones in your models.py files to work out what you have changed.
 
 ### Initial migrations
-
-
-The "initial migrations" for an app are the migrations that create the first version
-of that app's tables.
-
-When the migrate --fake-initial option is used, these initial migrations are treated
-specially. For an initial migration that creates one or more tables (CreateModel
-operation), Django checks that all of those tables already exist in the database and
-fake-applies the migration if so. Similarly, for an initial migration that adds one or
-more fields (AddField operation), Django checks that all of the respective columns
-already exist in the database and fake-applies the migration if so.
+* The "initial migrations" for an app are the migrations that create the first version of that app's tables.
+* When the `migrate --fake-initial` option is used, these initial migrations are treated specially. For an initial migration that creates one or more tables (CreateModel operation), Django checks that all of those tables already exist in the database and fake-applies the migration if so. Similarly, for an initial migration that adds one or more fields (AddField operation), Django checks that all of the respective columns already exist in the database and fake-applies the migration if so.
 
 ### Data migrations
-
-
-As well as changing the database schema, you can also use migrations to change the
-data in the database itself, in conjunction with the schema if you want.
-
-Migrations that alter data are usually called "data migrations"; they're best written
-as separate migrations, sitting alongside your schema migrations.
-
-Django can't automatically generate data migrations for you, as it does with schema
-migrations, but it's not very hard to write them. Migration files in Django are made
-up of Operations, and the main operation you use for data migrations is RunPython.
-
-To start, make an empty migration file you can work from (Django will put the file in
-the right place, suggest a name, and add dependencies for you):
+* As well as changing the database schema, you can also use migrations to change the data in the database itself, in conjunction with the schema if you want.
+* Migrations that alter data are usually called "data migrations"; they're best written as separate migrations, sitting alongside your schema migrations.
+* Django can't automatically generate data migrations for you, as it does with schema migrations, but it's not very hard to write them.
+* Migration files in Django are made up of Operations, and the main operation you use for data migrations is RunPython.
+* To start, make an empty migration file you can work from (Django will put the file in the right place, suggest a name, and add dependencies for you):
 
 ```bash
 $ python manage.py makemigrations --empty yourappname
@@ -480,47 +302,37 @@ $ python manage.py makemigrations --empty yourappname
 
 Then, open up the file; it should look something like this:
 
-# Generated by Django A.B on YYYY-MM-DD HH:MM
 ```python
+# Generated by Django A.B on YYYY-MM-DD HH:MM
 from django.db import migrations
 class Migration(migrations.Migration):
     dependencies = [
         ("yourappname", "0001_initial"),
     ]
-```
-
-```python
     operations = []
 ```
 
-Now, all you need to do is create a new function and have RunPython use it. RunPython
-expects a callable as its argument which takes two arguments - the first is an app
-registry that has the historical versions of all your models loaded into it to match
-where in your history the migration sits, and the second is a SchemaEditor, which you
-can use to manually effect database schema changes (but beware, doing this can confuse
-the migration autodetector!)
+Now, all you need to do is create a new function and have RunPython use it. RunPython expects a callable as its argument which takes two arguments - the first is an app registry that has the historical versions of all your models loaded into it to match where in your history the migration sits, and the second is a SchemaEditor, which you can use to manually effect database schema changes (but beware, doing this can confuse the migration autodetector!)
 
-Let's write a migration that populates our new name field with the combined values of
-first_name and last_name. All we need to do is use the historical model and iterate
-over the rows:
+Let's write a migration that populates our new name field with the combined values of first_name and last_name. All we need to do is use the historical model and iterate over the rows:
 
 ```python
 from django.db import migrations def combine_names(apps, schema_editor): # We can't
-import the Person model directly as it may be a newer # version than this migration
+# import the Person model directly as it may be a newer # version
+# than this migration expects. We use the historical version.
+
+Person = apps.get_model("yourappname", "Person")
+
+for person in Person.objects.all():
+    person.name = f"{person.first_name} {person.last_name}"
+    person.save()
+
+class Migration(migrations.Migration):
+    dependencies = [ ("yourappname", "0001_initial"), ]
+    operations = [ migrations.RunPython(combine_names), ]
 ```
 
-expects. We use the historical version. Person = apps.get_model("yourappname",
-"Person") for person in Person.objects.all(): person.name = f"{person.first_name}
-{person.last_name}" person.save() class Migration(migrations.Migration): dependencies
-= [ ("yourappname", "0001_initial"), ] operations = [
-migrations.RunPython(combine_names), ]
-
-Once that's done, we can run python manage.py migrate as normal and the data migration
-will run in place alongside other migrations.
-
-You can pass a second callable to RunPython to run whatever logic you want executed
-when migrating backwards. If this callable is omitted, migrating backwards will raise
-an exception.
+Once that's done, we can run python manage.py migrate as normal and the data migration will run in place alongside other migrations. You can pass a second callable to RunPython to run whatever logic you want executed when migrating backwards. If this callable is omitted, migrating backwards will raise an exception.
 
 ### Squashing migrations
 
@@ -614,8 +426,6 @@ option.
 
 
 ## Django Commands
-
-
 ```
 ┌────────────────────────────────────────┬─────────────────────────────────────────┐
 │ Command                                │ Description                             │
@@ -716,180 +526,82 @@ option.
 
 
 ## Django Templates
-
-
-A template contains the static parts of the desired HTML output as well as some
-special syntax describing how dynamic content will be inserted.
-
-Django ships built-in backends for its own template system, called the Django
-template language (DTL), and for the popular alternative Jinja2.
-
-Rendering replaces variables with their values, which are looked up in the context,
-and executes tags.
-
-The syntax of the Django template language involves four constructs.
+### Overview
+* A template contains the static parts of the desired HTML output as well as some special syntax describing how dynamic content will be inserted.
+* Django ships built-in backends for its own template system, called the Django template language (DTL), and for the popular alternative Jinja2.
+* Rendering replaces variables with their values, which are looked up in the context, and executes tags.
+* The syntax of the Django template language involves four constructs.
 
 ### Variables
-
-
-A variable outputs a value from the context, which is a dict-like object mapping keys
-to values.
-
-Variables are surrounded by {{ and }} like this:
-
-My first name is {{ first_name }}. My last name is {{ last_name }}.
-With a context of {'first_name': 'John', 'last_name': 'Doe'}, this template renders:
-My first name is John. My last name is Doe.
-
-If a variable resolves to a callable, the template system will call it with no
-arguments and use its result instead of the callable.
+* A variable outputs a value from the context, which is a dict-like object mapping keys to values.
+* Variables are surrounded by {{ and }} like this:
+    * My first name is {{ first_name }}. My last name is {{ last_name }}.
+    * With a context of `{'first_name': 'John', 'last_name': 'Doe'}`, this template renders: <u>My first name is John. My last name is Doe</u>.
+* If a variable resolves to a callable, the template system will call it with no arguments and use its result instead of the callable.
 
 ### Tags
-
-
-Tags provide arbitrary logic in the rendering process.
-
-This definition is deliberately vague. For example, a tag can output content, serve
-as a control structure e.g. an "if" statement or a "for" loop, grab content from a
-database, or even enable access to other template tags.
-
-Tags are surrounded by {% and %}
-
-Most tags accept arguments:
-{% cycle 'odd' 'even' %}
-
-Some tags require beginning and ending tags:
-{% if user.is_authenticated %}Hello, {{ user.username }}.{% endif %}
+* Tags provide arbitrary logic in the rendering process.
+* This definition is deliberately vague. For example, a tag can output content, serve as a control structure e.g. an "if" statement or a "for" loop, grab content from a database, or even enable access to other template tags.
+* Tags are surrounded by {% and %}
+* Most tags accept arguments: `{% cycle 'odd' 'even' %}`
+* Some tags require beginning and ending tags: `{% if user.is_authenticated %}Hello, {{ user.username }}.{% endif %}`
 
 ### Filters
-
-
-Filters transform the values of variables and tag arguments.
-
-They look like this:
-
-{{ django|title }}
-With a context of {'django': 'the web framework for perfectionists with deadlines'},
-this template renders to:
-The Web Framework For Perfectionists With Deadlines
-
-Some filters take an argument:
-{{ my_date|date:"Y-m-d" }}
+* Filters transform the values of variables and tag arguments.
+* They look like this: `{{ django|title }}`
+* With a context of `{'django': 'the web framework for perfectionists with deadlines'}`, this template renders to: <u>The Web Framework For Perfectionists With Deadlines</u>
+* Some filters take an argument: `{{ my_date|date:"Y-m-d" }}`
 
 ### Comments
-
-
-Comments look like this:
-
-{# this won't be rendered #}
-
-A {% comment %} tag provides multi-line comments.
+* Comments look like this: `{# this won't be rendered #}`
+* A `{% comment %}` tag provides multi-line comments.
 
 ### Templates Summary
-
-
-Templates allow us to define HTML documents with dynamic content, where the dynamic
-content is set by Django based on data we generate in our views, which we then pass
-into our templates with the render function for example.
-
-The interpolation syntax {{ }} is used to render a value in the HTML document.
-
-We can also use filters optionally if we want to, to adjust the look or the
-formatting of certain values.
-
-Besides interpolation, we also have tags.
-```python
-   - For example, the {% for %} tag for repeating content and rendering a list of
-   content based on some data.
-   - We also have the {% if %} tag to render content conditionally.
-```
-
-And then we have this important feature of template inheritance where we define a
-base template with some blocks reserved in them, which will be replaced by the
-inheriting templates.
-
-And we then do inherit by using the {% extends %} tag and pointing at the base
-template,
-
-We insert the block tags in inheriting template as well to inject content into the
-base template. We can inject anything - some text, some HTML tags or also some static
-file imports.
-
-For placing our templates, we use this best practice structure of repeating the app
-name in the app specific templates folder to avoid name clashes and we're doing the
-same for static files.
-
-And we also learned about the feature of including template files to {% include %}
-snippets into our templates and have nice feature which helps us with reusing code
-and the whiting code duplication.
-
-The overall goal with that is to keep our views files lean and to really focus on
-the logic for extracting and transforming data here and not on formatting and
-constructing HTML code. That's the task of the template.
+* Templates allow us to define HTML documents with dynamic content, where the dynamic content is set by Django based on data we generate in our views, which we then pass into our templates with the render function for example.
+* The interpolation syntax {{ }} is used to render a value in the HTML document.
+* We can also use filters optionally if we want to, to adjust the look or the formatting of certain values.
+* Besides interpolation, we also have tags.
+    * For example, the {% for %} tag for repeating content and rendering a list of content based on some data.
+    * We also have the {% if %} tag to render content conditionally.
+* And then we have this important feature of template inheritance where we define a base template with some blocks reserved in them, which will be replaced by the inheriting templates. And we then do inherit by using the {% extends %} tag and pointing at the base template.
+* We insert the block tags in inheriting template as well to inject content into the base template. We can inject anything - some text, some HTML tags or also some static file imports.
+* For placing our templates, we use this best practice structure of repeating the app name in the app specific templates folder to avoid name clashes and we're doing the same for static files.
+* And we also learned about the feature of including template files to {% include %} snippets into our templates and have nice feature which helps us with reusing code and the whiting code duplication.
+* The overall goal with that is to keep our views files lean and to really focus on the logic for extracting and transforming data here and not on formatting and constructing HTML code. That's the task of the template.
 
 ### SQLite
-
-
-"SQLite is a lightweight database that you can use with Django for development."
-
-"SQLite comes bundled with Python 3 and can be used in any of your Python
-applications."
+* "SQLite is a lightweight database that you can use with Django for development."
+* "SQLite comes bundled with Python 3 and can be used in any of your Python applications."
 
 
 
 
-## Building Static URLs Dynamically
-
-
-Imagine, that you want to build a static URL where some part of the URL (e.g. the
-filename) is actually stored in a variable that's exposed to the template.
-
-So you might want to build the URL like this:
-
-{% static "my_path/to/" + the_file %}
-
-Here, "the_file" would be a variable holding the actual filename.
-
-The above code would fail.
-
-Instead, you can use the "add" filter provided by Django to construct this path
-dynamically:
-
-{% static "my_path/to/"|add:the_file %}
+### Building Static URLs Dynamically
+* Imagine, that you want to build a static URL where some part of the URL (e.g. the filename) is actually stored in a variable that's exposed to the template.
+* So you might want to build the URL like this: `{% static "my_path/to/" + the_file %}`
+* Here, "the_file" would be a variable holding the actual filename. The above code would fail.
+* Instead, you can use the "add" filter provided by Django to construct this path dynamically: `{% static "my_path/to/"|add:the_file %}`
 
 
 
 ## Django Settings
 
 ### TEMPLATES
-
-
-A list containing the settings for all template engines to be used with Django.
-
-Each item of the list is a dictionary containing the options for an individual engine.
-
-Here's a setup that tells the Django template engine to load templates from the
-templates subdirectory inside each installed application:
-
-```python
-TEMPLATES = [
-    {
-        "BACKEND": "django.template.backends.django.DjangoTemplates",
-        "APP_DIRS": True,
-    },
-```
-
-]
-
-The "DIR" key specifies directories where the template engine should look for
-template source files, in search order.
-
-The "APP_DIRS" key specifies Whether the engine should look for template source
-files inside installed applications.
+* A list containing the settings for all template engines to be used with Django.
+* Each item of the list is a dictionary containing the options for an individual engine.
+* Here's a setup that tells the Django template engine to load templates from the templates subdirectory inside each installed application:
+    ```python
+    TEMPLATES = [
+        {
+            "BACKEND": "django.template.backends.django.DjangoTemplates",
+            "APP_DIRS": True,
+        },
+    ]
+    ```
+* The "DIR" key specifies directories where the template engine should look for template source files, in search order.
+* The "APP_DIRS" key specifies Whether the engine should look for template source files inside installed applications.
 
 ### STATICFILES_DIRS
-
-
 This setting defines the additional locations the staticfiles app will traverse
 
 ```python
@@ -897,74 +609,41 @@ STATICFILES_DIRS = [
     "/home/special.polls.com/polls/static",
     "/home/polls.com/polls/static",
     "/opt/webfiles/common",
+]
 ```
 
-]
 
 ### DEBUG
-
-
-DEBUG is a Boolean that turns the debug mode of the project on and off. If it is set
-to True, Django will display detailed error pages when an uncaught exception is thrown
-by your application. When you move to a production environment, remember that you have
-to set it to False. Never deploy a site into production with DEBUG turned on because
-you will expose sensitive project-related data.
+DEBUG is a Boolean that turns the debug mode of the project on and off. If it is set to True, Django will display detailed error pages when an uncaught exception is thrown by your application. When you move to a production environment, remember that you have to set it to False. Never deploy a site into production with DEBUG turned on because you will expose sensitive project-related data.
 
 ### ALLOWED_HOSTS
-
-
-ALLOWED_HOSTS is not applied while debug mode is on or when the tests are run. Once
-you move your site to production and set DEBUG to False, you will have to add your
-domain/host to this setting to allow it to serve your Django site.
+ALLOWED_HOSTS is not applied while debug mode is on or when the tests are run. Once you move your site to production and set DEBUG to False, you will have to add your domain/host to this setting to allow it to serve your Django site.
 
 ### INSTALLED_APPS
-
-
-INSTALLED_APPS is a setting you will have to edit for all projects.
-
-This setting tells Django which applications are active for this site.
-
-By default, Django includes the following applications:
-   django.contrib.admin: An administration site.
-   django.contrib.auth: An authentication framework.
-   django.contrib.contenttypes: A framework for handling content types.
-   django.contrib.sessions: A session framework.
-   django.contrib.messages: A messaging framework.
-   django.contrib.staticfiles: A framework for managing static files, such as CSS,
-   JavaScript files, and images.
+* INSTALLED_APPS is a setting you will have to edit for all projects.
+* This setting tells Django which applications are active for this site.
+* By default, Django includes the following applications:
+    * django.contrib.admin: An administration site.
+    * django.contrib.auth: An authentication framework.
+    * django.contrib.contenttypes: A framework for handling content types.
+    * django.contrib.sessions: A session framework.
+    * django.contrib.messages: A messaging framework.
+    * django.contrib.staticfiles: A framework for managing static files, such as CSS, JavaScript files, and images.
 
 ### DATABASES
-
-
-"The settings.py file contains the database configuration for your project in the
-DATABASES setting. The default configuration is a SQLite3 database."
+* The settings.py file contains the database configuration for your project in the DATABASES setting. The default configuration is a SQLite3 database.
 
 
 
 
 ## HttpRequest and HttpResponse
-
-
-Django uses request and response objects to pass state through the system.
-
-When a page is requested, Django creates an HttpRequest object that contains
-metadata about the request. Then Django loads the appropriate view, passing the
-HttpRequest as the first argument to the view function. Each view is responsible for
-returning an HttpResponse object.
-
-HttpRequest and HttpResponse are defined in the django.http module.
-
-In contrast to HttpRequest objects, which are created automatically by Django,
-HttpResponse objects are your responsibility. Each view you write is responsible for
-instantiating, populating, and returning an HttpResponse.
-
-Passing iterators
-
-You can pass HttpResponse an iterator rather than strings. HttpResponse will consume
-the iterator immediately, store its content as a string, and discard it. Objects with
-a close() method such as files and generators are immediately closed. If you need the
-response to be streamed from the iterator to the client, you must use the
-StreamingHttpResponse class instead.
+* Django uses request and response objects to pass state through the system.
+* When a page is requested, Django creates an HttpRequest object that contains metadata about the request. Then Django loads the appropriate view, passing the HttpRequest as the first argument to the view function. Each view is responsible for returning an HttpResponse object.
+* HttpRequest and HttpResponse are defined in the django.http module.
+* In contrast to HttpRequest objects, which are created automatically by Django, HttpResponse objects are your responsibility. Each view you write is responsible for instantiating, populating, and returning an HttpResponse.
+* Passing iterators
+    * You can pass HttpResponse an iterator rather than strings. HttpResponse will consume the iterator immediately, store its content as a string, and discard it.
+    * Objects with a close() method such as files and generators are immediately closed. If you need the response to be streamed from the iterator to the client, you must use the StreamingHttpResponse class instead.
 
 
 ## Django Tips
