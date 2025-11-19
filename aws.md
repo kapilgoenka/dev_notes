@@ -1,4 +1,5 @@
-# AWS Global Infrastructure
+# AWS
+
 ### Regions
 
 * AWS has Regions all around the world
@@ -148,6 +149,7 @@
 <br>
 
 # EC2
+
 ### Overview
 
 * EC2 is one of the most popular of AWS' offering
