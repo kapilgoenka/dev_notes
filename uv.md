@@ -1,41 +1,29 @@
 # UV
 
+* A high-speed package and project manager for Python, written in Rust.
 
+* An all-in-one tool for Python project management:
+    * Install and manage multiple Python versions
+    * Create virtual environments
+    * Efficiently handle project dependencies
+    * Reproduce working environments
+    * Build and publish a project
 
-A high-speed package and project manager for Python, written in Rust.
+* UV integrates into one tool most of the functionality provided by tools like pip, pip-tools, pipx, poetry, pyenv, twine, virtualenv, and more.
 
-An all-in-one tool for Python project management:
-  - Install and manage multiple Python versions
-  - Create virtual environments
-  - Efficiently handle project dependencies
-  - Reproduce working environments
-  - Build and publish a project
+* UV can build and publish Python packages to package repositories like PyPI, supporting a streamlined process from development to distribution
 
-UV integrates into one tool most of the functionality provided by tools like pip, pip-
-tools, pipx, poetry, pyenv, twine, virtualenv, and more.
+* UV can scaffold a full Python project, including the root directory, Git repository, virtual environment, pyproject.toml, README, and more.
 
-UV can build and publish Python packages to package repositories like PyPI, supporting
-a streamlined process from development to distribution
-
-UV can scaffold a full Python project, including the root directory, Git
-repository, virtual environment, pyproject.toml, README, and more.
-
-When it comes to managing your project's dependencies, uv makes your life easier with
-a clean workflow. This workflow allows you to lock your project's dependencies so that
-other developers can reproduce your environment exactly and contribute to your code
-without much setup effort.
+* When it comes to managing your project's dependencies, uv makes your life easier with a clean workflow. This workflow allows you to lock your project's dependencies so that other developers can reproduce your environment exactly and contribute to your code without much setup effort.
 
 
 
 ## Homebrew vs UV
 
+* Homebrew and UV are fundamentally different tools that serve different purposes.
 
-Homebrew and UV are fundamentally different tools that serve different purposes.
-
-Homebrew is a general-purpose package manager for macOS, while UV is a python-specific
-package and project manager. You would use Homebrew to install system-level tools,
-including UV itself, while UV is used for managing Python packages and projects, a
-task traditionally handled by pip.
+* Homebrew is a general-purpose package manager for macOS, while UV is a python-specific package and project manager. You would use Homebrew to install system-level tools, including UV itself, while UV is used for managing Python packages and projects, a task traditionally handled by pip.
 
 
 
