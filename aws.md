@@ -1,13 +1,5 @@
 # AWS
 
-[NEW] Ultimate AWS Certified Cloud Practitioner CLF-C02 2025
-
-Sources:
-- [Link](https://gale.udemy.com/course/aws-certified-cloud-practitioner-new)
-- [Link](https://media.datacumulus.com/aws-ccp/AWS%20Certified%20Cloud%20Practitioner%20Slides%20v41.pdf)
-
-<br>
-
 ## AWS Global Infrastructure
 ### Regions
 
@@ -832,3 +824,15 @@ The default settings shown are perfectly fine for most learning/testing scenario
 * Can be run on a schedule (weekly, whenever packages are updated, etc…)
 
 * Free service (only pay for the underlying resources)
+
+
+
+<br>
+<br>
+<br>
+
+
+Sources:
+- [Link](https://gale.udemy.com/course/aws-certified-cloud-practitioner-new)
+- [Link](https://media.datacumulus.com/aws-ccp/AWS%20Certified%20Cloud%20Practitioner%20Slides%20v41.pdf)
+
