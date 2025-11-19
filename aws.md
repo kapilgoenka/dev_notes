@@ -1,6 +1,4 @@
-# AWS
-
-## AWS Global Infrastructure
+# AWS Global Infrastructure
 ### Regions
 
 * AWS has Regions all around the world
@@ -44,7 +42,7 @@
 <br>
 <br>
 
-## IAM
+# IAM
 ### Users & Groups
 
 * IAM = Identity and Access Management, Global service
@@ -73,23 +71,23 @@
 
 * In AWS, you can setup a password policy:
 
-* Set a minimum password length
+    * Set a minimum password length
+    
+    * Require specific character types:
+    
+        * including uppercase letters
+    
+        * lowercase letters
+    
+        * numbers
+    
+        * non-alphanumeric characters
 
-* Require specific character types:
-
-    * including uppercase letters
-
-    * lowercase letters
-
-    * numbers
-
-    * non-alphanumeric characters
-
-* Allow all IAM users to change their own passwords
-
-* Require users to change their password after some time (password expiration)
-
-* Prevent password re-use
+    * Allow all IAM users to change their own passwords
+    
+    * Require users to change their password after some time (password expiration)
+    
+    * Prevent password re-use
 
 <br>
 
@@ -149,7 +147,7 @@
 <br>
 <br>
 
-## EC2
+# EC2
 ### Overview
 
 * EC2 is one of the most popular of AWS' offering
@@ -182,7 +180,7 @@
 
     * Network-attached (EBS & EFS)
 
-    * hardware (EC2 Instance Store)
+    * Hardware (EC2 Instance Store)
 
 * Network card: speed of the card, Public IP address
 
@@ -196,7 +194,7 @@
 
 * It is possible to bootstrap our instances using an EC2 User data script.
 
-* bootstrapping means launching commands when a machine starts
+* Bootstrapping means launching commands when a machine starts
 
 * That script is only run once at the instance first start
 
@@ -248,7 +246,7 @@
 
 #### yum install -y httpd
 
-* The command yum install -y httpd installs the Apache HTTP Server (web server) on Red Hat-based Linux distributions.
+* The command `yum install -y httpd` installs the Apache HTTP Server (web server) on Red Hat-based Linux distributions.
 
 * Breaking it down:
 
@@ -293,22 +291,21 @@
 
 * What does this line in a script do on a Red Hat-based Linux distribution?
 
-* This command creates a simple HTML web page with a heading that displays "Hello World" along with the server's fully qualified domain name (FQDN).
+    * This command creates a simple HTML web page with a heading that displays "Hello World" along with the server's fully qualified domain name (FQDN).
+         
+    * Executes `hostname -f` to get the server's full hostname
+    
+    * Creates an HTML string with that hostname embedded
+    
+    * Writes (or overwrites) this HTML to `/var/www/html/index.html`
+    
+    * This becomes the default page visitors see when accessing the web server
 
-* What it does:
- 
-* Executes hostname -f to get the server's full hostname
+    * Example output in the file:
 
-* Creates an HTML string with that hostname embedded
-
-* Writes (or overwrites) this HTML to /var/www/html/index.html
-
-* This becomes the default page visitors see when accessing the web server
-
-Example output in the file:
-```html
-Hello World from web-server.example.com
-```
+        ```html
+        Hello World from web-server.example.com
+        ```
 
 * This is typically used in:
 
@@ -486,9 +483,7 @@ Each category contains multiple instance families (like T3, M6, C5, R5, etc.) th
 
 * On-Demand Instances – short workload, predictable pricing, pay by second
 
-* Reserved (1 & 3 years)
-
-* Reserved Instances – long workloads
+* Reserved Instances (1 & 3 years) – long workloads
 
 * Convertible Reserved Instances – long workloads with flexible instances
 
@@ -538,10 +533,9 @@ Each category contains multiple instance families (like T3, M6, C5, R5, etc.) th
 
 ## EC2 Instance Storage
 
-### EBS
-#### What's an EBS Volume?
+### EBS (Elastic Block Store)
 
-* EBS = Elastic Block Store
+#### What's an EBS Volume?
 
 * A network drive you can attach to your instances while they run
 
@@ -726,29 +720,9 @@ The default settings shown are perfectly fine for most learning/testing scenario
 
 <br>
 
-### EC2 Instance Store
-#### What is EC2 Instance Store?
+### EFS (Elastic File System)
 
-* EBS volumes are network drives with good but "limited" performance
-
-* If you need a high-performance hardware disk, use EC2 Instance Store
-
-* Better I/O performance
-
-* EC2 Instance Store lose their storage if they're stopped (ephemeral)
-
-* Good for buffer / cache / scratch data / temporary content
-
-* Risk of data loss if hardware fails
-
-* Backups and Replication are your responsibility
-
-<br>
-
-### EFS
 #### What is EFS?
-
-* EFS – Elastic File System
 
 * Managed NFS (network file system) that can be mounted on 100s of EC2
 
@@ -771,6 +745,26 @@ The default settings shown are perfectly fine for most learning/testing scenario
 * Example: move files that are not accessed for 60 days to EFS-IA
 
 * Transparent to the applications accessing EFS
+
+<br>
+
+### EC2 Instance Store
+
+#### What is EC2 Instance Store?
+
+* EBS volumes are network drives with good but "limited" performance
+
+* If you need a high-performance hardware disk, use EC2 Instance Store
+
+* Better I/O performance
+
+* EC2 Instance Store lose their storage if they're stopped (ephemeral)
+
+* Good for buffer / cache / scratch data / temporary content
+
+* Risk of data loss if hardware fails
+
+* Backups and Replication are your responsibility
 
 
 <br>
