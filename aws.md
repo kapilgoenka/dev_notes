@@ -768,6 +768,23 @@ The default settings shown are perfectly fine for most learning/testing scenario
 
 * Backups and Replication are your responsibility
 
+<br>
+
+### FSx
+
+* Fully managed service
+
+* Launch 3rd party high-performance file systems on AWS
+
+    * FSx for Windows File Server
+    
+    * FSx for Lustre
+
+        * For High Performance Computing (HPC)
+    
+        * The name Lustre is derived from “Linux” and “cluster”
+    
+    * FSx for NetApp ONTAP
 
 <br>
 <br>
@@ -1161,6 +1178,48 @@ The default settings shown are perfectly fine for most learning/testing scenario
     * Archive Access tier (optional): configurable from 90 days to 700+ days
     
     * Deep Archive Access tier (optional): config. from 180 days to 700+ days
+
+<br>
+
+### IAM Access Analyzer for S3
+
+* Ensures that only intended people have access to your S3 buckets
+
+* Example: publicly accessible bucket, bucket shared with other AWS account ...
+
+* Evaluates S3 Bucket Policies, S3 ACLs, S3 Access Point Policies
+
+<br>
+
+### Snowball
+
+#### Edge Computing
+
+* Process data while it’s being created on an edge location
+
+    * A truck on the road, a ship on the sea, a mining station underground ...
+
+    * These locations may have limited internet and no access to computing power
+
+<br>
+
+#### What is Snowball?
+
+* Highly-secure, portable and `offline` devices to collect and process data at the edge, and `migrate` data into and out of AWS
+
+* Helps migrate up to Petabytes of data
+
+* If it takes more than a week to transfer over the network, use Snowball devices!
+
+<br>
+
+### Storage Gateway
+
+* Bridge between on-premise data and cloud data in S3
+
+* Extend on-premises storage to S3
+
+* Hybrid storage service to allow on-premises to seamlessly use the AWS
 
 <br>
 <br>
