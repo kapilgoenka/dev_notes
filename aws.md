@@ -910,7 +910,7 @@ The default settings shown are perfectly fine for most learning/testing scenario
 
 # S3
 
-## Buckets
+### Buckets
 
 * Amazon S3 allows people to store objects (files) in “buckets” (directories)
 
@@ -936,7 +936,7 @@ The default settings shown are perfectly fine for most learning/testing scenario
 
 <br>
 
-## Objects
+### Objects
 
 * Objects (files) have a Key
 
@@ -968,10 +968,7 @@ The default settings shown are perfectly fine for most learning/testing scenario
 
 <br>
 
-## Bucket Policies
-
-![Screenshot 2025-11-19 at 9.06.18 AM](assets/Screenshot%202025-11-19%20at%209.06.18%E2%80%AFAM.png)
-
+### Bucket Policies
 
 * JSON based policies
 
@@ -991,7 +988,157 @@ The default settings shown are perfectly fine for most learning/testing scenario
     
     * Grant access to another account (Cross Account)
 
+<br>
 
+### Security
+
+* User-Based
+
+    * IAM Policies – which API calls should be allowed for a specific user from IAM
+
+* Resource-Based
+
+    * Bucket Policies – bucket wide rules from the S3 console - allows cross account
+    
+    * Object Access Control List (ACL) – finer grain (can be disabled)
+    
+    * Bucket Access Control List (ACL) – less common (can be disabled)
+
+* An IAM principal can access an S3 object if:
+
+    * The user IAM permissions ALLOW it OR the resource policy ALLOWS it
+    
+    * AND there’s no explicit DENY
+
+* Examples:
+
+    * `Anonymous www website visitor --> S3 Bucket`: S3 Bucket Policy
+    
+    * `IAM User --> S3 Bucket`: IAM Policy
+    
+    * `EC2 Instance --> S3 Bucket`: IAM Roles
+    
+    * `Other AWS account IAM User --> S3 Bucket`: S3 Bucket Policy
+
+<br>
+
+### Static Website Hosting
+
+* S3 can host static websites and have them accessible on the Internet
+
+* The website URL will be (depending on the region):
+
+	* http://bucket-name.s3-website-aws-region.amazonaws.com, OR
+
+	* http://bucket-name.s3-website.aws-region.amazonaws.com
+
+* If you get a 403 Forbidden error, make sure the bucket policy allows public reads!
+
+<br>
+
+### Versioning
+
+* You can version your files in Amazon S3
+
+* It is enabled at the bucket level
+
+* Same key overwrite will change the “version”: 1, 2, 3….
+
+* It is best practice to version your buckets
+
+    * Protect against unintended deletes (ability to restore a version)
+    
+    * Easy roll back to previous version
+
+* Notes:
+
+    * Any file that is not versioned prior to enabling versioning will have version “null”
+    
+    * Suspending versioning does not delete the previous versions
+
+<br>
+
+### Replication
+
+* Cross-Region Replication (CRR)
+
+* Same-Region Replication (SRR)
+
+* Buckets can be in different AWS accounts
+
+* Copying is asynchronous
+
+* Must give proper IAM permissions to S3
+
+* Must enable Versioning in source and destination buckets
+
+<br>
+
+### Storage Classes
+
+* Standard - General Purpose
+
+    * Used for frequently accessed data
+
+    * Low latency and high throughput
+
+* Infrequent Access
+
+    * For data that is less frequently accessed, but requires rapid access when needed
+
+    * Lower cost than S3 Standard
+
+        * Standard - Infrequent Access
+            
+            * 99.9% Availability
+    
+        * One Zone - Infrequent Access
+        
+            * High durability (99.999999999%) in a single AZ
+        
+            * Data lost when AZ is destroyed
+
+* Glacier
+
+    * Low-cost object storage meant for archiving / backup
+    
+        * Instant Retrieval
+    
+            * Millisecond retrieval, great for data accessed once a quarter
+    
+            * Minimum storage duration of 90 days
+        
+        * Flexible Retrieval
+        
+            * Expedited (1 to 5 minutes), Standard (3 to 5 hours), Bulk (5 to 12 hours) – free
+        
+            * Minimum storage duration of 90 days
+        
+        * Deep Archive
+        
+            * For long term storage
+        
+            * Standard (12 hours), Bulk (48 hours)
+        
+            * Minimum storage duration of 180 days
+
+<br>
+
+### Intelligent-Tiering
+
+* Small monthly monitoring and auto-tiering fee
+
+* Moves objects automatically between Access Tiers based on usage
+
+    * Frequent Access tier (automatic): default tier
+    
+    * Infrequent Access tier (automatic): objects not accessed for 30 days
+    
+    * Archive Instant Access tier (automatic): objects not accessed for 90 days
+    
+    * Archive Access tier (optional): configurable from 90 days to 700+ days
+    
+    * Deep Archive Access tier (optional): config. from 180 days to 700+ days
 
 <br>
 <br>
