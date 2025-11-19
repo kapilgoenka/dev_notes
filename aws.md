@@ -11,27 +11,36 @@ Sources:
 
 ## AWS Global Infrastructure
 ### Regions
-- AWS has Regions all around the world
-- Names can be us-east-1, eu-west-3…
-- A region is a cluster of data centers
-- Most AWS services are region-scoped
+
+* AWS has Regions all around the world
+
+* Names can be us-east-1, eu-west-3…
+
+* A region is a cluster of data centers
+
+* Most AWS services are region-scoped
 
 <br>
 
 ### Availability Zones
-- Each region has many availability zones. Example:
-    - ap-southeast-2a
-    - ap-southeast-2b
-    - ap-southeast-2c
-- Each availability zone (AZ) is one or more discrete data centers with redundant power, networking, and connectivity
-- They're separate from each other, so that they're isolated from disasters
-- They're connected with high bandwidth, ultra-low latency networking
+
+* Each region has many availability zones. Example:
+    * ap-southeast-2a
+    * ap-southeast-2b
+    * ap-southeast-2c
+
+* Each availability zone (AZ) is one or more discrete data centers with redundant power, networking, and connectivity
+
+* They're separate from each other, so that they're isolated from disasters
+
+* They're connected with high bandwidth, ultra-low latency networking
 
 <br>
 
 ### Points of Presence (Edge Locations)
-- Amazon has 400+ Points of Presence (400+ Edge Locations & 10+ Regional Caches) in 90+ cities across 40+ countries
-- Content is delivered to end users with lower latency
+* Amazon has 400+ Points of Presence (400+ Edge Locations & 10+ Regional Caches) in 90+ cities across 40+ countries
+
+* Content is delivered to end users with lower latency
 
 <br>
 <br>
@@ -42,11 +51,16 @@ Sources:
 
 ## IAM
 ### Users & Groups
-- IAM = Identity and Access Management, Global service
-- Root account created by default, shouldn't be used or shared
-- Users are people within your organization, and can be grouped
-- Groups only contain users, not other groups
-- Users don't have to belong to a group, and user can belong to multiple groups
+
+* IAM = Identity and Access Management, Global service
+
+* Root account created by default, shouldn't be used or shared
+
+* Users are people within your organization, and can be grouped
+
+* Groups only contain users, not other groups
+
+* Users don't have to belong to a group, and user can belong to multiple groups
 
 <br>
 
