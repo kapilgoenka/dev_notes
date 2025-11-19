@@ -1400,6 +1400,10 @@ The default settings shown are perfectly fine for most learning/testing scenario
 
 * Cloud data warehouse designed specifically for OLAP
 
+* Has a SQL interface for performing queries
+
+* If you want to use SQL and you have structured data (eg CSV files), then Redshift is the simplest solution.
+
 * Powers modern data analytics at scale
 
 * Based on PostgreSQL, but it’s not used for OLTP
@@ -1407,8 +1411,6 @@ The default settings shown are perfectly fine for most learning/testing scenario
 * Columnar storage of data (instead of row based)
 
 * Massively Parallel Query Execution (MPP)
-
-* Has a SQL interface for performing queries
 
 * BI tools such as `AWS Quicksight` or `Tableau` integrate with it
 
@@ -1437,6 +1439,10 @@ The default settings shown are perfectly fine for most learning/testing scenario
 * EMR stands for “Elastic MapReduce”
 
 * A managed service that makes it easy to process large amounts of data using frameworks like Apache Spark and Hadoop.
+
+* Utilizes MapReduce for processing huge data sets in computing environments.
+
+* If you want to process unstructured data (eg in strange formats rather than structured CSV files), Amazon EMR can provide a Hadoop system that is very capable.
 
 * It allows you to launch and manage clusters of Amazon EC2 instances that work together to analyze data.
 
@@ -1557,6 +1563,8 @@ The default settings shown are perfectly fine for most learning/testing scenario
 * Fully serverless service
 
 * Glue Data Catalog: catalog of datasets
+
+* Crawlers automatically discover data in your data stores, infer the schema, and update the Data Catalog with the metadata
 
 * Can be used by Athena, Redshift, EMR
 
