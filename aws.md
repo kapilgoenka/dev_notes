@@ -7,7 +7,6 @@ Sources:
 - [Link](https://media.datacumulus.com/aws-ccp/AWS%20Certified%20Cloud%20Practitioner%20Slides%20v41.pdf)
 
 <br>
-<br>
 
 ## AWS Global Infrastructure
 ### Regions
@@ -568,6 +567,8 @@ Each category contains multiple instance families (like T3, M6, C5, R5, etc.) th
 
     * You can increase the capacity of the drive over time
 
+<br>
+
 #### Delete on Termination attribute
 
 * Controls the EBS behaviour when an EC2 instance terminates
@@ -575,6 +576,8 @@ Each category contains multiple instance families (like T3, M6, C5, R5, etc.) th
     * By default, the root EBS volume is deleted (attribute enabled)
 
     * By default, any other attached EBS volume is not deleted (attribute disabled)
+
+<br>
 
 #### Volume Configuration
 
@@ -707,6 +710,8 @@ Recommendations for Beginners:
 
 The default settings shown are perfectly fine for most learning/testing scenarios!
 
+<br>
+
 #### Snapshots
 
 * Make a backup (snapshot) of your EBS volume at a point in time
@@ -759,6 +764,7 @@ The default settings shown are perfectly fine for most learning/testing scenario
 
 * Highly available, scalable, expensive (3x gp2), pay per use, no capacity planning
 
+<br>
 
 #### EFS Infrequent Access (EFS-IA)
 
