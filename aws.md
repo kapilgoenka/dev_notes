@@ -1076,55 +1076,77 @@ The default settings shown are perfectly fine for most learning/testing scenario
 
 ### Storage Classes
 
-* Standard - General Purpose
+#### Standard - General Purpose
 
-    * Used for frequently accessed data
+* Used for frequently accessed data
 
-    * Low latency and high throughput
-
-* Infrequent Access
-
-    * For data that is less frequently accessed, but requires rapid access when needed
-
-    * Lower cost than S3 Standard
-
-        * Standard - Infrequent Access
-            
-            * 99.9% Availability
-    
-        * One Zone - Infrequent Access
-        
-            * High durability (99.999999999%) in a single AZ
-        
-            * Data lost when AZ is destroyed
-
-* Glacier
-
-    * Low-cost object storage meant for archiving / backup
-    
-        * Instant Retrieval
-    
-            * Millisecond retrieval, great for data accessed once a quarter
-    
-            * Minimum storage duration of 90 days
-        
-        * Flexible Retrieval
-        
-            * Expedited (1 to 5 minutes), Standard (3 to 5 hours), Bulk (5 to 12 hours) – free
-        
-            * Minimum storage duration of 90 days
-        
-        * Deep Archive
-        
-            * For long term storage
-        
-            * Standard (12 hours), Bulk (48 hours)
-        
-            * Minimum storage duration of 180 days
+* Low latency and high throughput
 
 <br>
 
-### Intelligent-Tiering
+#### Infrequent Access
+
+* For data that is less frequently accessed, but requires rapid access when needed
+
+* Lower cost than S3 Standard
+
+    * Standard - Infrequent Access
+        
+        * 99.9% Availability
+    
+    * One Zone - Infrequent Access
+    
+        * High durability (99.999999999%) in a single AZ
+    
+        * Data lost when AZ is destroyed
+
+<br>
+
+#### Glacier
+
+* Low-cost object storage meant for archiving / backup
+    
+    * Instant Retrieval
+    
+        * Millisecond retrieval, great for data accessed once a quarter
+    
+        * Minimum storage duration of 90 days
+    
+    * Flexible Retrieval
+    
+        * Expedited (1 to 5 minutes), Standard (3 to 5 hours), Bulk (5 to 12 hours) – free
+    
+        * Minimum storage duration of 90 days
+    
+    * Deep Archive
+    
+        * For long term storage
+    
+        * Standard (12 hours), Bulk (48 hours)
+    
+        * Minimum storage duration of 180 days
+
+<br>
+
+#### Express One Zone
+
+* High performance, single Availability Zone storage class
+    
+* Handle 100,000s requests per second with single-digit millisecond latency
+    
+* Up to 10x better performance than S3 Standard (50% lower costs)
+    
+* High Durability (99.999999999%) and Availability (99.95%)
+    
+* Co-locate your storage and compute resources in the same AZ (reduces latency)
+    
+* Use cases: latency-sensitive apps, data-intensive apps, AI & ML training, financial modeling, media processing, HPC…
+    
+* Best inteintegrated with SageMaker Model Training, Athena, EMR ..
+
+<br>
+
+#### Intelligent-Tiering
 
 * Small monthly monitoring and auto-tiering fee
 
