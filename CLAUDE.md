@@ -7,157 +7,85 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 This is a personal developer notes repository containing comprehensive technical documentation across multiple topics. The notes cover:
 
 - Python tooling and package management (UV, pip, pytest, aiohttp)
-- Node.js version management (NVM)
 - Django web framework (models, migrations, templates, ORM, MVT architecture)
-- macOS system architecture (framework builds, system protection, user directories)
-- Shell configuration patterns for zsh/bash
-- Development tools (Docker, Homebrew, Tart)
-- AWS (Cloud Practitioner certification topics, IAM, EC2, regions, availability zones)
+- AWS Cloud Practitioner certification (IAM, EC2, regions, availability zones)
 - Python testing (pytest, capsys, pytest.raises)
-- NotebookLM
+- macOS development tools (Homebrew, Tart virtualization)
+- NotebookLM (Google's AI research tool)
 - Article bookmarks and learning resources
 
 ## Repository Structure
 
-The repository has evolved significantly and now contains documentation in multiple formats:
+The repository contains focused, modular markdown documentation files:
 
-### Primary Documentation Files
+### Documentation Files (8 files)
 
-**Markdown Format (Modular):**
-- `intro.md` (484B) - Repository introduction and origin story
-- `nodejs.md` (778B) - NodeJS and NVM installation/configuration
-- `docker.md` (195B) - Docker Desktop CLI completions
-- `uv.md` (40K) - UV Python package manager (extensive coverage)
+- `article_bookmarks.md` (1.3K) - Curated learning resource links
+- `aws.md` (24K) - AWS Cloud Practitioner certification study notes
+- `django.md` (48K) - Comprehensive Django web framework documentation
+- `macos_dev.md` (658B) - Homebrew and Tart virtualization
+- `notebooklm.md` (1.3K) - Google's AI research tool
 - `python_misc.md` (11K) - Python distributions, PyPI, macOS integration
 - `python_testing.md` (2.3K) - pytest fixtures and testing patterns
-- `notebooklm.md` (1.2K) - Google's AI research tool
-- `macos_dev.md` (640B) - Homebrew and Tart virtualization
-- `aliases.md` (126B) - Shell aliases for git, python, ssh
-- `django.md` (48K) - Comprehensive Django web framework documentation
-- `aws.md` (24K) - AWS Cloud Practitioner certification study notes
-- `article_bookmarks.md` (1.3K) - Learning resource links
+- `uv.md` (40K) - UV Python package manager (extensive coverage)
 
-**Combined Formats:**
-- `dev_notes.md` (130K, 3391 lines) - Full markdown version with all content combined
-- `dev_notes.sh` (~3300 lines) - Original shell script format with comments
+### Meta Files
 
-**Meta Files:**
 - `CLAUDE.md` - This file, providing guidance for working with the repository
-
-### File Relationships
-
-- The individual `.md` files are split from `dev_notes.md` by top-level (H1) sections
-- `dev_notes.md` was converted from `dev_notes.sh`
-- `dev_notes.sh` is the original format that began as a `.zshrc` file
-- All three formats (shell script, combined markdown, split markdown) contain the same content in different organizations
 
 ## Document Organization
 
-### Markdown Files Structure
+All markdown files use standard markdown headers:
 
-The markdown files use standard markdown headers:
-
-1. **H1 headers (`#`)** - Top-level sections (major topics)
-   - One per individual file when split
-   - Examples: "# NodeJS", "# Django", "# AWS"
+1. **H1 headers (`#`)** - Top-level section (one per file)
+   - Examples: "# Django", "# AWS", "# UV"
 
 2. **H2 headers (`##`)** - Second-level sections (subtopics)
-   - Example: "## UV Project", "## Django Commands"
+   - Example: "## UV Project", "## Django Commands", "## IAM"
 
 3. **H3 headers (`###`)** - Third-level sections (detailed subsections)
    - Example: "### Auto Reload", "### Foreign Key", "### IAM Roles"
 
-### Shell Script Format (dev_notes.sh)
+4. **H4 headers (`####`)** - Fourth-level sections (specific details)
+   - Example: "#### yum update -y", "#### Delete on Termination attribute"
 
-The shell script follows a three-level header hierarchy using comment decorations:
+## Formatting Conventions
 
-1. **Top-level sections** (4 rows of `#` above and below title):
-   - Preceded by 5 empty rows
-   - Format: 8 rows of `#` with centered title
-   - Example: `######## NodeJS ########`
+### Bullet Points
 
-2. **Second-level sections** (1 row of `#` above and below title):
-   - Preceded by 3 empty rows
-   - Example: `### UV Project ###`
+- Use asterisk (`*`) for all bullet points (not dashes `-`)
+- Add blank lines between top-level bullet points for readability
+- Nest sub-bullets with proper indentation (4 spaces)
+- Example:
+  ```markdown
+  * Main point with detailed explanation
 
-3. **Third-level sections** (1 row of `-` above and below title):
-   - **Spacing rule**: Preceded by exactly 1 blank line (not 2 or more)
-   - **Hyphen formatting rule**: Hyphens must extend exactly 2 characters beyond the text length on each side
-   - Example: "Variables" (9 chars) requires 13 hyphens (9+2+2)
-   - Example: "Auto Reload" (11 chars) requires 15 hyphens (11+2+2)
-   - Format:
-     ```
-     # Previous content here
+  * Another main point
 
-     # ---------------
-     # Auto Reload
-     # ---------------
-     ```
+      * Sub-point with more detail
 
-## Formatting Rules for dev_notes.sh
+      * Another sub-point
+  ```
 
-### Line Length Requirements
+### Code Formatting
 
-**Critical formatting rule: 88 character line length limit**
+- Use inline code formatting for:
+  - Commands: `` `uv run` ``, `` `git status` ``
+  - File paths: `` `~/.cache/uv/` ``
+  - Configuration values: `` `DEBUG=True` ``
+  - AWS region names: `` `us-east-1` ``, `` `ap-southeast-2a` ``
 
-- Regular comment text must wrap at 88 characters
-- **Exceptions that may exceed 88 chars:**
-  - Lines containing only commands (starting with `$`, `uv`, `python`, `git`, etc.)
-  - Lines containing only file paths
-  - URLs (http:// or https://)
-  - ASCII table rows (containing box-drawing characters: ┌ ├ └ │ ┬ ┼ ┴ ─ ┐ ┤ ┘)
+- Use code blocks for:
+  - Multi-line code examples
+  - Shell commands
+  - Configuration snippets
+  - Specify language when applicable: ` ```bash `, ` ```python `, ` ```html `
 
-### Content Structure Patterns
+### Section Spacing
 
-When adding content to `dev_notes.sh`:
-
-1. **Explanatory sections** follow this pattern:
-   - Concept introduction and definition
-   - Characteristics or properties
-   - Practical usage examples
-   - Verification commands (when applicable)
-   - Related tools or concepts
-
-2. **Code examples** are shown as comments:
-   ```bash
-   # Example command:
-   # uv run manage.py runserver
-   ```
-
-3. **Tables** use ASCII box-drawing characters:
-   ```
-   # ┌────────────────┬──────────────────┐
-   # │ Command        │ Description      │
-   # ├────────────────┼──────────────────┤
-   # │ uv run         │ Execute command  │
-   # └────────────────┴──────────────────┘
-   ```
-
-4. **Visual diagrams** use ASCII art with box-drawing for complex concepts:
-   - Used extensively in UV section to explain temporary environments
-   - Shows relationships between project .venv, package cache, and temporary environments
-   - Includes flowcharts for `uv run --with` behavior
-
-5. **Actual shell configuration** (uncommented):
-   - Environment variable exports
-   - Path additions
-   - Aliases
-   - Source commands for loading tools
-
-## File Origin and Evolution
-
-The documentation started as a `.zshrc` configuration file and evolved significantly:
-
-1. **Original**: `.zshrc` shell configuration file on macOS
-2. **Evolution**: Became `dev_notes.sh` with extensive educational comments
-3. **Conversion**: Converted to `dev_notes.md` markdown format (3391 lines)
-4. **Split**: Divided into 13 individual markdown files by topic
-
-The `dev_notes.sh` file contains both:
-- **Active shell configuration** (uncommented lines): NVM setup, Docker completions, environment exports
-- **Educational documentation** (commented lines): Detailed explanations of Python, Django, UV, and other development concepts
-
-When editing `dev_notes.sh`, preserve this dual nature - some parts are actual shell configuration that loads on terminal startup, while most is educational commentary.
+- Add `<br>` tags between major sections for visual separation
+- Use blank lines generously between bullet points for readability
+- Keep related content grouped together
 
 ## Major Topic Documentation Coverage
 
@@ -218,6 +146,9 @@ AWS Cloud Practitioner certification notes include:
 
 Python ecosystem documentation:
 - macOS Python framework builds
+- macOS System Python and user-specific package locations
+- Framework vs. non-framework builds
+- sys.path and PYTHONPATH
 - Package distribution formats (wheel, sdist)
 - PyPI (Python Package Index)
 - Rust-based Python tooling (Ruff, UV)
@@ -232,12 +163,9 @@ pytest documentation:
 
 ### Other Topics
 
-- **NodeJS** (778B) - NVM installation and configuration
-- **Docker** (195B) - Docker Desktop CLI completions
-- **NotebookLM** (1.2K) - Google's AI research tool
-- **macOS Dev** (640B) - Homebrew and Tart virtualization
-- **Aliases** (126B) - Shell aliases (git, python, ssh)
-- **Article Bookmarks** (1.3K) - Curated learning resources
+- **macOS Dev** (658B) - Homebrew installation and Tart virtualization setup
+- **NotebookLM** (1.3K) - Google's AI research tool capabilities and use cases
+- **Article Bookmarks** (1.3K) - Links to Python, Django, and AWS learning resources
 
 ## Git Workflow
 
@@ -253,19 +181,17 @@ When committing changes:
 
 ## Working with the Repository
 
-### Which File to Edit?
+### Adding New Content
 
-- **For new content**: Add to the appropriate individual `.md` file (e.g., `django.md`, `aws.md`)
-- **For shell configuration**: Edit `dev_notes.sh` and maintain both uncommented config and commented documentation
-- **For combined view**: The full content is in `dev_notes.md` but editing individual files is preferred
+- Add content to the appropriate existing `.md` file based on topic
+- Follow the established formatting conventions (asterisk bullets, spacing, inline code)
+- Use proper markdown headers (H2 for major topics, H3 for subtopics, H4 for details)
+- Add section breaks (`<br>`) between major topics for visual clarity
 
 ### No Build/Test Commands
 
 This repository contains documentation only - there are no build, test, or lint commands to run.
 
-### File Synchronization
+### Repository Evolution Note
 
-Currently, the three formats (shell script, combined markdown, split markdown files) are **not automatically synchronized**. When editing:
-- If you edit `dev_notes.sh`, the markdown files won't update automatically
-- If you edit individual `.md` files, `dev_notes.md` and `dev_notes.sh` won't update automatically
-- Manual synchronization or regeneration may be needed if keeping all formats in sync
+This repository originally started as a `.zshrc` shell configuration file and evolved into comprehensive developer documentation. Previous formats (dev_notes.sh, dev_notes.md) and some split files have been consolidated into the current 8 focused markdown files.
