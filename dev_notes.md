@@ -201,9 +201,6 @@ directory with a module directory and an __init__.py file:
    $ uv init --package example-pkg
    $ tree example-pkg
       .
-```
-
-```
       ├── .git
       ├── .gitignore
       ├── .python-version
@@ -923,13 +920,7 @@ managing virtual environments!
         │   │ Project .venv │   │ Package Cache │     │
         │   │               │   │               │     │
         │   │ requests      │   │ requests      |     │
-```
-
-```python
         |   | (2.32.5)      |   | (2.31.0)      |     |
-```
-
-```
         │   └───────────────┘   └───────────────┘     │
         │    (persistent)       (persistent)          │
         └─────────────────────────────────────────────┘
