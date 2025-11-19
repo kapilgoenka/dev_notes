@@ -533,7 +533,7 @@ Each category contains multiple instance families (like T3, M6, C5, R5, etc.) th
 <br>
 <br>
 
-## EC2 Instance Storage
+## Instance Storage
 
 ### EBS (Elastic Block Store)
 
@@ -777,6 +777,7 @@ The default settings shown are perfectly fine for most learning/testing scenario
 <br>
 
 ## AMI
+
 ### AMI Overview
 
 * AMI = Amazon Machine Image
@@ -821,7 +822,95 @@ The default settings shown are perfectly fine for most learning/testing scenario
 
 * Free service (only pay for the underlying resources)
 
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 
+## ELB & ASG
+
+### ELB (Elastic Load Balancing)
+
+#### Overview
+
+* Load balancers are servers that forward internet traffic to multiple servers (EC2 Instances) downstream.
+
+* An ELB (Elastic Load Balancer) is a managed load balancer
+
+    * AWS guarantees that it will be working
+    
+    * AWS takes care of upgrades, maintenance, high availability
+    
+    * AWS provides only a few configuration knobs
+
+* It costs less to setup your own load balancer but it will be a lot more effort on your end (maintenance, integrations)
+
+* 3 kinds of load balancers offered by AWS:
+
+    * Application Load Balancer (HTTP / HTTPS only) – Layer 7
+
+    * Network Load Balancer (ultra-high performance, allows for TCP) – Layer 4
+
+    * Gateway Load Balancer – Layer 3
+
+<br>
+
+### ASG (Auto Scaling Group)
+
+#### Overview
+
+* The goal of an Auto Scaling Group (ASG) is to:
+
+    * Scale out (add EC2 instances) to match an increased load
+
+    * Scale in (remove EC2 instances) to match a decreased load
+
+    * Ensure we have a minimum and a maximum number of machines running
+
+    * Automatically register new instances to a load balancer
+
+    * Replace unhealthy instances
+
+<br>
+
+#### Scaling Strategies
+
+* **Manual Scaling**: Update the size of an ASG manually
+
+* **Dynamic Scaling**: Respond to changing demand
+
+    * Simple / Step Scaling
+    
+        * When a CloudWatch alarm is triggered (example CPU > 70%), then add 2 units
+        
+        * When a CloudWatch alarm is triggered (example CPU < 30%), then remove 1
+    
+    * Target Tracking Scaling
+    
+        * Example: I want the average ASG CPU to stay at around 40%
+    
+    * Scheduled Scaling
+    
+        * Anticipate a scaling based on known usage patterns
+    
+        * Example: increase the minimum capacity to 10 at 5 pm on Fridays
+
+* **Predictive Scaling**: Uses Machine Learning to predict future traffic ahead of time
+    
+    * Automatically provisions the right number of EC2 instances in advance
+
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+
+# S3
+
+## ELB (Elastic Load Balancing)
 
 <br>
 <br>
