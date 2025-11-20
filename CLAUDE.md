@@ -8,7 +8,7 @@ This is a personal developer notes repository containing comprehensive technical
 
 - Python tooling and package management (UV, pip, pytest, aiohttp)
 - Django web framework (models, migrations, templates, ORM, MVT architecture)
-- AWS Cloud Practitioner certification (IAM, EC2, regions, availability zones)
+- AWS Cloud Practitioner certification (IAM, EC2, S3, databases, compute services)
 - Python testing (pytest, capsys, pytest.raises)
 - macOS development tools (Homebrew, Tart virtualization)
 - NotebookLM (Google's AI research tool)
@@ -18,16 +18,28 @@ This is a personal developer notes repository containing comprehensive technical
 
 The repository contains focused, modular markdown documentation files:
 
-### Documentation Files (8 files)
+### Documentation Files
 
+**Root Level:**
 - `article_bookmarks.md` (1.3K) - Curated learning resource links
-- `aws.md` (24K) - AWS Cloud Practitioner certification study notes
 - `django.md` (48K) - Comprehensive Django web framework documentation
 - `macos_dev.md` (658B) - Homebrew and Tart virtualization
 - `notebooklm.md` (1.3K) - Google's AI research tool
 - `python_misc.md` (11K) - Python distributions, PyPI, macOS integration
 - `python_testing.md` (2.3K) - pytest fixtures and testing patterns
 - `uv.md` (40K) - UV Python package manager (extensive coverage)
+
+**AWS Directory (`aws/`):**
+- `1-aws-global-infra.md` (776B) - Regions, Availability Zones, Edge Locations
+- `2-iam.md` (2.1K) - IAM users, groups, roles, policies
+- `3-ec2.md` (23K) - EC2 instances, storage, AMI, ELB/ASG
+- `4-s3.md` (6.8K) - S3 buckets, objects, security, storage classes
+- `5-databases.md` (9.7K) - RDS, Aurora, DynamoDB, Redshift, EMR, Glue
+- `6-other-compute.md` (3.4K) - ECS, Fargate, Lambda, API Gateway, Batch
+- `7-deploying-and-managing.md` (4.6K) - Deployment and management services
+
+**Other Directories:**
+- `assets/` - Screenshots and images referenced in documentation
 
 ### Meta Files
 
@@ -37,17 +49,17 @@ The repository contains focused, modular markdown documentation files:
 
 All markdown files use standard markdown headers:
 
-1. **H1 headers (`#`)** - Top-level section (one per file)
-   - Examples: "# Django", "# AWS", "# UV"
+1. **H1 headers (`#`)** - Top-level section (one per file, or major topics in split files)
+   - Examples: "# Django", "# AWS", "# IAM"
 
-2. **H2 headers (`##`)** - Second-level sections (subtopics)
-   - Example: "## UV Project", "## Django Commands", "## IAM"
+2. **H2 headers (`##`)** - Second-level sections (major subtopics)
+   - Example: "## UV Project", "## Django Commands", "## RDS"
 
 3. **H3 headers (`###`)** - Third-level sections (detailed subsections)
-   - Example: "### Auto Reload", "### Foreign Key", "### IAM Roles"
+   - Example: "### Auto Reload", "### Foreign Key", "### Buckets"
 
 4. **H4 headers (`####`)** - Fourth-level sections (specific details)
-   - Example: "#### yum update -y", "#### Delete on Termination attribute"
+   - Example: "#### Standard - General Purpose", "#### yum update -y"
 
 ## Formatting Conventions
 
@@ -87,6 +99,12 @@ All markdown files use standard markdown headers:
 - Use blank lines generously between bullet points for readability
 - Keep related content grouped together
 
+### Images and Assets
+
+- Store images in the `assets/` directory
+- Reference images using relative paths: `![Description](assets/filename.png)`
+- Use descriptive filenames for images
+
 ## Major Topic Documentation Coverage
 
 ### UV (Python Package Manager) - 40K
@@ -122,25 +140,23 @@ Comprehensive Django documentation includes:
 - Default auto-incrementing primary keys (BigAutoField)
 - Default indexes (SlugField, Unique fields, ForeignKey)
 
-### AWS (Cloud Practitioner) - 24K
+### AWS (Cloud Practitioner) - Split across 7 files (~46K total)
 
-AWS Cloud Practitioner certification notes include:
-- AWS global infrastructure (Regions, Availability Zones, Edge Locations)
-- IAM (Identity and Access Management):
-  - Users, Groups, Roles, and Policies
-  - Password policies and MFA
-  - IAM Credentials Report and Access Advisor
-  - Service roles (EC2, Lambda, CloudFormation)
-- EC2 (Elastic Compute Cloud):
-  - Instance types and sizing options
-  - EC2 User Data scripts for bootstrapping
-  - Security Groups (firewall rules, inbound/outbound traffic)
-  - Purchasing options (On-Demand, Reserved, Spot, Dedicated)
-  - Classic ports (SSH, HTTP, HTTPS, RDP, FTP, SFTP)
-  - EBS (Elastic Block Store) volume configuration
-  - EC2 instance categories (General Purpose, Compute, Memory, Storage, Accelerated, HPC)
-  - EC2 Instance Store and EFS (Elastic File System)
-- Linux commands for EC2 (yum, httpd, systemctl)
+AWS Cloud Practitioner certification notes organized by topic:
+
+**1. Global Infrastructure** - Regions, Availability Zones, Edge Locations
+
+**2. IAM** - Users, Groups, Roles, Policies, Password policies, MFA, Security tools
+
+**3. EC2** - Instance types, User Data scripts, Security Groups, Purchasing options, EBS storage, EFS, AMI, EC2 Image Builder, ELB, ASG
+
+**4. S3** - Buckets, Objects, Security, Versioning, Replication, Storage Classes, IAM Access Analyzer, Snowball, Storage Gateway
+
+**5. Databases** - RDS, Aurora, ElastiCache, DynamoDB, Redshift, EMR, Athena, QuickSight, DocumentDB, Neptune, Timestream, Managed Blockchain, Glue, Database Migration Service
+
+**6. Other Compute** - ECS, Fargate, ECR, EKS, API Gateway, Lambda, Batch
+
+**7. Deploying and Managing** - Deployment and infrastructure management services
 
 ### Python (Misc) - 11K
 
@@ -183,10 +199,12 @@ When committing changes:
 
 ### Adding New Content
 
-- Add content to the appropriate existing `.md` file based on topic
+- **For AWS topics**: Add to the appropriate file in the `aws/` directory based on service category
+- **For other topics**: Add to the appropriate root-level `.md` file based on topic
 - Follow the established formatting conventions (asterisk bullets, spacing, inline code)
 - Use proper markdown headers (H2 for major topics, H3 for subtopics, H4 for details)
 - Add section breaks (`<br>`) between major topics for visual clarity
+- Store images in `assets/` directory and reference them with relative paths
 
 ### No Build/Test Commands
 
@@ -194,4 +212,4 @@ This repository contains documentation only - there are no build, test, or lint 
 
 ### Repository Evolution Note
 
-This repository originally started as a `.zshrc` shell configuration file and evolved into comprehensive developer documentation. Previous formats (dev_notes.sh, dev_notes.md) and some split files have been consolidated into the current 8 focused markdown files.
+This repository originally started as a `.zshrc` shell configuration file and evolved into comprehensive developer documentation. The AWS documentation was recently reorganized from a single large file into a modular directory structure for better organization and maintainability.
