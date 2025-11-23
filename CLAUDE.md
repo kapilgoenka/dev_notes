@@ -32,12 +32,15 @@ The repository contains focused, modular markdown documentation files:
 **AWS Directory (`aws/`):**
 - `1-aws-global-infra.md` (776B) - Regions, Availability Zones, Edge Locations
 - `2-iam.md` (2.1K) - IAM users, groups, roles, policies
-- `3-ec2.md` (24K) - EC2 instances, storage, AMI, ELB/ASG
-- `4-s3.md` (8K) - S3 buckets, objects, security, storage classes
-- `5-databases.md` (12K) - RDS, Aurora, DynamoDB, Redshift, EMR, Glue
+- `3-ec2.md` (23K) - EC2 instances, storage, AMI, ELB/ASG
+- `4-s3.md` (6.8K) - S3 buckets, objects, security, storage classes
+- `5-databases.md` (9.7K) - RDS, Aurora, DynamoDB, Redshift, EMR, Glue
 - `6-other-compute.md` (3.4K) - ECS, Fargate, Lambda, API Gateway, Batch
-- `7-deploying-and-managing.md` (8K) - Deployment and management services
+- `7-deploying-and-managing.md` (4.6K) - Deployment and management services
 - `8-global-applications.md` (5.7K) - CloudFront, Route 53, global application architecture
+- `9-cloud-integration.md` (9.2K) - SQS, SNS, Kinesis, messaging patterns
+- `10-cloud-monitoring.md` (11K) - CloudWatch, EventBridge, CloudTrail, X-Ray
+- `11-vpc.md` (4.9K) - VPC, subnets, security groups, networking
 
 **Other Directories:**
 - `assets/` - Screenshots and images referenced in documentation
@@ -141,7 +144,7 @@ Comprehensive Django documentation includes:
 - Default auto-incrementing primary keys (BigAutoField)
 - Default indexes (SlugField, Unique fields, ForeignKey)
 
-### AWS (Cloud Practitioner) - Split across 8 files (~64K total)
+### AWS (Cloud Practitioner) - Split across 11 files (~82K total)
 
 AWS Cloud Practitioner certification notes organized by topic:
 
@@ -160,6 +163,12 @@ AWS Cloud Practitioner certification notes organized by topic:
 **7. Deploying and Managing** - Deployment and infrastructure management services
 
 **8. Global Applications** - CloudFront CDN, Route 53 DNS, global application architecture patterns
+
+**9. Cloud Integration** - SQS (queue service), SNS (notification service), Kinesis (streaming), messaging patterns
+
+**10. Cloud Monitoring** - CloudWatch (metrics/logs/alarms), EventBridge (events), CloudTrail (audit), X-Ray (tracing)
+
+**11. VPC** - Virtual Private Cloud, subnets, security groups, NACLs, VPN, Direct Connect, networking fundamentals
 
 ### Python (Misc) - 11K
 
