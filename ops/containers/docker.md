@@ -1,6 +1,8 @@
 # Docker
 
-## Dev Containers (concept)
+## Dev Containers
+
+### Concept
 
 * Allow you to set up a development environment and tooling within a docker container and interact with that container via your IDE, just as you would a workspace hosted on your own laptop.
 
@@ -8,9 +10,7 @@
 
 * A prerequisite is to have docker (CLI) installed.
 
-<br>
-
-## VSCode / Cursor Extension
+### VSCode / Cursor Extension
 
 * Provided by Microsoft
 
