@@ -10,7 +10,6 @@ This is a personal developer notes repository containing comprehensive technical
 - Django web framework (models, migrations, templates, ORM, MVT architecture)
 - AWS Cloud Practitioner certification (IAM, EC2, S3, databases, compute services)
 - macOS development tools (Homebrew, Tart virtualization)
-- NotebookLM (Google's AI research tool)
 - Article bookmarks and learning resources
 
 ## Repository Structure
@@ -20,7 +19,6 @@ The repository contains focused, modular markdown documentation files:
 ### Documentation Files
 
 **Root Level:**
-- `notebooklm.md` (1.3K) - Google's AI research tool
 
 **Python Dev Directory (`python_dev/`):**
 - `python.md` (13K) - Python distributions, PyPI, macOS integration, pytest testing patterns, macOS dev tools
@@ -176,7 +174,6 @@ Python ecosystem documentation:
 ### Other Topics
 
 - **macOS Dev** - Homebrew installation and Tart virtualization setup (merged into `python.md`)
-- **NotebookLM** (1.3K) - Google's AI research tool capabilities and use cases
 - **Articles** (1.3K) - Links to Python, Django, and AWS learning resources
 
 ## Git Workflow
