@@ -40,9 +40,6 @@ The repository contains focused, modular markdown documentation files:
 - `10-cloud-monitoring.md` (11K) - CloudWatch, EventBridge, CloudTrail, X-Ray
 - `11-vpc.md` (4.9K) - VPC, subnets, security groups, networking
 
-**Other Directories:**
-- `assets/` - Screenshots and images referenced in documentation
-
 ### Meta Files
 
 - `CLAUDE.md` - This file, providing guidance for working with the repository
@@ -100,12 +97,6 @@ All markdown files use standard markdown headers:
 - Add `<br>` tags between major sections for visual separation
 - Use blank lines generously between bullet points for readability
 - Keep related content grouped together
-
-### Images and Assets
-
-- Store images in the `assets/` directory
-- Reference images using relative paths: `![Description](assets/filename.png)`
-- Use descriptive filenames for images
 
 ## Major Topic Documentation Coverage
 
@@ -208,7 +199,6 @@ When committing changes:
 - Follow the established formatting conventions (asterisk bullets, spacing, inline code)
 - Use proper markdown headers (H2 for major topics, H3 for subtopics, H4 for details)
 - Add section breaks (`<br>`) between major topics for visual clarity
-- Store images in `assets/` directory and reference them with relative paths
 
 ### No Build/Test Commands
 
