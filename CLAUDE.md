@@ -24,7 +24,7 @@ The repository contains focused, modular markdown documentation files:
 - `django.md` (48K) - Comprehensive Django web framework documentation
 - `macos_dev.md` (658B) - Homebrew and Tart virtualization
 - `notebooklm.md` (1.3K) - Google's AI research tool
-- `python_misc.md` (13K) - Python distributions, PyPI, macOS integration, pytest testing patterns
+- `python.md` (13K) - Python distributions, PyPI, macOS integration, pytest testing patterns
 - `uv.md` (40K) - UV Python package manager (extensive coverage)
 
 **AWS Directory (`aws/`):**
@@ -159,7 +159,7 @@ AWS Cloud Practitioner certification notes organized by topic:
 
 **11. VPC** - Virtual Private Cloud, subnets, security groups, NACLs, VPN, Direct Connect, networking fundamentals
 
-### Python (Misc) - 13K
+### Python - 13K
 
 Python ecosystem documentation:
 - macOS Python framework builds

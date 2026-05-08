@@ -1,4 +1,4 @@
-# Python (Misc)
+# Python
 
 
 ## macOS System Python
