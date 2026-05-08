@@ -25,14 +25,14 @@
 
 * Homebrew is a general-purpose package manager for macOS, while UV is a python-specific package and project manager. You would use Homebrew to install system-level tools, including UV itself, while UV is used for managing Python packages and projects, a task traditionally handled by pip.
 
-
+<br>
 
 ## UV Install Cmd
 
 
 curl -LsSf https://astral.sh/uv/install.sh | sh
 
-
+<br>
 
 ## UV Path Additions
 
@@ -67,7 +67,7 @@ some configuration logic into separate files.
 . "$HOME/.local/bin/env"
 ```
 
-
+<br>
 
 ## UV Shell Completion
 
@@ -76,7 +76,7 @@ some configuration logic into separate files.
 eval "$(uv generate-shell-completion zsh)"
 ```
 
-
+<br>
 
 ## UV Project
 
@@ -287,7 +287,7 @@ pyproject.toml
 To add an optional dependency, use the --optional <extra> option:
    uv add httpx --optional network
 
-
+<br>
 
 ## Build systems
 
@@ -308,7 +308,7 @@ included files and the distribution filenames, are determined by the build backe
 defined in [build-system]. Information about build configuration can be found in the
 respective tool's documentation.
 
-
+<br>
 
 ## Managed and system Python installations in UV
 
@@ -323,7 +323,7 @@ is managed with pyenv, it would still be considered a system Python version in u
 The available Python versions are frozen for each uv release. To install new Python
 versions, you may need upgrade uv.
 
-
+<br>
 
 ## UV Lock File (uv.lock)
 
@@ -356,7 +356,7 @@ you execute uv run, the project is locked and synced before the command is invok
 To see this in action, you can go ahead and remove the .venv/ folder from the
 project's root directory. `uv run` will recreate it.
 
-
+<br>
 
 ## UV Tools
 
@@ -417,7 +417,7 @@ When installing a tool with uv tool install, a virtual environment is created in
 uv tools directory. The environment will not be removed unless the tool is
 uninstalled. If the environment is manually deleted, the tool will fail to run.
 
-
+<br>
 
 ## UV Python Versions
 
@@ -433,7 +433,7 @@ uv does not allow transparently upgrading across minor Python versions, e.g.,
 uv-managed Python versions can be upgraded to the latest supported patch
 release with the python upgrade command
 
-
+<br>
 
 ## UV Common Commands
 
@@ -533,7 +533,7 @@ performing a self-update.
 └──────────────────────────┴───────────────────────────────────────────────────┘
 ```
 
-
+<br>
 
 ## UV pyproject.toml file: [project.scripts] section
 
@@ -573,7 +573,7 @@ Assume package name is 'uv-cats'.
 When someone runs `pip install uv-cats` or `uv tool install uv-cats`, Python puts the
 executable script in their PATH (like /usr/local/bin/uv-cats or similar)
 
-
+<br>
 
 ## UV pyproject.toml file: [build-system] section
 
@@ -662,14 +662,14 @@ name. For example:
   wheel."
 ```
 
-
+<br>
 
 ## UV Cache Location
 
 
 UV cache location: ~/.cache/uv/
 
-
+<br>
 
 ## UV Cache Directory Structure
 
@@ -707,7 +707,7 @@ UV cache location: ~/.cache/uv/
   └── simple-v18/          # PyPI index cache (PERSISTENT)
 ```
 
-
+<br>
 
 ## UV Package Cache Location
 
@@ -715,7 +715,7 @@ UV cache location: ~/.cache/uv/
 Downloaded packages are stored in UV's package cache (persistent) and reused:
 ~/.cache/uv/archive-v0/
 
-
+<br>
 
 ## UV Temporary Environments Location
 
@@ -725,7 +725,7 @@ Downloaded packages are stored in UV's package cache (persistent) and reused:
      ~/.cache/uv/builds-v0/
 ```
 
-
+<br>
 
 ## Sample UV Temporary Environment Structure
 
@@ -746,7 +746,7 @@ A temporary environment is a full Python virtual environment containing:
         └── pyvenv.cfg
 ```
 
-
+<br>
 
 ## `uv run --with`
 
@@ -882,7 +882,7 @@ managing virtual environments!
         └───────────────────────────────────────────────────────────┘
 ```
 
-
+<br>
 
 ## Running scripts
 

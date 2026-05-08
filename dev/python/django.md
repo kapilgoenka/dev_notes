@@ -19,9 +19,11 @@ class Post(models.Model):
     created = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)"
 ```
-- created: This is a DateTimeField field. We will use it to store the date and time when the post was created. By using auto_now_add, the date will be saved automatically when creating an object.
-- updated: This is a DateTimeField field. We will use it to store the last date and time when the post was updated. By using auto_now, the date will be updated automatically when saving an object.
-- Utilizing the auto_now_add and auto_now datetime fields in your Django models is highly beneficial for tracking the creation and last modification times of objects.
+* created: This is a DateTimeField field. We will use it to store the date and time when the post was created. By using auto_now_add, the date will be saved automatically when creating an object.
+
+* updated: This is a DateTimeField field. We will use it to store the last date and time when the post was updated. By using auto_now, the date will be updated automatically when saving an object.
+
+* Utilizing the auto_now_add and auto_now datetime fields in your Django models is highly beneficial for tracking the creation and last modification times of objects.
 
 
 ### Enumeration
@@ -112,9 +114,11 @@ The sqlmigrate command takes the migration names and returns their SQL without e
 Django generates the table names by combining the application name and the lowercase name of the model (blog_post), but you can also specify a custom database name for your model in the Meta class of the model using the db_table attribute.
 
 ### Default Indexes
-- SlugField fields imply an index by default.
-- Unique fields imply an index by default.
-- ForeignKey fields imply an index by default.
+* SlugField fields imply an index by default.
+
+* Unique fields imply an index by default.
+
+* ForeignKey fields imply an index by default.
 
 ### Circular Relations & Lazy Relations
 
@@ -162,25 +166,26 @@ You can reference models defined in other Django apps (no matter if created by y
 
 
 #### Django project
-- A Django project is the overall container for your application's settings and
+* A Django project is the overall container for your application's settings and
 configurations (e.g., database settings, installed apps, URL routing at the project level). Django projects are composed of one or more "apps".
 
 
 #### Django App
-- An app is a self-contained module that handles a specific piece of
+* An app is a self-contained module that handles a specific piece of
 functionality (like a blog, a user management system, etc.)
 
 
 #### Django's MVT Architecture
-- Django's MVT (Model-View-Template) is a twist on the MVC pattern.
-  - The "View" part deals with user requests.
-  - The "Model" part manages data and talks to the database.
-  - And the "Template" part shows the data to users.
+* Django's MVT (Model-View-Template) is a twist on the MVC pattern.
+  * The "View" part deals with user requests.
+  * The "Model" part manages data and talks to the database.
+  * And the "Template" part shows the data to users.
 
 
 #### Django ORM
-- The Django ORM (Object-Relational Mapping) lets developers work with databases in Python. This means no need for raw SQL queries. It makes managing databases easy and helps apps grow.
-- Using Django's ORM correctly is key to handling complex queries & avoiding slowdowns.
+* The Django ORM (Object-Relational Mapping) lets developers work with databases in Python. This means no need for raw SQL queries. It makes managing databases easy and helps apps grow.
+
+* Using Django's ORM correctly is key to handling complex queries & avoiding slowdowns.
 
 
 #### django-admin
@@ -423,7 +428,7 @@ If it is likely that you may reuse the name of a deleted migration in the future
 should remove references to it from Django's migrations table with the migrate --prune
 option.
 
-
+<br>
 
 ## Django Commands
 ```
@@ -523,7 +528,7 @@ option.
 └────────────────────────────────────────┴─────────────────────────────────────────┘
 ```
 
-
+<br>
 
 ## Django Templates
 ### Overview
@@ -582,7 +587,7 @@ option.
 * Here, "the_file" would be a variable holding the actual filename. The above code would fail.
 * Instead, you can use the "add" filter provided by Django to construct this path dynamically: `{% static "my_path/to/"|add:the_file %}`
 
-
+<br>
 
 ## Django Settings
 
@@ -633,8 +638,7 @@ ALLOWED_HOSTS is not applied while debug mode is on or when the tests are run. O
 ### DATABASES
 * The settings.py file contains the database configuration for your project in the DATABASES setting. The default configuration is a SQLite3 database.
 
-
-
+<br>
 
 ## HttpRequest and HttpResponse
 * Django uses request and response objects to pass state through the system.
@@ -645,6 +649,7 @@ ALLOWED_HOSTS is not applied while debug mode is on or when the tests are run. O
     * You can pass HttpResponse an iterator rather than strings. HttpResponse will consume the iterator immediately, store its content as a string, and discard it.
     * Objects with a close() method such as files and generators are immediately closed. If you need the response to be streamed from the iterator to the client, you must use the StreamingHttpResponse class instead.
 
+<br>
 
 ## Django Tips
 

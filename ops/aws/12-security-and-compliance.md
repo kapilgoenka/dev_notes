@@ -16,6 +16,8 @@
     
     * The Shield: AWS absorbs this massive bandwidth on their global backbone so your little EC2 instance never even feels it.
 
+<br>
+
 ## Shield Advanced
 
 * Optional DDoS mitigation service ($3,000 per month per organization)
@@ -76,7 +78,7 @@
 
 <br>
 
-AWS Firewall Manager
+## AWS Firewall Manager
 
 * 🧩 What does it actually manage?
 
