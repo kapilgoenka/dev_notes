@@ -21,11 +21,13 @@ The repository contains focused, modular markdown documentation files:
 
 **Root Level:**
 - `article_bookmarks.md` (1.3K) - Curated learning resource links
-- `django.md` (48K) - Comprehensive Django web framework documentation
-- `macos_dev.md` (658B) - Homebrew and Tart virtualization
 - `notebooklm.md` (1.3K) - Google's AI research tool
+
+**Python Dev Directory (`python_dev/`):**
 - `python.md` (13K) - Python distributions, PyPI, macOS integration, pytest testing patterns
 - `uv.md` (40K) - UV Python package manager (extensive coverage)
+- `django.md` (48K) - Comprehensive Django web framework documentation
+- `macos_dev.md` (658B) - Homebrew and Tart virtualization
 
 **AWS Directory (`aws/`):**
 - `1-aws-global-infra.md` (776B) - Regions, Availability Zones, Edge Locations
@@ -195,6 +197,7 @@ When committing changes:
 ### Adding New Content
 
 - **For AWS topics**: Add to the appropriate file in the `aws/` directory based on service category
+- **For Python/Django/macOS topics**: Add to the appropriate file in the `python_dev/` directory
 - **For other topics**: Add to the appropriate root-level `.md` file based on topic
 - Follow the established formatting conventions (asterisk bullets, spacing, inline code)
 - Use proper markdown headers (H2 for major topics, H3 for subtopics, H4 for details)
