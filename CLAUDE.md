@@ -24,7 +24,7 @@ The repository contains focused, modular markdown documentation files:
 - `django.md` (48K) - Comprehensive Django web framework documentation
 - `articles.md` (1.3K) - Curated learning resource links
 
-**Ops Directory (`ops/aws/`):**
+**Cloud Directory (`cloud/aws/`):**
 - `1-aws-global-infra.md` (776B) - Regions, Availability Zones, Edge Locations
 - `2-iam.md` (2.1K) - IAM users, groups, roles, policies
 - `3-ec2.md` (23K) - EC2 instances, storage, AMI, ELB/ASG
@@ -194,7 +194,7 @@ When committing changes:
 
 ### Adding New Content
 
-- **For AWS topics**: Add to the appropriate file in the `ops/aws/` directory based on service category
+- **For AWS topics**: Add to the appropriate file in the `cloud/aws/` directory based on service category
 - **For shell scripting topics**: Add to the appropriate file in the `ops/shell_scripting/` directory
 - **For Python/Django/macOS topics**: Add to the appropriate file in the `dev/python/` directory
 - **For other topics**: Add to the appropriate root-level `.md` file based on topic
