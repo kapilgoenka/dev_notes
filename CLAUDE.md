@@ -18,15 +18,13 @@ The repository contains focused, modular markdown documentation files:
 
 ### Documentation Files
 
-**Root Level:**
-
-**Python Dev Directory (`python_dev/`):**
+**Dev Directory (`dev/python/`):**
 - `python.md` (13K) - Python distributions, PyPI, macOS integration, pytest testing patterns, macOS dev tools
 - `uv.md` (40K) - UV Python package manager (extensive coverage)
 - `django.md` (48K) - Comprehensive Django web framework documentation
 - `articles.md` (1.3K) - Curated learning resource links
 
-**AWS Directory (`aws/`):**
+**Ops Directory (`ops/aws/`):**
 - `1-aws-global-infra.md` (776B) - Regions, Availability Zones, Edge Locations
 - `2-iam.md` (2.1K) - IAM users, groups, roles, policies
 - `3-ec2.md` (23K) - EC2 instances, storage, AMI, ELB/ASG
@@ -38,6 +36,10 @@ The repository contains focused, modular markdown documentation files:
 - `9-cloud-integration.md` (9.2K) - SQS, SNS, Kinesis, messaging patterns
 - `10-cloud-monitoring.md` (11K) - CloudWatch, EventBridge, CloudTrail, X-Ray
 - `11-vpc.md` (4.9K) - VPC, subnets, security groups, networking
+
+**Ops Directory (`ops/shell_scripting/`):**
+- `1-grep.md` - grep command flags and usage
+- `2-sed.md` - sed command and text processing
 
 ### Meta Files
 
@@ -192,8 +194,9 @@ When committing changes:
 
 ### Adding New Content
 
-- **For AWS topics**: Add to the appropriate file in the `aws/` directory based on service category
-- **For Python/Django/macOS topics**: Add to the appropriate file in the `python_dev/` directory
+- **For AWS topics**: Add to the appropriate file in the `ops/aws/` directory based on service category
+- **For shell scripting topics**: Add to the appropriate file in the `ops/shell_scripting/` directory
+- **For Python/Django/macOS topics**: Add to the appropriate file in the `dev/python/` directory
 - **For other topics**: Add to the appropriate root-level `.md` file based on topic
 - Follow the established formatting conventions (asterisk bullets, spacing, inline code)
 - Use proper markdown headers (H2 for major topics, H3 for subtopics, H4 for details)
