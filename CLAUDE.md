@@ -20,13 +20,13 @@ The repository contains focused, modular markdown documentation files:
 ### Documentation Files
 
 **Root Level:**
-- `article_bookmarks.md` (1.3K) - Curated learning resource links
 - `notebooklm.md` (1.3K) - Google's AI research tool
 
 **Python Dev Directory (`python_dev/`):**
 - `python.md` (13K) - Python distributions, PyPI, macOS integration, pytest testing patterns, macOS dev tools
 - `uv.md` (40K) - UV Python package manager (extensive coverage)
 - `django.md` (48K) - Comprehensive Django web framework documentation
+- `articles.md` (1.3K) - Curated learning resource links
 
 **AWS Directory (`aws/`):**
 - `1-aws-global-infra.md` (776B) - Regions, Availability Zones, Edge Locations
@@ -177,7 +177,7 @@ Python ecosystem documentation:
 
 - **macOS Dev** - Homebrew installation and Tart virtualization setup (merged into `python.md`)
 - **NotebookLM** (1.3K) - Google's AI research tool capabilities and use cases
-- **Article Bookmarks** (1.3K) - Links to Python, Django, and AWS learning resources
+- **Articles** (1.3K) - Links to Python, Django, and AWS learning resources
 
 ## Git Workflow
 
