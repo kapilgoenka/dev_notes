@@ -9,7 +9,6 @@ This is a personal developer notes repository containing comprehensive technical
 - Python tooling and package management (UV, pip, pytest, aiohttp)
 - Django web framework (models, migrations, templates, ORM, MVT architecture)
 - AWS Cloud Practitioner certification (IAM, EC2, S3, databases, compute services)
-- Python testing (pytest, capsys, pytest.raises)
 - macOS development tools (Homebrew, Tart virtualization)
 - NotebookLM (Google's AI research tool)
 - Article bookmarks and learning resources
@@ -25,8 +24,7 @@ The repository contains focused, modular markdown documentation files:
 - `django.md` (48K) - Comprehensive Django web framework documentation
 - `macos_dev.md` (658B) - Homebrew and Tart virtualization
 - `notebooklm.md` (1.3K) - Google's AI research tool
-- `python_misc.md` (11K) - Python distributions, PyPI, macOS integration
-- `python_testing.md` (2.3K) - pytest fixtures and testing patterns
+- `python_misc.md` (13K) - Python distributions, PyPI, macOS integration, pytest testing patterns
 - `uv.md` (40K) - UV Python package manager (extensive coverage)
 
 **AWS Directory (`aws/`):**
@@ -170,7 +168,7 @@ AWS Cloud Practitioner certification notes organized by topic:
 
 **11. VPC** - Virtual Private Cloud, subnets, security groups, NACLs, VPN, Direct Connect, networking fundamentals
 
-### Python (Misc) - 11K
+### Python (Misc) - 13K
 
 Python ecosystem documentation:
 - macOS Python framework builds
@@ -181,13 +179,7 @@ Python ecosystem documentation:
 - PyPI (Python Package Index)
 - Rust-based Python tooling (Ruff, UV)
 - aiohttp async HTTP library
-
-### Python Testing - 2.3K
-
-pytest documentation:
-- capsys fixture for capturing stdout/stderr
-- pytest.raises() context manager
-- Testing patterns and best practices
+- pytest testing: capsys fixture, pytest.raises() context manager
 
 ### Other Topics
 
